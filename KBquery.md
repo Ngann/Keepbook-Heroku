@@ -19,6 +19,12 @@ query {
 }
 
 mutation {
+  updateCustomer(id: "cjsy0d79e6la00b30mq6gjb3b", name: "ngan", contact:"name") {  
+     name
+    }
+}
+
+mutation {
   deleteVendor(id: "cjsy06r1k5ei20b94nt2butli") {  
     id
   }
