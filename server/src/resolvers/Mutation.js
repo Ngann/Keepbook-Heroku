@@ -23,6 +23,22 @@ function createCustomer(parent, args, context) {
   })
 }
 
+function updateCustomer(parent, args, context) {
+  return context.prisma.updateCustomer({
+    where: { id: args.id},
+    data: {
+      name: args.name,
+      contact: args.contact,
+    }
+  })
+}
+
+function deleteCustomer(parent, {id}, context) {
+  return context.prisma.deleteCustomer({
+    id,
+  })
+}
+
 async function signup(parent, args, context) {
   const password = await bcrypt.hash(args.password, 10)
   const user = await context.prisma.createUser({ ...args, password })
@@ -75,4 +91,6 @@ module.exports = {
   vote,
   addVendor,
   createCustomer,
+  updateCustomer,
+  deleteCustomer,
 }

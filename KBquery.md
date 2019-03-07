@@ -29,6 +29,11 @@ mutation {
   }
 }
 
+mutation {
+  deleteCustomer(id: "cjsy06r1k5ei20b94nt2butli") {  
+    id
+  }
+}
 
 ---------
 query {
