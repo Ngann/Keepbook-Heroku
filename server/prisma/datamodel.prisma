@@ -57,3 +57,10 @@ type Invoice {
   amount: Int!
   postedBy: User
 }
+
+type Post {
+  id: ID! @unique
+  isPublished: Boolean!
+  title: String!
+  text: String!
+}

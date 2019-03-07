@@ -36,8 +36,23 @@ function customers(parent, args, context, info) {
   return context.prisma.customers()
 }
 
+function bfeed(parent, args, ctx, info) {
+      return ctx.db.query.posts({ where: { isPublished: true } }, info)
+    }
+
+function drafts(parent, args, ctx, info) {
+      return ctx.db.query.posts({ where: { isPublished: false } }, info)
+    }
+
+function post(parent, { id }, ctx, info) {
+      return ctx.db.query.post({ where: { id: id } }, info)
+    }
+
 module.exports = {
   feed,
   vendors,
   customers,
+  bfeed,
+  drafts,
+  post
 }

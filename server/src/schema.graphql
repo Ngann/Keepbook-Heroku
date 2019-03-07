@@ -7,6 +7,11 @@ type Query {
   customers: [Customer!]!
   getCustomer(id: ID!): Customer
   getVendor(id: ID!): Vendor
+
+  bfeed: [Post!]!
+  drafts: [Post!]!
+  post(id: ID!): Post
+
 }
 
 enum LinkOrderByInput {
@@ -39,6 +44,10 @@ type Mutation {
   createCustomer(name: String!, contact: String!): Customer
   updateCustomer(id: ID!, name: String!, contact: String!): Customer
   deleteCustomer(id: ID!): Customer
+
+  createDraft(title: String!, text: String): Post
+  deletePost(id: ID!): Post
+  publish(id: ID!): Post
 }
 
 type Subscription {
@@ -115,4 +124,11 @@ type Invoice {
   account: String!
   amount: Int!
   postedBy: User
+}
+
+type Post {
+  id: ID! 
+  isPublished: Boolean!
+  title: String!
+  text: String!
 }

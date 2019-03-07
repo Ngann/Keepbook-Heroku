@@ -8,6 +8,7 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 import Login from './Login'
 import Search from './Search'
 
+
 class App extends Component {
   render() {
     return (
@@ -22,7 +23,7 @@ class App extends Component {
             <Route exact path="/search" component={Search} />
             <Route exact path="/top" component={LinkList} />
             <Route exact path="/vendor" component={VendorList} />
-            <Route exact path="/new/:page" component={LinkList} />
+            <Route exact path="/new/:page" component={LinkList} />        
           </Switch>
         </div>
       </div>

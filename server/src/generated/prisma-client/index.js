@@ -31,11 +31,15 @@ var models = [
   {
     name: "Invoice",
     embedded: false
+  },
+  {
+    name: "Post",
+    embedded: false
   }
 ];
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
   typeDefs,
   models,
-  endpoint: `https://eu1.prisma.sh/ngan-nguyen-13344c/main/dev`
+  endpoint: `https://eu1.prisma.sh/ngan-nguyen-13344c/blogr/dev`
 });
 exports.prisma = new exports.Prisma();
