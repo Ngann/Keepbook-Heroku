@@ -18,6 +18,12 @@ query {
   }
 }
 
+mutation {
+  deleteVendor(id: "cjsy06r1k5ei20b94nt2butli") {  
+    id
+  }
+}
+
 Add Customer:
 
 mutation {

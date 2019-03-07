@@ -16,6 +16,12 @@ function addVendor(parent, args, context) {
   })
 }
 
+function deleteVendor(parent, {id}, context) {
+  return context.prisma.deleteVendor({
+    id,
+  })
+}
+
 function createCustomer(parent, args, context) {
   return context.prisma.createCustomer({
     name: args.name,
@@ -93,4 +99,5 @@ module.exports = {
   createCustomer,
   updateCustomer,
   deleteCustomer,
+  deleteVendor,
 }
