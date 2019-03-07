@@ -6,6 +6,7 @@ type Query {
   veed: Veed!
   vendors: [Vendor!]!
   vendor(id: ID!): Vendor
+  getVendor(id: ID!): Vendor
 }
 
 enum LinkOrderByInput {
@@ -30,6 +31,7 @@ type Veed {
 type Mutation {
   post(url: String!, description: String!): Link!
   addVendor(name: String!, contact: String!): Vendor!
+  updateVendor(id: ID!, name:String! , contact: String!):Vendor
   signup(email: String!, password: String!, name: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
   vote(linkId: ID!): Vote!
@@ -74,6 +76,11 @@ type Vendor {
   name: String!
   contact: String!
   postedBy: User
+}
+
+type VendorInput {
+  name: String!
+  contact: String!
 }
 
 type Customer {

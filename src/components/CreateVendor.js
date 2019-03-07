@@ -42,7 +42,7 @@ class CreateVendor extends Component {
         <Mutation
         mutation={ADDVENDOR_MUTATION}
         variables={{ name, contact }}
-        // onCompleted={() => this.props.histroy.push('/vendor')}
+        // onCompleted={() => this.props.push.history('/')}
         >
           {postMutation => <button onClick={postMutation}>Submit</button>}
         </Mutation>

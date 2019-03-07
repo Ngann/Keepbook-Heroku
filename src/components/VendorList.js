@@ -15,28 +15,6 @@ const VENDORS_QUERY = gql`
 `
 
 class VendorList extends Component {
-//   render() {
-//     const vendorsToRender = [
-//       {
-//         id: '1',
-//         name: 'Vendor one',
-//         contact: '555-555-5555',
-//       },
-//       {
-//         id: '2',
-//         name: 'Vendor two',
-//         contact: '666-666-6666',
-//       },
-//     ]
-//
-//     return (
-//       // <div>{vendorsToRender.map(vendor => <Vendor key={vendor.id} vendor={vendor} />)}</div>
-//       <Query query = {VENDORS_QUERY}>
-//         {() => vendorsToRender.map(vendor => <Vendor key={vendor.id} vendor={vendor}/>)}
-//       </Query>
-//     )
-//   }
-// }
 
 render() {
     return (
