@@ -4,6 +4,8 @@ type Query {
   info: String!
   feed(filter: String, skip: Int, first: Int, orderBy: LinkOrderByInput): Feed!
   vendors: [Vendor!]!
+  customers: [Customer!]!
+  getCustomer(id: ID!): Customer
 }
 
 enum LinkOrderByInput {
@@ -32,6 +34,8 @@ type Mutation {
   signup(email: String!, password: String!, name: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
   vote(linkId: ID!): Vote!
+  createCustomer(input: CustomerInput): Customer!
+  updateCustomer(id: ID!, input: CustomerInput): Customer!
 }
 
 type Subscription {
@@ -103,4 +107,9 @@ type Invoice {
   account: String!
   amount: Int!
   postedBy: User
+}
+
+input CustomerInput {
+  name: String!
+  contact: String!
 }
