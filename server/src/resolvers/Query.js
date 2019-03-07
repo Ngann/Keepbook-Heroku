@@ -32,8 +32,12 @@ function vendors(parent, args, context, info) {
   return context.prisma.vendors()
 }
 
+function customers(parent, args, context, info) {
+  return context.prisma.customers()
+}
 
 module.exports = {
   feed,
   vendors,
+  customers,
 }

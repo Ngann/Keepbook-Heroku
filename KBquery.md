@@ -18,6 +18,17 @@ query {
   }
 }
 
+Add Customer:
+
+mutation {
+  createCustomer(
+    name: "First Customer"
+    contact: "777-777-777"
+  ) {
+    id
+  }
+}
+
 
 ---------
 query {

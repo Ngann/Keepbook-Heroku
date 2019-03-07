@@ -14,6 +14,8 @@ type User {
   password: String!
   links: [Link!]!
   votes: [Vote!]!
+  vendors: [Vendor!]!
+  customers: [Customer!]!
 }
 
 type Vote {
@@ -32,6 +34,7 @@ type Vendor {
 
 type Customer {
   id: ID! @unique
+  createdAt: DateTime!
   name: String!
   contact: String!
   postedBy: User

@@ -34,8 +34,9 @@ type Mutation {
   signup(email: String!, password: String!, name: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
   vote(linkId: ID!): Vote!
-  createCustomer(input: CustomerInput): Customer!
-  updateCustomer(id: ID!, input: CustomerInput): Customer!
+  createCustomer(name: String!, contact: String!): Customer
+  updateCustomer(id: ID!, name: String!, contact: String!): Customer
+  deleteCustomer(id: ID!): Customer
 }
 
 type Subscription {
@@ -54,6 +55,7 @@ type User {
   email: String!
   links: [Link!]!
   vendors: [Vendor!]!
+  customers: [Customer!]!
 }
 
 type Link {
@@ -107,9 +109,4 @@ type Invoice {
   account: String!
   amount: Int!
   postedBy: User
-}
-
-input CustomerInput {
-  name: String!
-  contact: String!
 }

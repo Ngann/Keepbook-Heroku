@@ -16,6 +16,13 @@ function addVendor(parent, args, context) {
   })
 }
 
+function createCustomer(parent, args, context) {
+  return context.prisma.createCustomer({
+    name: args.name,
+    contact: args.contact,
+  })
+}
+
 async function signup(parent, args, context) {
   const password = await bcrypt.hash(args.password, 10)
   const user = await context.prisma.createUser({ ...args, password })
@@ -67,4 +74,5 @@ module.exports = {
   login,
   vote,
   addVendor,
+  createCustomer,
 }

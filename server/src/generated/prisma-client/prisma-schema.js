@@ -198,6 +198,7 @@ input BillWhereUniqueInput {
 
 type Customer {
   id: ID!
+  createdAt: DateTime!
   name: String!
   contact: String!
   postedBy: User
@@ -212,7 +213,17 @@ type CustomerConnection {
 input CustomerCreateInput {
   name: String!
   contact: String!
-  postedBy: UserCreateOneInput
+  postedBy: UserCreateOneWithoutCustomersInput
+}
+
+input CustomerCreateManyWithoutPostedByInput {
+  create: [CustomerCreateWithoutPostedByInput!]
+  connect: [CustomerWhereUniqueInput!]
+}
+
+input CustomerCreateWithoutPostedByInput {
+  name: String!
+  contact: String!
 }
 
 type CustomerEdge {
@@ -223,20 +234,77 @@ type CustomerEdge {
 enum CustomerOrderByInput {
   id_ASC
   id_DESC
+  createdAt_ASC
+  createdAt_DESC
   name_ASC
   name_DESC
   contact_ASC
   contact_DESC
-  createdAt_ASC
-  createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
 }
 
 type CustomerPreviousValues {
   id: ID!
+  createdAt: DateTime!
   name: String!
   contact: String!
+}
+
+input CustomerScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  contact: String
+  contact_not: String
+  contact_in: [String!]
+  contact_not_in: [String!]
+  contact_lt: String
+  contact_lte: String
+  contact_gt: String
+  contact_gte: String
+  contact_contains: String
+  contact_not_contains: String
+  contact_starts_with: String
+  contact_not_starts_with: String
+  contact_ends_with: String
+  contact_not_ends_with: String
+  AND: [CustomerScalarWhereInput!]
+  OR: [CustomerScalarWhereInput!]
+  NOT: [CustomerScalarWhereInput!]
 }
 
 type CustomerSubscriptionPayload {
@@ -260,12 +328,50 @@ input CustomerSubscriptionWhereInput {
 input CustomerUpdateInput {
   name: String
   contact: String
-  postedBy: UserUpdateOneInput
+  postedBy: UserUpdateOneWithoutCustomersInput
+}
+
+input CustomerUpdateManyDataInput {
+  name: String
+  contact: String
 }
 
 input CustomerUpdateManyMutationInput {
   name: String
   contact: String
+}
+
+input CustomerUpdateManyWithoutPostedByInput {
+  create: [CustomerCreateWithoutPostedByInput!]
+  delete: [CustomerWhereUniqueInput!]
+  connect: [CustomerWhereUniqueInput!]
+  set: [CustomerWhereUniqueInput!]
+  disconnect: [CustomerWhereUniqueInput!]
+  update: [CustomerUpdateWithWhereUniqueWithoutPostedByInput!]
+  upsert: [CustomerUpsertWithWhereUniqueWithoutPostedByInput!]
+  deleteMany: [CustomerScalarWhereInput!]
+  updateMany: [CustomerUpdateManyWithWhereNestedInput!]
+}
+
+input CustomerUpdateManyWithWhereNestedInput {
+  where: CustomerScalarWhereInput!
+  data: CustomerUpdateManyDataInput!
+}
+
+input CustomerUpdateWithoutPostedByDataInput {
+  name: String
+  contact: String
+}
+
+input CustomerUpdateWithWhereUniqueWithoutPostedByInput {
+  where: CustomerWhereUniqueInput!
+  data: CustomerUpdateWithoutPostedByDataInput!
+}
+
+input CustomerUpsertWithWhereUniqueWithoutPostedByInput {
+  where: CustomerWhereUniqueInput!
+  update: CustomerUpdateWithoutPostedByDataInput!
+  create: CustomerCreateWithoutPostedByInput!
 }
 
 input CustomerWhereInput {
@@ -283,6 +389,14 @@ input CustomerWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
   name: String
   name_not: String
   name_in: [String!]
@@ -865,6 +979,8 @@ type User {
   password: String!
   links(where: LinkWhereInput, orderBy: LinkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Link!]
   votes(where: VoteWhereInput, orderBy: VoteOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Vote!]
+  vendors(where: VendorWhereInput, orderBy: VendorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Vendor!]
+  customers(where: CustomerWhereInput, orderBy: CustomerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Customer!]
 }
 
 type UserConnection {
@@ -879,10 +995,17 @@ input UserCreateInput {
   password: String!
   links: LinkCreateManyWithoutPostedByInput
   votes: VoteCreateManyWithoutUserInput
+  vendors: VendorCreateManyWithoutPostedByInput
+  customers: CustomerCreateManyWithoutPostedByInput
 }
 
 input UserCreateOneInput {
   create: UserCreateInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutCustomersInput {
+  create: UserCreateWithoutCustomersInput
   connect: UserWhereUniqueInput
 }
 
@@ -891,9 +1014,23 @@ input UserCreateOneWithoutLinksInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreateOneWithoutVendorsInput {
+  create: UserCreateWithoutVendorsInput
+  connect: UserWhereUniqueInput
+}
+
 input UserCreateOneWithoutVotesInput {
   create: UserCreateWithoutVotesInput
   connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutCustomersInput {
+  name: String!
+  email: String!
+  password: String!
+  links: LinkCreateManyWithoutPostedByInput
+  votes: VoteCreateManyWithoutUserInput
+  vendors: VendorCreateManyWithoutPostedByInput
 }
 
 input UserCreateWithoutLinksInput {
@@ -901,6 +1038,17 @@ input UserCreateWithoutLinksInput {
   email: String!
   password: String!
   votes: VoteCreateManyWithoutUserInput
+  vendors: VendorCreateManyWithoutPostedByInput
+  customers: CustomerCreateManyWithoutPostedByInput
+}
+
+input UserCreateWithoutVendorsInput {
+  name: String!
+  email: String!
+  password: String!
+  links: LinkCreateManyWithoutPostedByInput
+  votes: VoteCreateManyWithoutUserInput
+  customers: CustomerCreateManyWithoutPostedByInput
 }
 
 input UserCreateWithoutVotesInput {
@@ -908,6 +1056,8 @@ input UserCreateWithoutVotesInput {
   email: String!
   password: String!
   links: LinkCreateManyWithoutPostedByInput
+  vendors: VendorCreateManyWithoutPostedByInput
+  customers: CustomerCreateManyWithoutPostedByInput
 }
 
 type UserEdge {
@@ -961,6 +1111,8 @@ input UserUpdateDataInput {
   password: String
   links: LinkUpdateManyWithoutPostedByInput
   votes: VoteUpdateManyWithoutUserInput
+  vendors: VendorUpdateManyWithoutPostedByInput
+  customers: CustomerUpdateManyWithoutPostedByInput
 }
 
 input UserUpdateInput {
@@ -969,6 +1121,8 @@ input UserUpdateInput {
   password: String
   links: LinkUpdateManyWithoutPostedByInput
   votes: VoteUpdateManyWithoutUserInput
+  vendors: VendorUpdateManyWithoutPostedByInput
+  customers: CustomerUpdateManyWithoutPostedByInput
 }
 
 input UserUpdateManyMutationInput {
@@ -993,6 +1147,15 @@ input UserUpdateOneRequiredWithoutVotesInput {
   connect: UserWhereUniqueInput
 }
 
+input UserUpdateOneWithoutCustomersInput {
+  create: UserCreateWithoutCustomersInput
+  update: UserUpdateWithoutCustomersDataInput
+  upsert: UserUpsertWithoutCustomersInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: UserWhereUniqueInput
+}
+
 input UserUpdateOneWithoutLinksInput {
   create: UserCreateWithoutLinksInput
   update: UserUpdateWithoutLinksDataInput
@@ -1002,11 +1165,40 @@ input UserUpdateOneWithoutLinksInput {
   connect: UserWhereUniqueInput
 }
 
+input UserUpdateOneWithoutVendorsInput {
+  create: UserCreateWithoutVendorsInput
+  update: UserUpdateWithoutVendorsDataInput
+  upsert: UserUpsertWithoutVendorsInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateWithoutCustomersDataInput {
+  name: String
+  email: String
+  password: String
+  links: LinkUpdateManyWithoutPostedByInput
+  votes: VoteUpdateManyWithoutUserInput
+  vendors: VendorUpdateManyWithoutPostedByInput
+}
+
 input UserUpdateWithoutLinksDataInput {
   name: String
   email: String
   password: String
   votes: VoteUpdateManyWithoutUserInput
+  vendors: VendorUpdateManyWithoutPostedByInput
+  customers: CustomerUpdateManyWithoutPostedByInput
+}
+
+input UserUpdateWithoutVendorsDataInput {
+  name: String
+  email: String
+  password: String
+  links: LinkUpdateManyWithoutPostedByInput
+  votes: VoteUpdateManyWithoutUserInput
+  customers: CustomerUpdateManyWithoutPostedByInput
 }
 
 input UserUpdateWithoutVotesDataInput {
@@ -1014,6 +1206,8 @@ input UserUpdateWithoutVotesDataInput {
   email: String
   password: String
   links: LinkUpdateManyWithoutPostedByInput
+  vendors: VendorUpdateManyWithoutPostedByInput
+  customers: CustomerUpdateManyWithoutPostedByInput
 }
 
 input UserUpsertNestedInput {
@@ -1021,9 +1215,19 @@ input UserUpsertNestedInput {
   create: UserCreateInput!
 }
 
+input UserUpsertWithoutCustomersInput {
+  update: UserUpdateWithoutCustomersDataInput!
+  create: UserCreateWithoutCustomersInput!
+}
+
 input UserUpsertWithoutLinksInput {
   update: UserUpdateWithoutLinksDataInput!
   create: UserCreateWithoutLinksInput!
+}
+
+input UserUpsertWithoutVendorsInput {
+  update: UserUpdateWithoutVendorsDataInput!
+  create: UserCreateWithoutVendorsInput!
 }
 
 input UserUpsertWithoutVotesInput {
@@ -1094,6 +1298,12 @@ input UserWhereInput {
   votes_every: VoteWhereInput
   votes_some: VoteWhereInput
   votes_none: VoteWhereInput
+  vendors_every: VendorWhereInput
+  vendors_some: VendorWhereInput
+  vendors_none: VendorWhereInput
+  customers_every: CustomerWhereInput
+  customers_some: CustomerWhereInput
+  customers_none: CustomerWhereInput
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]
@@ -1121,7 +1331,17 @@ type VendorConnection {
 input VendorCreateInput {
   name: String!
   contact: String!
-  postedBy: UserCreateOneInput
+  postedBy: UserCreateOneWithoutVendorsInput
+}
+
+input VendorCreateManyWithoutPostedByInput {
+  create: [VendorCreateWithoutPostedByInput!]
+  connect: [VendorWhereUniqueInput!]
+}
+
+input VendorCreateWithoutPostedByInput {
+  name: String!
+  contact: String!
 }
 
 type VendorEdge {
@@ -1149,6 +1369,62 @@ type VendorPreviousValues {
   contact: String!
 }
 
+input VendorScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  contact: String
+  contact_not: String
+  contact_in: [String!]
+  contact_not_in: [String!]
+  contact_lt: String
+  contact_lte: String
+  contact_gt: String
+  contact_gte: String
+  contact_contains: String
+  contact_not_contains: String
+  contact_starts_with: String
+  contact_not_starts_with: String
+  contact_ends_with: String
+  contact_not_ends_with: String
+  AND: [VendorScalarWhereInput!]
+  OR: [VendorScalarWhereInput!]
+  NOT: [VendorScalarWhereInput!]
+}
+
 type VendorSubscriptionPayload {
   mutation: MutationType!
   node: Vendor
@@ -1170,12 +1446,50 @@ input VendorSubscriptionWhereInput {
 input VendorUpdateInput {
   name: String
   contact: String
-  postedBy: UserUpdateOneInput
+  postedBy: UserUpdateOneWithoutVendorsInput
+}
+
+input VendorUpdateManyDataInput {
+  name: String
+  contact: String
 }
 
 input VendorUpdateManyMutationInput {
   name: String
   contact: String
+}
+
+input VendorUpdateManyWithoutPostedByInput {
+  create: [VendorCreateWithoutPostedByInput!]
+  delete: [VendorWhereUniqueInput!]
+  connect: [VendorWhereUniqueInput!]
+  set: [VendorWhereUniqueInput!]
+  disconnect: [VendorWhereUniqueInput!]
+  update: [VendorUpdateWithWhereUniqueWithoutPostedByInput!]
+  upsert: [VendorUpsertWithWhereUniqueWithoutPostedByInput!]
+  deleteMany: [VendorScalarWhereInput!]
+  updateMany: [VendorUpdateManyWithWhereNestedInput!]
+}
+
+input VendorUpdateManyWithWhereNestedInput {
+  where: VendorScalarWhereInput!
+  data: VendorUpdateManyDataInput!
+}
+
+input VendorUpdateWithoutPostedByDataInput {
+  name: String
+  contact: String
+}
+
+input VendorUpdateWithWhereUniqueWithoutPostedByInput {
+  where: VendorWhereUniqueInput!
+  data: VendorUpdateWithoutPostedByDataInput!
+}
+
+input VendorUpsertWithWhereUniqueWithoutPostedByInput {
+  where: VendorWhereUniqueInput!
+  update: VendorUpdateWithoutPostedByDataInput!
+  create: VendorCreateWithoutPostedByInput!
 }
 
 input VendorWhereInput {

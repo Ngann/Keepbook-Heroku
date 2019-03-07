@@ -378,6 +378,30 @@ export type VoteOrderByInput =
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
+export type VendorOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "contact_ASC"
+  | "contact_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type CustomerOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "contact_ASC"
+  | "contact_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
 export type BillOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -389,18 +413,6 @@ export type BillOrderByInput =
   | "account_DESC"
   | "amount_ASC"
   | "amount_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
-
-export type CustomerOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "name_ASC"
-  | "name_DESC"
-  | "contact_ASC"
-  | "contact_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -436,34 +448,136 @@ export type UserOrderByInput =
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
-export type VendorOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "name_ASC"
-  | "name_DESC"
-  | "contact_ASC"
-  | "contact_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC";
-
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface UserCreateWithoutLinksInput {
-  name: String;
-  email: String;
-  password: String;
-  votes?: VoteCreateManyWithoutUserInput;
+export interface UserUpdateOneRequiredWithoutVotesInput {
+  create?: UserCreateWithoutVotesInput;
+  update?: UserUpdateWithoutVotesDataInput;
+  upsert?: UserUpsertWithoutVotesInput;
+  connect?: UserWhereUniqueInput;
 }
 
 export type BillWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
 }>;
 
-export interface LinkUpdateWithWhereUniqueWithoutPostedByInput {
-  where: LinkWhereUniqueInput;
-  data: LinkUpdateWithoutPostedByDataInput;
+export interface VendorUpsertWithWhereUniqueWithoutPostedByInput {
+  where: VendorWhereUniqueInput;
+  update: VendorUpdateWithoutPostedByDataInput;
+  create: VendorCreateWithoutPostedByInput;
+}
+
+export interface VendorWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  contact?: String;
+  contact_not?: String;
+  contact_in?: String[] | String;
+  contact_not_in?: String[] | String;
+  contact_lt?: String;
+  contact_lte?: String;
+  contact_gt?: String;
+  contact_gte?: String;
+  contact_contains?: String;
+  contact_not_contains?: String;
+  contact_starts_with?: String;
+  contact_not_starts_with?: String;
+  contact_ends_with?: String;
+  contact_not_ends_with?: String;
+  postedBy?: UserWhereInput;
+  AND?: VendorWhereInput[] | VendorWhereInput;
+  OR?: VendorWhereInput[] | VendorWhereInput;
+  NOT?: VendorWhereInput[] | VendorWhereInput;
+}
+
+export interface VendorScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  contact?: String;
+  contact_not?: String;
+  contact_in?: String[] | String;
+  contact_not_in?: String[] | String;
+  contact_lt?: String;
+  contact_lte?: String;
+  contact_gt?: String;
+  contact_gte?: String;
+  contact_contains?: String;
+  contact_not_contains?: String;
+  contact_starts_with?: String;
+  contact_not_starts_with?: String;
+  contact_ends_with?: String;
+  contact_not_ends_with?: String;
+  AND?: VendorScalarWhereInput[] | VendorScalarWhereInput;
+  OR?: VendorScalarWhereInput[] | VendorScalarWhereInput;
+  NOT?: VendorScalarWhereInput[] | VendorScalarWhereInput;
 }
 
 export interface VoteWhereInput {
@@ -488,10 +602,9 @@ export interface VoteWhereInput {
   NOT?: VoteWhereInput[] | VoteWhereInput;
 }
 
-export interface LinkUpdateWithoutPostedByDataInput {
-  description?: String;
-  url?: String;
-  votes?: VoteUpdateManyWithoutLinkInput;
+export interface VendorUpdateManyWithWhereNestedInput {
+  where: VendorScalarWhereInput;
+  data: VendorUpdateManyDataInput;
 }
 
 export interface UserWhereInput {
@@ -557,109 +670,56 @@ export interface UserWhereInput {
   votes_every?: VoteWhereInput;
   votes_some?: VoteWhereInput;
   votes_none?: VoteWhereInput;
+  vendors_every?: VendorWhereInput;
+  vendors_some?: VendorWhereInput;
+  vendors_none?: VendorWhereInput;
+  customers_every?: CustomerWhereInput;
+  customers_some?: CustomerWhereInput;
+  customers_none?: CustomerWhereInput;
   AND?: UserWhereInput[] | UserWhereInput;
   OR?: UserWhereInput[] | UserWhereInput;
   NOT?: UserWhereInput[] | UserWhereInput;
 }
 
-export interface VoteUpdateManyWithoutLinkInput {
-  create?: VoteCreateWithoutLinkInput[] | VoteCreateWithoutLinkInput;
-  delete?: VoteWhereUniqueInput[] | VoteWhereUniqueInput;
+export interface CustomerCreateWithoutPostedByInput {
+  name: String;
+  contact: String;
+}
+
+export interface CustomerCreateInput {
+  name: String;
+  contact: String;
+  postedBy?: UserCreateOneWithoutCustomersInput;
+}
+
+export interface VoteCreateManyWithoutUserInput {
+  create?: VoteCreateWithoutUserInput[] | VoteCreateWithoutUserInput;
   connect?: VoteWhereUniqueInput[] | VoteWhereUniqueInput;
-  set?: VoteWhereUniqueInput[] | VoteWhereUniqueInput;
-  disconnect?: VoteWhereUniqueInput[] | VoteWhereUniqueInput;
-  update?:
-    | VoteUpdateWithWhereUniqueWithoutLinkInput[]
-    | VoteUpdateWithWhereUniqueWithoutLinkInput;
-  upsert?:
-    | VoteUpsertWithWhereUniqueWithoutLinkInput[]
-    | VoteUpsertWithWhereUniqueWithoutLinkInput;
-  deleteMany?: VoteScalarWhereInput[] | VoteScalarWhereInput;
 }
 
-export interface BillWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  vendor?: String;
-  vendor_not?: String;
-  vendor_in?: String[] | String;
-  vendor_not_in?: String[] | String;
-  vendor_lt?: String;
-  vendor_lte?: String;
-  vendor_gt?: String;
-  vendor_gte?: String;
-  vendor_contains?: String;
-  vendor_not_contains?: String;
-  vendor_starts_with?: String;
-  vendor_not_starts_with?: String;
-  vendor_ends_with?: String;
-  vendor_not_ends_with?: String;
-  date?: String;
-  date_not?: String;
-  date_in?: String[] | String;
-  date_not_in?: String[] | String;
-  date_lt?: String;
-  date_lte?: String;
-  date_gt?: String;
-  date_gte?: String;
-  date_contains?: String;
-  date_not_contains?: String;
-  date_starts_with?: String;
-  date_not_starts_with?: String;
-  date_ends_with?: String;
-  date_not_ends_with?: String;
-  account?: String;
-  account_not?: String;
-  account_in?: String[] | String;
-  account_not_in?: String[] | String;
-  account_lt?: String;
-  account_lte?: String;
-  account_gt?: String;
-  account_gte?: String;
-  account_contains?: String;
-  account_not_contains?: String;
-  account_starts_with?: String;
-  account_not_starts_with?: String;
-  account_ends_with?: String;
-  account_not_ends_with?: String;
-  amount?: Int;
-  amount_not?: Int;
-  amount_in?: Int[] | Int;
-  amount_not_in?: Int[] | Int;
-  amount_lt?: Int;
-  amount_lte?: Int;
-  amount_gt?: Int;
-  amount_gte?: Int;
-  postedBy?: UserWhereInput;
-  AND?: BillWhereInput[] | BillWhereInput;
-  OR?: BillWhereInput[] | BillWhereInput;
-  NOT?: BillWhereInput[] | BillWhereInput;
+export interface VendorUpdateManyDataInput {
+  name?: String;
+  contact?: String;
 }
 
-export interface LinkUpsertWithoutVotesInput {
-  update: LinkUpdateWithoutVotesDataInput;
-  create: LinkCreateWithoutVotesInput;
+export interface VoteCreateWithoutUserInput {
+  link: LinkCreateOneWithoutVotesInput;
 }
 
-export interface VoteUpdateWithoutUserDataInput {
-  link?: LinkUpdateOneRequiredWithoutVotesInput;
+export interface VoteSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: VoteWhereInput;
+  AND?: VoteSubscriptionWhereInput[] | VoteSubscriptionWhereInput;
+  OR?: VoteSubscriptionWhereInput[] | VoteSubscriptionWhereInput;
+  NOT?: VoteSubscriptionWhereInput[] | VoteSubscriptionWhereInput;
 }
 
-export interface VoteUpdateWithWhereUniqueWithoutLinkInput {
-  where: VoteWhereUniqueInput;
-  data: VoteUpdateWithoutLinkDataInput;
+export interface LinkCreateOneWithoutVotesInput {
+  create?: LinkCreateWithoutVotesInput;
+  connect?: LinkWhereUniqueInput;
 }
 
 export interface VendorSubscriptionWhereInput {
@@ -673,442 +733,10 @@ export interface VendorSubscriptionWhereInput {
   NOT?: VendorSubscriptionWhereInput[] | VendorSubscriptionWhereInput;
 }
 
-export interface BillCreateInput {
-  vendor: String;
-  date: String;
-  account: String;
-  amount: Int;
-  postedBy?: UserCreateOneInput;
-}
-
-export type CustomerWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
-
-export interface UserCreateOneInput {
-  create?: UserCreateInput;
-  connect?: UserWhereUniqueInput;
-}
-
-export interface CustomerWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  name?: String;
-  name_not?: String;
-  name_in?: String[] | String;
-  name_not_in?: String[] | String;
-  name_lt?: String;
-  name_lte?: String;
-  name_gt?: String;
-  name_gte?: String;
-  name_contains?: String;
-  name_not_contains?: String;
-  name_starts_with?: String;
-  name_not_starts_with?: String;
-  name_ends_with?: String;
-  name_not_ends_with?: String;
-  contact?: String;
-  contact_not?: String;
-  contact_in?: String[] | String;
-  contact_not_in?: String[] | String;
-  contact_lt?: String;
-  contact_lte?: String;
-  contact_gt?: String;
-  contact_gte?: String;
-  contact_contains?: String;
-  contact_not_contains?: String;
-  contact_starts_with?: String;
-  contact_not_starts_with?: String;
-  contact_ends_with?: String;
-  contact_not_ends_with?: String;
-  postedBy?: UserWhereInput;
-  AND?: CustomerWhereInput[] | CustomerWhereInput;
-  OR?: CustomerWhereInput[] | CustomerWhereInput;
-  NOT?: CustomerWhereInput[] | CustomerWhereInput;
-}
-
-export interface UserCreateInput {
-  name: String;
-  email: String;
-  password: String;
-  links?: LinkCreateManyWithoutPostedByInput;
-  votes?: VoteCreateManyWithoutUserInput;
-}
-
-export interface InvoiceSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: InvoiceWhereInput;
-  AND?: InvoiceSubscriptionWhereInput[] | InvoiceSubscriptionWhereInput;
-  OR?: InvoiceSubscriptionWhereInput[] | InvoiceSubscriptionWhereInput;
-  NOT?: InvoiceSubscriptionWhereInput[] | InvoiceSubscriptionWhereInput;
-}
-
-export interface LinkCreateManyWithoutPostedByInput {
-  create?: LinkCreateWithoutPostedByInput[] | LinkCreateWithoutPostedByInput;
-  connect?: LinkWhereUniqueInput[] | LinkWhereUniqueInput;
-}
-
-export interface BillSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: BillWhereInput;
-  AND?: BillSubscriptionWhereInput[] | BillSubscriptionWhereInput;
-  OR?: BillSubscriptionWhereInput[] | BillSubscriptionWhereInput;
-  NOT?: BillSubscriptionWhereInput[] | BillSubscriptionWhereInput;
-}
-
-export interface LinkCreateWithoutPostedByInput {
-  description: String;
-  url: String;
-  votes?: VoteCreateManyWithoutLinkInput;
-}
-
-export interface VoteUpdateInput {
-  link?: LinkUpdateOneRequiredWithoutVotesInput;
-  user?: UserUpdateOneRequiredWithoutVotesInput;
-}
-
-export interface VoteCreateManyWithoutLinkInput {
-  create?: VoteCreateWithoutLinkInput[] | VoteCreateWithoutLinkInput;
-  connect?: VoteWhereUniqueInput[] | VoteWhereUniqueInput;
-}
-
-export interface VoteCreateInput {
-  link: LinkCreateOneWithoutVotesInput;
-  user: UserCreateOneWithoutVotesInput;
-}
-
-export interface VoteCreateWithoutLinkInput {
-  user: UserCreateOneWithoutVotesInput;
-}
-
-export interface VendorUpdateInput {
-  name?: String;
-  contact?: String;
-  postedBy?: UserUpdateOneInput;
-}
-
-export interface UserCreateOneWithoutVotesInput {
-  create?: UserCreateWithoutVotesInput;
-  connect?: UserWhereUniqueInput;
-}
-
-export type LinkWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
-
-export interface UserCreateWithoutVotesInput {
-  name: String;
-  email: String;
-  password: String;
-  links?: LinkCreateManyWithoutPostedByInput;
-}
-
-export interface UserUpdateInput {
-  name?: String;
-  email?: String;
-  password?: String;
-  links?: LinkUpdateManyWithoutPostedByInput;
-  votes?: VoteUpdateManyWithoutUserInput;
-}
-
-export interface VoteCreateManyWithoutUserInput {
-  create?: VoteCreateWithoutUserInput[] | VoteCreateWithoutUserInput;
-  connect?: VoteWhereUniqueInput[] | VoteWhereUniqueInput;
-}
-
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-  email?: String;
-}>;
-
-export interface VoteCreateWithoutUserInput {
-  link: LinkCreateOneWithoutVotesInput;
-}
-
-export interface LinkCreateInput {
-  description: String;
-  url: String;
-  postedBy?: UserCreateOneWithoutLinksInput;
-  votes?: VoteCreateManyWithoutLinkInput;
-}
-
-export interface LinkCreateOneWithoutVotesInput {
-  create?: LinkCreateWithoutVotesInput;
-  connect?: LinkWhereUniqueInput;
-}
-
-export interface InvoiceUpdateInput {
-  customer?: String;
-  date?: String;
-  account?: String;
-  amount?: Int;
-  postedBy?: UserUpdateOneInput;
-}
-
 export interface LinkCreateWithoutVotesInput {
   description: String;
   url: String;
   postedBy?: UserCreateOneWithoutLinksInput;
-}
-
-export interface InvoiceCreateInput {
-  customer: String;
-  date: String;
-  account: String;
-  amount: Int;
-  postedBy?: UserCreateOneInput;
-}
-
-export interface UserCreateOneWithoutLinksInput {
-  create?: UserCreateWithoutLinksInput;
-  connect?: UserWhereUniqueInput;
-}
-
-export interface CustomerUpdateManyMutationInput {
-  name?: String;
-  contact?: String;
-}
-
-export interface UserUpsertWithoutLinksInput {
-  update: UserUpdateWithoutLinksDataInput;
-  create: UserCreateWithoutLinksInput;
-}
-
-export interface CustomerCreateInput {
-  name: String;
-  contact: String;
-  postedBy?: UserCreateOneInput;
-}
-
-export interface BillUpdateInput {
-  vendor?: String;
-  date?: String;
-  account?: String;
-  amount?: Int;
-  postedBy?: UserUpdateOneInput;
-}
-
-export type VoteWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
-
-export interface UserUpdateOneInput {
-  create?: UserCreateInput;
-  update?: UserUpdateDataInput;
-  upsert?: UserUpsertNestedInput;
-  delete?: Boolean;
-  disconnect?: Boolean;
-  connect?: UserWhereUniqueInput;
-}
-
-export interface VoteUpsertWithWhereUniqueWithoutUserInput {
-  where: VoteWhereUniqueInput;
-  update: VoteUpdateWithoutUserDataInput;
-  create: VoteCreateWithoutUserInput;
-}
-
-export interface UserUpdateDataInput {
-  name?: String;
-  email?: String;
-  password?: String;
-  links?: LinkUpdateManyWithoutPostedByInput;
-  votes?: VoteUpdateManyWithoutUserInput;
-}
-
-export interface UserSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: UserWhereInput;
-  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
-  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
-  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
-}
-
-export interface LinkUpdateManyWithoutPostedByInput {
-  create?: LinkCreateWithoutPostedByInput[] | LinkCreateWithoutPostedByInput;
-  delete?: LinkWhereUniqueInput[] | LinkWhereUniqueInput;
-  connect?: LinkWhereUniqueInput[] | LinkWhereUniqueInput;
-  set?: LinkWhereUniqueInput[] | LinkWhereUniqueInput;
-  disconnect?: LinkWhereUniqueInput[] | LinkWhereUniqueInput;
-  update?:
-    | LinkUpdateWithWhereUniqueWithoutPostedByInput[]
-    | LinkUpdateWithWhereUniqueWithoutPostedByInput;
-  upsert?:
-    | LinkUpsertWithWhereUniqueWithoutPostedByInput[]
-    | LinkUpsertWithWhereUniqueWithoutPostedByInput;
-  deleteMany?: LinkScalarWhereInput[] | LinkScalarWhereInput;
-  updateMany?:
-    | LinkUpdateManyWithWhereNestedInput[]
-    | LinkUpdateManyWithWhereNestedInput;
-}
-
-export interface LinkWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  createdAt?: DateTimeInput;
-  createdAt_not?: DateTimeInput;
-  createdAt_in?: DateTimeInput[] | DateTimeInput;
-  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
-  createdAt_lt?: DateTimeInput;
-  createdAt_lte?: DateTimeInput;
-  createdAt_gt?: DateTimeInput;
-  createdAt_gte?: DateTimeInput;
-  description?: String;
-  description_not?: String;
-  description_in?: String[] | String;
-  description_not_in?: String[] | String;
-  description_lt?: String;
-  description_lte?: String;
-  description_gt?: String;
-  description_gte?: String;
-  description_contains?: String;
-  description_not_contains?: String;
-  description_starts_with?: String;
-  description_not_starts_with?: String;
-  description_ends_with?: String;
-  description_not_ends_with?: String;
-  url?: String;
-  url_not?: String;
-  url_in?: String[] | String;
-  url_not_in?: String[] | String;
-  url_lt?: String;
-  url_lte?: String;
-  url_gt?: String;
-  url_gte?: String;
-  url_contains?: String;
-  url_not_contains?: String;
-  url_starts_with?: String;
-  url_not_starts_with?: String;
-  url_ends_with?: String;
-  url_not_ends_with?: String;
-  postedBy?: UserWhereInput;
-  votes_every?: VoteWhereInput;
-  votes_some?: VoteWhereInput;
-  votes_none?: VoteWhereInput;
-  AND?: LinkWhereInput[] | LinkWhereInput;
-  OR?: LinkWhereInput[] | LinkWhereInput;
-  NOT?: LinkWhereInput[] | LinkWhereInput;
-}
-
-export interface UserUpdateWithoutLinksDataInput {
-  name?: String;
-  email?: String;
-  password?: String;
-  votes?: VoteUpdateManyWithoutUserInput;
-}
-
-export type InvoiceWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
-
-export interface UserUpdateOneWithoutLinksInput {
-  create?: UserCreateWithoutLinksInput;
-  update?: UserUpdateWithoutLinksDataInput;
-  upsert?: UserUpsertWithoutLinksInput;
-  delete?: Boolean;
-  disconnect?: Boolean;
-  connect?: UserWhereUniqueInput;
-}
-
-export interface VendorUpdateManyMutationInput {
-  name?: String;
-  contact?: String;
-}
-
-export interface LinkUpdateWithoutVotesDataInput {
-  description?: String;
-  url?: String;
-  postedBy?: UserUpdateOneWithoutLinksInput;
-}
-
-export interface UserUpdateManyMutationInput {
-  name?: String;
-  email?: String;
-  password?: String;
-}
-
-export interface LinkUpdateOneRequiredWithoutVotesInput {
-  create?: LinkCreateWithoutVotesInput;
-  update?: LinkUpdateWithoutVotesDataInput;
-  upsert?: LinkUpsertWithoutVotesInput;
-  connect?: LinkWhereUniqueInput;
-}
-
-export interface LinkUpdateInput {
-  description?: String;
-  url?: String;
-  postedBy?: UserUpdateOneWithoutLinksInput;
-  votes?: VoteUpdateManyWithoutLinkInput;
-}
-
-export interface VoteUpdateWithoutLinkDataInput {
-  user?: UserUpdateOneRequiredWithoutVotesInput;
-}
-
-export type VendorWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
-
-export interface UserUpdateOneRequiredWithoutVotesInput {
-  create?: UserCreateWithoutVotesInput;
-  update?: UserUpdateWithoutVotesDataInput;
-  upsert?: UserUpsertWithoutVotesInput;
-  connect?: UserWhereUniqueInput;
-}
-
-export interface CustomerUpdateInput {
-  name?: String;
-  contact?: String;
-  postedBy?: UserUpdateOneInput;
-}
-
-export interface UserUpdateWithoutVotesDataInput {
-  name?: String;
-  email?: String;
-  password?: String;
-  links?: LinkUpdateManyWithoutPostedByInput;
-}
-
-export interface UserUpsertNestedInput {
-  update: UserUpdateDataInput;
-  create: UserCreateInput;
-}
-
-export interface UserUpsertWithoutVotesInput {
-  update: UserUpdateWithoutVotesDataInput;
-  create: UserCreateWithoutVotesInput;
 }
 
 export interface LinkSubscriptionWhereInput {
@@ -1122,10 +750,69 @@ export interface LinkSubscriptionWhereInput {
   NOT?: LinkSubscriptionWhereInput[] | LinkSubscriptionWhereInput;
 }
 
-export interface VoteUpsertWithWhereUniqueWithoutLinkInput {
-  where: VoteWhereUniqueInput;
-  update: VoteUpdateWithoutLinkDataInput;
-  create: VoteCreateWithoutLinkInput;
+export interface UserCreateOneWithoutLinksInput {
+  create?: UserCreateWithoutLinksInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface CustomerSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: CustomerWhereInput;
+  AND?: CustomerSubscriptionWhereInput[] | CustomerSubscriptionWhereInput;
+  OR?: CustomerSubscriptionWhereInput[] | CustomerSubscriptionWhereInput;
+  NOT?: CustomerSubscriptionWhereInput[] | CustomerSubscriptionWhereInput;
+}
+
+export interface UserCreateWithoutLinksInput {
+  name: String;
+  email: String;
+  password: String;
+  votes?: VoteCreateManyWithoutUserInput;
+  vendors?: VendorCreateManyWithoutPostedByInput;
+  customers?: CustomerCreateManyWithoutPostedByInput;
+}
+
+export type CustomerWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export interface BillUpdateInput {
+  vendor?: String;
+  date?: String;
+  account?: String;
+  amount?: Int;
+  postedBy?: UserUpdateOneInput;
+}
+
+export interface VoteCreateInput {
+  link: LinkCreateOneWithoutVotesInput;
+  user: UserCreateOneWithoutVotesInput;
+}
+
+export interface UserUpdateOneInput {
+  create?: UserCreateInput;
+  update?: UserUpdateDataInput;
+  upsert?: UserUpsertNestedInput;
+  delete?: Boolean;
+  disconnect?: Boolean;
+  connect?: UserWhereUniqueInput;
+}
+
+export type InvoiceWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export interface UserUpdateDataInput {
+  name?: String;
+  email?: String;
+  password?: String;
+  links?: LinkUpdateManyWithoutPostedByInput;
+  votes?: VoteUpdateManyWithoutUserInput;
+  vendors?: VendorUpdateManyWithoutPostedByInput;
+  customers?: CustomerUpdateManyWithoutPostedByInput;
 }
 
 export interface InvoiceWhereInput {
@@ -1199,38 +886,180 @@ export interface InvoiceWhereInput {
   NOT?: InvoiceWhereInput[] | InvoiceWhereInput;
 }
 
-export interface VoteScalarWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  AND?: VoteScalarWhereInput[] | VoteScalarWhereInput;
-  OR?: VoteScalarWhereInput[] | VoteScalarWhereInput;
-  NOT?: VoteScalarWhereInput[] | VoteScalarWhereInput;
+export interface LinkUpdateManyWithoutPostedByInput {
+  create?: LinkCreateWithoutPostedByInput[] | LinkCreateWithoutPostedByInput;
+  delete?: LinkWhereUniqueInput[] | LinkWhereUniqueInput;
+  connect?: LinkWhereUniqueInput[] | LinkWhereUniqueInput;
+  set?: LinkWhereUniqueInput[] | LinkWhereUniqueInput;
+  disconnect?: LinkWhereUniqueInput[] | LinkWhereUniqueInput;
+  update?:
+    | LinkUpdateWithWhereUniqueWithoutPostedByInput[]
+    | LinkUpdateWithWhereUniqueWithoutPostedByInput;
+  upsert?:
+    | LinkUpsertWithWhereUniqueWithoutPostedByInput[]
+    | LinkUpsertWithWhereUniqueWithoutPostedByInput;
+  deleteMany?: LinkScalarWhereInput[] | LinkScalarWhereInput;
+  updateMany?:
+    | LinkUpdateManyWithWhereNestedInput[]
+    | LinkUpdateManyWithWhereNestedInput;
 }
 
-export interface LinkUpdateManyMutationInput {
+export interface UserUpdateOneWithoutVendorsInput {
+  create?: UserCreateWithoutVendorsInput;
+  update?: UserUpdateWithoutVendorsDataInput;
+  upsert?: UserUpsertWithoutVendorsInput;
+  delete?: Boolean;
+  disconnect?: Boolean;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface LinkUpdateWithWhereUniqueWithoutPostedByInput {
+  where: LinkWhereUniqueInput;
+  data: LinkUpdateWithoutPostedByDataInput;
+}
+
+export interface UserCreateWithoutVendorsInput {
+  name: String;
+  email: String;
+  password: String;
+  links?: LinkCreateManyWithoutPostedByInput;
+  votes?: VoteCreateManyWithoutUserInput;
+  customers?: CustomerCreateManyWithoutPostedByInput;
+}
+
+export interface LinkUpdateWithoutPostedByDataInput {
   description?: String;
   url?: String;
+  votes?: VoteUpdateManyWithoutLinkInput;
 }
 
-export interface LinkUpsertWithWhereUniqueWithoutPostedByInput {
-  where: LinkWhereUniqueInput;
-  update: LinkUpdateWithoutPostedByDataInput;
-  create: LinkCreateWithoutPostedByInput;
+export interface UserCreateOneWithoutVendorsInput {
+  create?: UserCreateWithoutVendorsInput;
+  connect?: UserWhereUniqueInput;
 }
 
-export interface VendorWhereInput {
+export interface VoteUpdateManyWithoutLinkInput {
+  create?: VoteCreateWithoutLinkInput[] | VoteCreateWithoutLinkInput;
+  delete?: VoteWhereUniqueInput[] | VoteWhereUniqueInput;
+  connect?: VoteWhereUniqueInput[] | VoteWhereUniqueInput;
+  set?: VoteWhereUniqueInput[] | VoteWhereUniqueInput;
+  disconnect?: VoteWhereUniqueInput[] | VoteWhereUniqueInput;
+  update?:
+    | VoteUpdateWithWhereUniqueWithoutLinkInput[]
+    | VoteUpdateWithWhereUniqueWithoutLinkInput;
+  upsert?:
+    | VoteUpsertWithWhereUniqueWithoutLinkInput[]
+    | VoteUpsertWithWhereUniqueWithoutLinkInput;
+  deleteMany?: VoteScalarWhereInput[] | VoteScalarWhereInput;
+}
+
+export interface UserUpdateManyMutationInput {
+  name?: String;
+  email?: String;
+  password?: String;
+}
+
+export interface VoteUpdateWithWhereUniqueWithoutLinkInput {
+  where: VoteWhereUniqueInput;
+  data: VoteUpdateWithoutLinkDataInput;
+}
+
+export interface UserUpdateInput {
+  name?: String;
+  email?: String;
+  password?: String;
+  links?: LinkUpdateManyWithoutPostedByInput;
+  votes?: VoteUpdateManyWithoutUserInput;
+  vendors?: VendorUpdateManyWithoutPostedByInput;
+  customers?: CustomerUpdateManyWithoutPostedByInput;
+}
+
+export interface VoteUpdateWithoutLinkDataInput {
+  user?: UserUpdateOneRequiredWithoutVotesInput;
+}
+
+export interface LinkUpdateInput {
+  description?: String;
+  url?: String;
+  postedBy?: UserUpdateOneWithoutLinksInput;
+  votes?: VoteUpdateManyWithoutLinkInput;
+}
+
+export interface UserUpdateOneWithoutCustomersInput {
+  create?: UserCreateWithoutCustomersInput;
+  update?: UserUpdateWithoutCustomersDataInput;
+  upsert?: UserUpsertWithoutCustomersInput;
+  delete?: Boolean;
+  disconnect?: Boolean;
+  connect?: UserWhereUniqueInput;
+}
+
+export type VendorWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export interface UserUpdateWithoutVotesDataInput {
+  name?: String;
+  email?: String;
+  password?: String;
+  links?: LinkUpdateManyWithoutPostedByInput;
+  vendors?: VendorUpdateManyWithoutPostedByInput;
+  customers?: CustomerUpdateManyWithoutPostedByInput;
+}
+
+export interface InvoiceUpdateInput {
+  customer?: String;
+  date?: String;
+  account?: String;
+  amount?: Int;
+  postedBy?: UserUpdateOneInput;
+}
+
+export interface VendorUpdateManyWithoutPostedByInput {
+  create?:
+    | VendorCreateWithoutPostedByInput[]
+    | VendorCreateWithoutPostedByInput;
+  delete?: VendorWhereUniqueInput[] | VendorWhereUniqueInput;
+  connect?: VendorWhereUniqueInput[] | VendorWhereUniqueInput;
+  set?: VendorWhereUniqueInput[] | VendorWhereUniqueInput;
+  disconnect?: VendorWhereUniqueInput[] | VendorWhereUniqueInput;
+  update?:
+    | VendorUpdateWithWhereUniqueWithoutPostedByInput[]
+    | VendorUpdateWithWhereUniqueWithoutPostedByInput;
+  upsert?:
+    | VendorUpsertWithWhereUniqueWithoutPostedByInput[]
+    | VendorUpsertWithWhereUniqueWithoutPostedByInput;
+  deleteMany?: VendorScalarWhereInput[] | VendorScalarWhereInput;
+  updateMany?:
+    | VendorUpdateManyWithWhereNestedInput[]
+    | VendorUpdateManyWithWhereNestedInput;
+}
+
+export type VoteWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export interface VendorUpdateWithWhereUniqueWithoutPostedByInput {
+  where: VendorWhereUniqueInput;
+  data: VendorUpdateWithoutPostedByDataInput;
+}
+
+export interface UserUpsertWithoutCustomersInput {
+  update: UserUpdateWithoutCustomersDataInput;
+  create: UserCreateWithoutCustomersInput;
+}
+
+export interface VendorUpdateWithoutPostedByDataInput {
+  name?: String;
+  contact?: String;
+}
+
+export interface UserCreateOneInput {
+  create?: UserCreateInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface CustomerWhereInput {
   id?: ID_Input;
   id_not?: ID_Input;
   id_in?: ID_Input[] | ID_Input;
@@ -1282,9 +1111,326 @@ export interface VendorWhereInput {
   contact_ends_with?: String;
   contact_not_ends_with?: String;
   postedBy?: UserWhereInput;
-  AND?: VendorWhereInput[] | VendorWhereInput;
-  OR?: VendorWhereInput[] | VendorWhereInput;
-  NOT?: VendorWhereInput[] | VendorWhereInput;
+  AND?: CustomerWhereInput[] | CustomerWhereInput;
+  OR?: CustomerWhereInput[] | CustomerWhereInput;
+  NOT?: CustomerWhereInput[] | CustomerWhereInput;
+}
+
+export interface LinkCreateManyWithoutPostedByInput {
+  create?: LinkCreateWithoutPostedByInput[] | LinkCreateWithoutPostedByInput;
+  connect?: LinkWhereUniqueInput[] | LinkWhereUniqueInput;
+}
+
+export interface CustomerUpdateInput {
+  name?: String;
+  contact?: String;
+  postedBy?: UserUpdateOneWithoutCustomersInput;
+}
+
+export interface VoteCreateManyWithoutLinkInput {
+  create?: VoteCreateWithoutLinkInput[] | VoteCreateWithoutLinkInput;
+  connect?: VoteWhereUniqueInput[] | VoteWhereUniqueInput;
+}
+
+export interface UserCreateWithoutCustomersInput {
+  name: String;
+  email: String;
+  password: String;
+  links?: LinkCreateManyWithoutPostedByInput;
+  votes?: VoteCreateManyWithoutUserInput;
+  vendors?: VendorCreateManyWithoutPostedByInput;
+}
+
+export interface UserCreateOneWithoutVotesInput {
+  create?: UserCreateWithoutVotesInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface UserCreateOneWithoutCustomersInput {
+  create?: UserCreateWithoutCustomersInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface VendorCreateManyWithoutPostedByInput {
+  create?:
+    | VendorCreateWithoutPostedByInput[]
+    | VendorCreateWithoutPostedByInput;
+  connect?: VendorWhereUniqueInput[] | VendorWhereUniqueInput;
+}
+
+export interface CustomerUpdateManyWithoutPostedByInput {
+  create?:
+    | CustomerCreateWithoutPostedByInput[]
+    | CustomerCreateWithoutPostedByInput;
+  delete?: CustomerWhereUniqueInput[] | CustomerWhereUniqueInput;
+  connect?: CustomerWhereUniqueInput[] | CustomerWhereUniqueInput;
+  set?: CustomerWhereUniqueInput[] | CustomerWhereUniqueInput;
+  disconnect?: CustomerWhereUniqueInput[] | CustomerWhereUniqueInput;
+  update?:
+    | CustomerUpdateWithWhereUniqueWithoutPostedByInput[]
+    | CustomerUpdateWithWhereUniqueWithoutPostedByInput;
+  upsert?:
+    | CustomerUpsertWithWhereUniqueWithoutPostedByInput[]
+    | CustomerUpsertWithWhereUniqueWithoutPostedByInput;
+  deleteMany?: CustomerScalarWhereInput[] | CustomerScalarWhereInput;
+  updateMany?:
+    | CustomerUpdateManyWithWhereNestedInput[]
+    | CustomerUpdateManyWithWhereNestedInput;
+}
+
+export interface CustomerCreateManyWithoutPostedByInput {
+  create?:
+    | CustomerCreateWithoutPostedByInput[]
+    | CustomerCreateWithoutPostedByInput;
+  connect?: CustomerWhereUniqueInput[] | CustomerWhereUniqueInput;
+}
+
+export interface CustomerUpdateWithWhereUniqueWithoutPostedByInput {
+  where: CustomerWhereUniqueInput;
+  data: CustomerUpdateWithoutPostedByDataInput;
+}
+
+export interface BillWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  vendor?: String;
+  vendor_not?: String;
+  vendor_in?: String[] | String;
+  vendor_not_in?: String[] | String;
+  vendor_lt?: String;
+  vendor_lte?: String;
+  vendor_gt?: String;
+  vendor_gte?: String;
+  vendor_contains?: String;
+  vendor_not_contains?: String;
+  vendor_starts_with?: String;
+  vendor_not_starts_with?: String;
+  vendor_ends_with?: String;
+  vendor_not_ends_with?: String;
+  date?: String;
+  date_not?: String;
+  date_in?: String[] | String;
+  date_not_in?: String[] | String;
+  date_lt?: String;
+  date_lte?: String;
+  date_gt?: String;
+  date_gte?: String;
+  date_contains?: String;
+  date_not_contains?: String;
+  date_starts_with?: String;
+  date_not_starts_with?: String;
+  date_ends_with?: String;
+  date_not_ends_with?: String;
+  account?: String;
+  account_not?: String;
+  account_in?: String[] | String;
+  account_not_in?: String[] | String;
+  account_lt?: String;
+  account_lte?: String;
+  account_gt?: String;
+  account_gte?: String;
+  account_contains?: String;
+  account_not_contains?: String;
+  account_starts_with?: String;
+  account_not_starts_with?: String;
+  account_ends_with?: String;
+  account_not_ends_with?: String;
+  amount?: Int;
+  amount_not?: Int;
+  amount_in?: Int[] | Int;
+  amount_not_in?: Int[] | Int;
+  amount_lt?: Int;
+  amount_lte?: Int;
+  amount_gt?: Int;
+  amount_gte?: Int;
+  postedBy?: UserWhereInput;
+  AND?: BillWhereInput[] | BillWhereInput;
+  OR?: BillWhereInput[] | BillWhereInput;
+  NOT?: BillWhereInput[] | BillWhereInput;
+}
+
+export interface CustomerUpdateWithoutPostedByDataInput {
+  name?: String;
+  contact?: String;
+}
+
+export interface InvoiceSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: InvoiceWhereInput;
+  AND?: InvoiceSubscriptionWhereInput[] | InvoiceSubscriptionWhereInput;
+  OR?: InvoiceSubscriptionWhereInput[] | InvoiceSubscriptionWhereInput;
+  NOT?: InvoiceSubscriptionWhereInput[] | InvoiceSubscriptionWhereInput;
+}
+
+export interface CustomerUpsertWithWhereUniqueWithoutPostedByInput {
+  where: CustomerWhereUniqueInput;
+  update: CustomerUpdateWithoutPostedByDataInput;
+  create: CustomerCreateWithoutPostedByInput;
+}
+
+export interface VoteUpdateInput {
+  link?: LinkUpdateOneRequiredWithoutVotesInput;
+  user?: UserUpdateOneRequiredWithoutVotesInput;
+}
+
+export interface CustomerScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  contact?: String;
+  contact_not?: String;
+  contact_in?: String[] | String;
+  contact_not_in?: String[] | String;
+  contact_lt?: String;
+  contact_lte?: String;
+  contact_gt?: String;
+  contact_gte?: String;
+  contact_contains?: String;
+  contact_not_contains?: String;
+  contact_starts_with?: String;
+  contact_not_starts_with?: String;
+  contact_ends_with?: String;
+  contact_not_ends_with?: String;
+  AND?: CustomerScalarWhereInput[] | CustomerScalarWhereInput;
+  OR?: CustomerScalarWhereInput[] | CustomerScalarWhereInput;
+  NOT?: CustomerScalarWhereInput[] | CustomerScalarWhereInput;
+}
+
+export interface UserUpsertWithoutVendorsInput {
+  update: UserUpdateWithoutVendorsDataInput;
+  create: UserCreateWithoutVendorsInput;
+}
+
+export interface CustomerUpdateManyWithWhereNestedInput {
+  where: CustomerScalarWhereInput;
+  data: CustomerUpdateManyDataInput;
+}
+
+export interface VendorUpdateInput {
+  name?: String;
+  contact?: String;
+  postedBy?: UserUpdateOneWithoutVendorsInput;
+}
+
+export interface CustomerUpdateManyDataInput {
+  name?: String;
+  contact?: String;
+}
+
+export interface VendorCreateInput {
+  name: String;
+  contact: String;
+  postedBy?: UserCreateOneWithoutVendorsInput;
+}
+
+export interface UserUpsertWithoutVotesInput {
+  update: UserUpdateWithoutVotesDataInput;
+  create: UserCreateWithoutVotesInput;
+}
+
+export interface LinkUpdateManyMutationInput {
+  description?: String;
+  url?: String;
+}
+
+export interface VoteUpsertWithWhereUniqueWithoutLinkInput {
+  where: VoteWhereUniqueInput;
+  update: VoteUpdateWithoutLinkDataInput;
+  create: VoteCreateWithoutLinkInput;
+}
+
+export interface InvoiceUpdateManyMutationInput {
+  customer?: String;
+  date?: String;
+  account?: String;
+  amount?: Int;
+}
+
+export interface VoteScalarWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  AND?: VoteScalarWhereInput[] | VoteScalarWhereInput;
+  OR?: VoteScalarWhereInput[] | VoteScalarWhereInput;
+  NOT?: VoteScalarWhereInput[] | VoteScalarWhereInput;
+}
+
+export interface CustomerUpdateManyMutationInput {
+  name?: String;
+  contact?: String;
+}
+
+export interface LinkUpsertWithWhereUniqueWithoutPostedByInput {
+  where: LinkWhereUniqueInput;
+  update: LinkUpdateWithoutPostedByDataInput;
+  create: LinkCreateWithoutPostedByInput;
+}
+
+export interface BillCreateInput {
+  vendor: String;
+  date: String;
+  account: String;
+  amount: Int;
+  postedBy?: UserCreateOneInput;
 }
 
 export interface LinkScalarWhereInput {
@@ -1343,20 +1489,89 @@ export interface LinkScalarWhereInput {
   NOT?: LinkScalarWhereInput[] | LinkScalarWhereInput;
 }
 
-export interface VoteSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: VoteWhereInput;
-  AND?: VoteSubscriptionWhereInput[] | VoteSubscriptionWhereInput;
-  OR?: VoteSubscriptionWhereInput[] | VoteSubscriptionWhereInput;
-  NOT?: VoteSubscriptionWhereInput[] | VoteSubscriptionWhereInput;
+export interface LinkCreateWithoutPostedByInput {
+  description: String;
+  url: String;
+  votes?: VoteCreateManyWithoutLinkInput;
 }
 
-export interface VoteUpdateWithWhereUniqueWithoutUserInput {
-  where: VoteWhereUniqueInput;
-  data: VoteUpdateWithoutUserDataInput;
+export interface LinkUpdateManyWithWhereNestedInput {
+  where: LinkScalarWhereInput;
+  data: LinkUpdateManyDataInput;
+}
+
+export interface UserCreateWithoutVotesInput {
+  name: String;
+  email: String;
+  password: String;
+  links?: LinkCreateManyWithoutPostedByInput;
+  vendors?: VendorCreateManyWithoutPostedByInput;
+  customers?: CustomerCreateManyWithoutPostedByInput;
+}
+
+export interface LinkUpdateManyDataInput {
+  description?: String;
+  url?: String;
+}
+
+export interface LinkWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  description?: String;
+  description_not?: String;
+  description_in?: String[] | String;
+  description_not_in?: String[] | String;
+  description_lt?: String;
+  description_lte?: String;
+  description_gt?: String;
+  description_gte?: String;
+  description_contains?: String;
+  description_not_contains?: String;
+  description_starts_with?: String;
+  description_not_starts_with?: String;
+  description_ends_with?: String;
+  description_not_ends_with?: String;
+  url?: String;
+  url_not?: String;
+  url_in?: String[] | String;
+  url_not_in?: String[] | String;
+  url_lt?: String;
+  url_lte?: String;
+  url_gt?: String;
+  url_gte?: String;
+  url_contains?: String;
+  url_not_contains?: String;
+  url_starts_with?: String;
+  url_not_starts_with?: String;
+  url_ends_with?: String;
+  url_not_ends_with?: String;
+  postedBy?: UserWhereInput;
+  votes_every?: VoteWhereInput;
+  votes_some?: VoteWhereInput;
+  votes_none?: VoteWhereInput;
+  AND?: LinkWhereInput[] | LinkWhereInput;
+  OR?: LinkWhereInput[] | LinkWhereInput;
+  NOT?: LinkWhereInput[] | LinkWhereInput;
 }
 
 export interface VoteUpdateManyWithoutUserInput {
@@ -1374,25 +1589,109 @@ export interface VoteUpdateManyWithoutUserInput {
   deleteMany?: VoteScalarWhereInput[] | VoteScalarWhereInput;
 }
 
-export interface LinkUpdateManyDataInput {
-  description?: String;
-  url?: String;
-}
-
-export interface LinkUpdateManyWithWhereNestedInput {
-  where: LinkScalarWhereInput;
-  data: LinkUpdateManyDataInput;
-}
-
-export interface CustomerSubscriptionWhereInput {
+export interface BillSubscriptionWhereInput {
   mutation_in?: MutationType[] | MutationType;
   updatedFields_contains?: String;
   updatedFields_contains_every?: String[] | String;
   updatedFields_contains_some?: String[] | String;
-  node?: CustomerWhereInput;
-  AND?: CustomerSubscriptionWhereInput[] | CustomerSubscriptionWhereInput;
-  OR?: CustomerSubscriptionWhereInput[] | CustomerSubscriptionWhereInput;
-  NOT?: CustomerSubscriptionWhereInput[] | CustomerSubscriptionWhereInput;
+  node?: BillWhereInput;
+  AND?: BillSubscriptionWhereInput[] | BillSubscriptionWhereInput;
+  OR?: BillSubscriptionWhereInput[] | BillSubscriptionWhereInput;
+  NOT?: BillSubscriptionWhereInput[] | BillSubscriptionWhereInput;
+}
+
+export interface VoteUpdateWithWhereUniqueWithoutUserInput {
+  where: VoteWhereUniqueInput;
+  data: VoteUpdateWithoutUserDataInput;
+}
+
+export interface UserUpdateWithoutVendorsDataInput {
+  name?: String;
+  email?: String;
+  password?: String;
+  links?: LinkUpdateManyWithoutPostedByInput;
+  votes?: VoteUpdateManyWithoutUserInput;
+  customers?: CustomerUpdateManyWithoutPostedByInput;
+}
+
+export interface VoteUpdateWithoutUserDataInput {
+  link?: LinkUpdateOneRequiredWithoutVotesInput;
+}
+
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+  email?: String;
+}>;
+
+export interface LinkUpdateOneRequiredWithoutVotesInput {
+  create?: LinkCreateWithoutVotesInput;
+  update?: LinkUpdateWithoutVotesDataInput;
+  upsert?: LinkUpsertWithoutVotesInput;
+  connect?: LinkWhereUniqueInput;
+}
+
+export interface InvoiceCreateInput {
+  customer: String;
+  date: String;
+  account: String;
+  amount: Int;
+  postedBy?: UserCreateOneInput;
+}
+
+export interface LinkUpdateWithoutVotesDataInput {
+  description?: String;
+  url?: String;
+  postedBy?: UserUpdateOneWithoutLinksInput;
+}
+
+export interface UserCreateInput {
+  name: String;
+  email: String;
+  password: String;
+  links?: LinkCreateManyWithoutPostedByInput;
+  votes?: VoteCreateManyWithoutUserInput;
+  vendors?: VendorCreateManyWithoutPostedByInput;
+  customers?: CustomerCreateManyWithoutPostedByInput;
+}
+
+export interface UserUpdateOneWithoutLinksInput {
+  create?: UserCreateWithoutLinksInput;
+  update?: UserUpdateWithoutLinksDataInput;
+  upsert?: UserUpsertWithoutLinksInput;
+  delete?: Boolean;
+  disconnect?: Boolean;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface VendorCreateWithoutPostedByInput {
+  name: String;
+  contact: String;
+}
+
+export interface UserUpdateWithoutLinksDataInput {
+  name?: String;
+  email?: String;
+  password?: String;
+  votes?: VoteUpdateManyWithoutUserInput;
+  vendors?: VendorUpdateManyWithoutPostedByInput;
+  customers?: CustomerUpdateManyWithoutPostedByInput;
+}
+
+export interface VendorUpdateManyMutationInput {
+  name?: String;
+  contact?: String;
+}
+
+export interface UserUpsertWithoutLinksInput {
+  update: UserUpdateWithoutLinksDataInput;
+  create: UserCreateWithoutLinksInput;
+}
+
+export interface LinkCreateInput {
+  description: String;
+  url: String;
+  postedBy?: UserCreateOneWithoutLinksInput;
+  votes?: VoteCreateManyWithoutLinkInput;
 }
 
 export interface BillUpdateManyMutationInput {
@@ -1402,17 +1701,48 @@ export interface BillUpdateManyMutationInput {
   amount?: Int;
 }
 
-export interface InvoiceUpdateManyMutationInput {
-  customer?: String;
-  date?: String;
-  account?: String;
-  amount?: Int;
+export interface UserUpsertNestedInput {
+  update: UserUpdateDataInput;
+  create: UserCreateInput;
 }
 
-export interface VendorCreateInput {
-  name: String;
-  contact: String;
-  postedBy?: UserCreateOneInput;
+export interface VoteUpsertWithWhereUniqueWithoutUserInput {
+  where: VoteWhereUniqueInput;
+  update: VoteUpdateWithoutUserDataInput;
+  create: VoteCreateWithoutUserInput;
+}
+
+export interface LinkUpsertWithoutVotesInput {
+  update: LinkUpdateWithoutVotesDataInput;
+  create: LinkCreateWithoutVotesInput;
+}
+
+export interface UserUpdateWithoutCustomersDataInput {
+  name?: String;
+  email?: String;
+  password?: String;
+  links?: LinkUpdateManyWithoutPostedByInput;
+  votes?: VoteUpdateManyWithoutUserInput;
+  vendors?: VendorUpdateManyWithoutPostedByInput;
+}
+
+export type LinkWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export interface UserSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: UserWhereInput;
+  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
+  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
+  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
+}
+
+export interface VoteCreateWithoutLinkInput {
+  user: UserCreateOneWithoutVotesInput;
 }
 
 export interface NodeNode {
@@ -1435,46 +1765,29 @@ export interface VotePreviousValuesSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
 }
 
-export interface InvoiceConnection {
-  pageInfo: PageInfo;
-  edges: InvoiceEdge[];
+export interface VendorPreviousValues {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  name: String;
+  contact: String;
 }
 
-export interface InvoiceConnectionPromise
-  extends Promise<InvoiceConnection>,
+export interface VendorPreviousValuesPromise
+  extends Promise<VendorPreviousValues>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<InvoiceEdge>>() => T;
-  aggregate: <T = AggregateInvoicePromise>() => T;
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  name: () => Promise<String>;
+  contact: () => Promise<String>;
 }
 
-export interface InvoiceConnectionSubscription
-  extends Promise<AsyncIterator<InvoiceConnection>>,
+export interface VendorPreviousValuesSubscription
+  extends Promise<AsyncIterator<VendorPreviousValues>>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<InvoiceEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateInvoiceSubscription>() => T;
-}
-
-export interface BillConnection {
-  pageInfo: PageInfo;
-  edges: BillEdge[];
-}
-
-export interface BillConnectionPromise
-  extends Promise<BillConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<BillEdge>>() => T;
-  aggregate: <T = AggregateBillPromise>() => T;
-}
-
-export interface BillConnectionSubscription
-  extends Promise<AsyncIterator<BillConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<BillEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateBillSubscription>() => T;
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  name: () => Promise<AsyncIterator<String>>;
+  contact: () => Promise<AsyncIterator<String>>;
 }
 
 export interface User {
@@ -1504,6 +1817,28 @@ export interface UserPromise extends Promise<User>, Fragmentable {
     args?: {
       where?: VoteWhereInput;
       orderBy?: VoteOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  vendors: <T = FragmentableArray<Vendor>>(
+    args?: {
+      where?: VendorWhereInput;
+      orderBy?: VendorOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  customers: <T = FragmentableArray<Customer>>(
+    args?: {
+      where?: CustomerWhereInput;
+      orderBy?: CustomerOrderByInput;
       skip?: Int;
       after?: String;
       before?: String;
@@ -1542,29 +1877,28 @@ export interface UserSubscription
       last?: Int;
     }
   ) => T;
-}
-
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
-}
-
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
-    Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
+  vendors: <T = Promise<AsyncIterator<VendorSubscription>>>(
+    args?: {
+      where?: VendorWhereInput;
+      orderBy?: VendorOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  customers: <T = Promise<AsyncIterator<CustomerSubscription>>>(
+    args?: {
+      where?: CustomerWhereInput;
+      orderBy?: CustomerOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
 }
 
 export interface Invoice {
@@ -1595,6 +1929,38 @@ export interface InvoiceSubscription
   postedBy: <T = UserSubscription>() => T;
 }
 
+export interface AggregateCustomer {
+  count: Int;
+}
+
+export interface AggregateCustomerPromise
+  extends Promise<AggregateCustomer>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateCustomerSubscription
+  extends Promise<AsyncIterator<AggregateCustomer>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface BatchPayload {
+  count: Long;
+}
+
+export interface BatchPayloadPromise
+  extends Promise<BatchPayload>,
+    Fragmentable {
+  count: () => Promise<Long>;
+}
+
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayload>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Long>>;
+}
+
 export interface Vote {
   id: ID_Output;
 }
@@ -1613,20 +1979,69 @@ export interface VoteSubscription
   user: <T = UserSubscription>() => T;
 }
 
-export interface AggregateCustomer {
-  count: Int;
+export interface CustomerEdge {
+  node: Customer;
+  cursor: String;
 }
 
-export interface AggregateCustomerPromise
-  extends Promise<AggregateCustomer>,
+export interface CustomerEdgePromise
+  extends Promise<CustomerEdge>,
     Fragmentable {
-  count: () => Promise<Int>;
+  node: <T = CustomerPromise>() => T;
+  cursor: () => Promise<String>;
 }
 
-export interface AggregateCustomerSubscription
-  extends Promise<AsyncIterator<AggregateCustomer>>,
+export interface CustomerEdgeSubscription
+  extends Promise<AsyncIterator<CustomerEdge>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  node: <T = CustomerSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface VoteSubscriptionPayload {
+  mutation: MutationType;
+  node: Vote;
+  updatedFields: String[];
+  previousValues: VotePreviousValues;
+}
+
+export interface VoteSubscriptionPayloadPromise
+  extends Promise<VoteSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = VotePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = VotePreviousValuesPromise>() => T;
+}
+
+export interface VoteSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<VoteSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = VoteSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = VotePreviousValuesSubscription>() => T;
+}
+
+export interface CustomerConnection {
+  pageInfo: PageInfo;
+  edges: CustomerEdge[];
+}
+
+export interface CustomerConnectionPromise
+  extends Promise<CustomerConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<CustomerEdge>>() => T;
+  aggregate: <T = AggregateCustomerPromise>() => T;
+}
+
+export interface CustomerConnectionSubscription
+  extends Promise<AsyncIterator<CustomerConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<CustomerEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateCustomerSubscription>() => T;
 }
 
 export interface VoteEdge {
@@ -1644,6 +2059,38 @@ export interface VoteEdgeSubscription
     Fragmentable {
   node: <T = VoteSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateBill {
+  count: Int;
+}
+
+export interface AggregateBillPromise
+  extends Promise<AggregateBill>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateBillSubscription
+  extends Promise<AsyncIterator<AggregateBill>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface AggregateVendor {
+  count: Int;
+}
+
+export interface AggregateVendorPromise
+  extends Promise<AggregateVendor>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateVendorSubscription
+  extends Promise<AsyncIterator<AggregateVendor>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface Bill {
@@ -1674,74 +2121,25 @@ export interface BillSubscription
   postedBy: <T = UserSubscription>() => T;
 }
 
-export interface AggregateVendor {
-  count: Int;
-}
-
-export interface AggregateVendorPromise
-  extends Promise<AggregateVendor>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateVendorSubscription
-  extends Promise<AsyncIterator<AggregateVendor>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface VoteConnection {
+export interface VendorConnection {
   pageInfo: PageInfo;
-  edges: VoteEdge[];
+  edges: VendorEdge[];
 }
 
-export interface VoteConnectionPromise
-  extends Promise<VoteConnection>,
+export interface VendorConnectionPromise
+  extends Promise<VendorConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<VoteEdge>>() => T;
-  aggregate: <T = AggregateVotePromise>() => T;
+  edges: <T = FragmentableArray<VendorEdge>>() => T;
+  aggregate: <T = AggregateVendorPromise>() => T;
 }
 
-export interface VoteConnectionSubscription
-  extends Promise<AsyncIterator<VoteConnection>>,
+export interface VendorConnectionSubscription
+  extends Promise<AsyncIterator<VendorConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<VoteEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateVoteSubscription>() => T;
-}
-
-export interface BillEdge {
-  node: Bill;
-  cursor: String;
-}
-
-export interface BillEdgePromise extends Promise<BillEdge>, Fragmentable {
-  node: <T = BillPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface BillEdgeSubscription
-  extends Promise<AsyncIterator<BillEdge>>,
-    Fragmentable {
-  node: <T = BillSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface BatchPayload {
-  count: Long;
-}
-
-export interface BatchPayloadPromise
-  extends Promise<BatchPayload>,
-    Fragmentable {
-  count: () => Promise<Long>;
-}
-
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayload>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
+  edges: <T = Promise<AsyncIterator<VendorEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateVendorSubscription>() => T;
 }
 
 export interface BillSubscriptionPayload {
@@ -1769,46 +2167,21 @@ export interface BillSubscriptionPayloadSubscription
   previousValues: <T = BillPreviousValuesSubscription>() => T;
 }
 
-export interface VendorEdge {
-  node: Vendor;
+export interface UserEdge {
+  node: User;
   cursor: String;
 }
 
-export interface VendorEdgePromise extends Promise<VendorEdge>, Fragmentable {
-  node: <T = VendorPromise>() => T;
+export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
+  node: <T = UserPromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface VendorEdgeSubscription
-  extends Promise<AsyncIterator<VendorEdge>>,
+export interface UserEdgeSubscription
+  extends Promise<AsyncIterator<UserEdge>>,
     Fragmentable {
-  node: <T = VendorSubscription>() => T;
+  node: <T = UserSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface VoteSubscriptionPayload {
-  mutation: MutationType;
-  node: Vote;
-  updatedFields: String[];
-  previousValues: VotePreviousValues;
-}
-
-export interface VoteSubscriptionPayloadPromise
-  extends Promise<VoteSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = VotePromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = VotePreviousValuesPromise>() => T;
-}
-
-export interface VoteSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<VoteSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = VoteSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = VotePreviousValuesSubscription>() => T;
 }
 
 export interface BillPreviousValues {
@@ -1839,60 +2212,63 @@ export interface BillPreviousValuesSubscription
   amount: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface AggregateUser {
-  count: Int;
+export interface Customer {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  name: String;
+  contact: String;
 }
 
-export interface AggregateUserPromise
-  extends Promise<AggregateUser>,
+export interface CustomerPromise extends Promise<Customer>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  name: () => Promise<String>;
+  contact: () => Promise<String>;
+  postedBy: <T = UserPromise>() => T;
+}
+
+export interface CustomerSubscription
+  extends Promise<AsyncIterator<Customer>>,
     Fragmentable {
-  count: () => Promise<Int>;
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  name: () => Promise<AsyncIterator<String>>;
+  contact: () => Promise<AsyncIterator<String>>;
+  postedBy: <T = UserSubscription>() => T;
 }
 
-export interface AggregateUserSubscription
-  extends Promise<AsyncIterator<AggregateUser>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface CustomerEdge {
-  node: Customer;
+export interface BillEdge {
+  node: Bill;
   cursor: String;
 }
 
-export interface CustomerEdgePromise
-  extends Promise<CustomerEdge>,
-    Fragmentable {
-  node: <T = CustomerPromise>() => T;
+export interface BillEdgePromise extends Promise<BillEdge>, Fragmentable {
+  node: <T = BillPromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface CustomerEdgeSubscription
-  extends Promise<AsyncIterator<CustomerEdge>>,
+export interface BillEdgeSubscription
+  extends Promise<AsyncIterator<BillEdge>>,
     Fragmentable {
-  node: <T = CustomerSubscription>() => T;
+  node: <T = BillSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface UserConnection {
-  pageInfo: PageInfo;
-  edges: UserEdge[];
+export interface LinkEdge {
+  node: Link;
+  cursor: String;
 }
 
-export interface UserConnectionPromise
-  extends Promise<UserConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<UserEdge>>() => T;
-  aggregate: <T = AggregateUserPromise>() => T;
+export interface LinkEdgePromise extends Promise<LinkEdge>, Fragmentable {
+  node: <T = LinkPromise>() => T;
+  cursor: () => Promise<String>;
 }
 
-export interface UserConnectionSubscription
-  extends Promise<AsyncIterator<UserConnection>>,
+export interface LinkEdgeSubscription
+  extends Promise<AsyncIterator<LinkEdge>>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateUserSubscription>() => T;
+  node: <T = LinkSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface CustomerSubscriptionPayload {
@@ -1920,24 +2296,25 @@ export interface CustomerSubscriptionPayloadSubscription
   previousValues: <T = CustomerPreviousValuesSubscription>() => T;
 }
 
-export interface AggregateLink {
+export interface AggregateInvoice {
   count: Int;
 }
 
-export interface AggregateLinkPromise
-  extends Promise<AggregateLink>,
+export interface AggregateInvoicePromise
+  extends Promise<AggregateInvoice>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateLinkSubscription
-  extends Promise<AsyncIterator<AggregateLink>>,
+export interface AggregateInvoiceSubscription
+  extends Promise<AsyncIterator<AggregateInvoice>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface CustomerPreviousValues {
   id: ID_Output;
+  createdAt: DateTimeOutput;
   name: String;
   contact: String;
 }
@@ -1946,6 +2323,7 @@ export interface CustomerPreviousValuesPromise
   extends Promise<CustomerPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
   name: () => Promise<String>;
   contact: () => Promise<String>;
 }
@@ -1954,92 +2332,55 @@ export interface CustomerPreviousValuesSubscription
   extends Promise<AsyncIterator<CustomerPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   name: () => Promise<AsyncIterator<String>>;
   contact: () => Promise<AsyncIterator<String>>;
 }
 
-export interface LinkConnection {
+export interface InvoiceConnection {
   pageInfo: PageInfo;
-  edges: LinkEdge[];
+  edges: InvoiceEdge[];
 }
 
-export interface LinkConnectionPromise
-  extends Promise<LinkConnection>,
+export interface InvoiceConnectionPromise
+  extends Promise<InvoiceConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<LinkEdge>>() => T;
-  aggregate: <T = AggregateLinkPromise>() => T;
+  edges: <T = FragmentableArray<InvoiceEdge>>() => T;
+  aggregate: <T = AggregateInvoicePromise>() => T;
 }
 
-export interface LinkConnectionSubscription
-  extends Promise<AsyncIterator<LinkConnection>>,
+export interface InvoiceConnectionSubscription
+  extends Promise<AsyncIterator<InvoiceConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<LinkEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateLinkSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<InvoiceEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateInvoiceSubscription>() => T;
 }
 
-export interface CustomerConnection {
-  pageInfo: PageInfo;
-  edges: CustomerEdge[];
-}
-
-export interface CustomerConnectionPromise
-  extends Promise<CustomerConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<CustomerEdge>>() => T;
-  aggregate: <T = AggregateCustomerPromise>() => T;
-}
-
-export interface CustomerConnectionSubscription
-  extends Promise<AsyncIterator<CustomerConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<CustomerEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateCustomerSubscription>() => T;
-}
-
-export interface InvoiceEdge {
-  node: Invoice;
-  cursor: String;
-}
-
-export interface InvoiceEdgePromise extends Promise<InvoiceEdge>, Fragmentable {
-  node: <T = InvoicePromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface InvoiceEdgeSubscription
-  extends Promise<AsyncIterator<InvoiceEdge>>,
-    Fragmentable {
-  node: <T = InvoiceSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface InvoiceSubscriptionPayload {
+export interface VendorSubscriptionPayload {
   mutation: MutationType;
-  node: Invoice;
+  node: Vendor;
   updatedFields: String[];
-  previousValues: InvoicePreviousValues;
+  previousValues: VendorPreviousValues;
 }
 
-export interface InvoiceSubscriptionPayloadPromise
-  extends Promise<InvoiceSubscriptionPayload>,
+export interface VendorSubscriptionPayloadPromise
+  extends Promise<VendorSubscriptionPayload>,
     Fragmentable {
   mutation: () => Promise<MutationType>;
-  node: <T = InvoicePromise>() => T;
+  node: <T = VendorPromise>() => T;
   updatedFields: () => Promise<String[]>;
-  previousValues: <T = InvoicePreviousValuesPromise>() => T;
+  previousValues: <T = VendorPreviousValuesPromise>() => T;
 }
 
-export interface InvoiceSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<InvoiceSubscriptionPayload>>,
+export interface VendorSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<VendorSubscriptionPayload>>,
     Fragmentable {
   mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = InvoiceSubscription>() => T;
+  node: <T = VendorSubscription>() => T;
   updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = InvoicePreviousValuesSubscription>() => T;
+  previousValues: <T = VendorPreviousValuesSubscription>() => T;
 }
 
 export interface Link {
@@ -2089,6 +2430,52 @@ export interface LinkSubscription
   ) => T;
 }
 
+export interface InvoiceSubscriptionPayload {
+  mutation: MutationType;
+  node: Invoice;
+  updatedFields: String[];
+  previousValues: InvoicePreviousValues;
+}
+
+export interface InvoiceSubscriptionPayloadPromise
+  extends Promise<InvoiceSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = InvoicePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = InvoicePreviousValuesPromise>() => T;
+}
+
+export interface InvoiceSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<InvoiceSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = InvoiceSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = InvoicePreviousValuesSubscription>() => T;
+}
+
+export interface VoteConnection {
+  pageInfo: PageInfo;
+  edges: VoteEdge[];
+}
+
+export interface VoteConnectionPromise
+  extends Promise<VoteConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<VoteEdge>>() => T;
+  aggregate: <T = AggregateVotePromise>() => T;
+}
+
+export interface VoteConnectionSubscription
+  extends Promise<AsyncIterator<VoteConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<VoteEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateVoteSubscription>() => T;
+}
+
 export interface InvoicePreviousValues {
   id: ID_Output;
   customer: String;
@@ -2117,64 +2504,59 @@ export interface InvoicePreviousValuesSubscription
   amount: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface VendorConnection {
-  pageInfo: PageInfo;
-  edges: VendorEdge[];
+export interface AggregateUser {
+  count: Int;
 }
 
-export interface VendorConnectionPromise
-  extends Promise<VendorConnection>,
+export interface AggregateUserPromise
+  extends Promise<AggregateUser>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<VendorEdge>>() => T;
-  aggregate: <T = AggregateVendorPromise>() => T;
+  count: () => Promise<Int>;
 }
 
-export interface VendorConnectionSubscription
-  extends Promise<AsyncIterator<VendorConnection>>,
+export interface AggregateUserSubscription
+  extends Promise<AsyncIterator<AggregateUser>>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<VendorEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateVendorSubscription>() => T;
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface Customer {
-  id: ID_Output;
-  name: String;
-  contact: String;
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
 }
 
-export interface CustomerPromise extends Promise<Customer>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  contact: () => Promise<String>;
-  postedBy: <T = UserPromise>() => T;
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
 }
 
-export interface CustomerSubscription
-  extends Promise<AsyncIterator<Customer>>,
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
     Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  contact: () => Promise<AsyncIterator<String>>;
-  postedBy: <T = UserSubscription>() => T;
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface UserEdge {
-  node: User;
-  cursor: String;
+export interface AggregateLink {
+  count: Int;
 }
 
-export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
-  node: <T = UserPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface UserEdgeSubscription
-  extends Promise<AsyncIterator<UserEdge>>,
+export interface AggregateLinkPromise
+  extends Promise<AggregateLink>,
     Fragmentable {
-  node: <T = UserSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  count: () => Promise<Int>;
+}
+
+export interface AggregateLinkSubscription
+  extends Promise<AsyncIterator<AggregateLink>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface LinkSubscriptionPayload {
@@ -2202,46 +2584,37 @@ export interface LinkSubscriptionPayloadSubscription
   previousValues: <T = LinkPreviousValuesSubscription>() => T;
 }
 
-export interface LinkEdge {
-  node: Link;
+export interface InvoiceEdge {
+  node: Invoice;
   cursor: String;
 }
 
-export interface LinkEdgePromise extends Promise<LinkEdge>, Fragmentable {
-  node: <T = LinkPromise>() => T;
+export interface InvoiceEdgePromise extends Promise<InvoiceEdge>, Fragmentable {
+  node: <T = InvoicePromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface LinkEdgeSubscription
-  extends Promise<AsyncIterator<LinkEdge>>,
+export interface InvoiceEdgeSubscription
+  extends Promise<AsyncIterator<InvoiceEdge>>,
     Fragmentable {
-  node: <T = LinkSubscription>() => T;
+  node: <T = InvoiceSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface VendorSubscriptionPayload {
-  mutation: MutationType;
-  node: Vendor;
-  updatedFields: String[];
-  previousValues: VendorPreviousValues;
+export interface AggregateVote {
+  count: Int;
 }
 
-export interface VendorSubscriptionPayloadPromise
-  extends Promise<VendorSubscriptionPayload>,
+export interface AggregateVotePromise
+  extends Promise<AggregateVote>,
     Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = VendorPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = VendorPreviousValuesPromise>() => T;
+  count: () => Promise<Int>;
 }
 
-export interface VendorSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<VendorSubscriptionPayload>>,
+export interface AggregateVoteSubscription
+  extends Promise<AsyncIterator<AggregateVote>>,
     Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = VendorSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = VendorPreviousValuesSubscription>() => T;
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface UserPreviousValues {
@@ -2294,20 +2667,25 @@ export interface UserSubscriptionPayloadSubscription
   previousValues: <T = UserPreviousValuesSubscription>() => T;
 }
 
-export interface AggregateBill {
-  count: Int;
+export interface BillConnection {
+  pageInfo: PageInfo;
+  edges: BillEdge[];
 }
 
-export interface AggregateBillPromise
-  extends Promise<AggregateBill>,
+export interface BillConnectionPromise
+  extends Promise<BillConnection>,
     Fragmentable {
-  count: () => Promise<Int>;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<BillEdge>>() => T;
+  aggregate: <T = AggregateBillPromise>() => T;
 }
 
-export interface AggregateBillSubscription
-  extends Promise<AsyncIterator<AggregateBill>>,
+export interface BillConnectionSubscription
+  extends Promise<AsyncIterator<BillConnection>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<BillEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateBillSubscription>() => T;
 }
 
 export interface LinkPreviousValues {
@@ -2335,61 +2713,21 @@ export interface LinkPreviousValuesSubscription
   url: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AggregateVote {
-  count: Int;
+export interface VendorEdge {
+  node: Vendor;
+  cursor: String;
 }
 
-export interface AggregateVotePromise
-  extends Promise<AggregateVote>,
+export interface VendorEdgePromise extends Promise<VendorEdge>, Fragmentable {
+  node: <T = VendorPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface VendorEdgeSubscription
+  extends Promise<AsyncIterator<VendorEdge>>,
     Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateVoteSubscription
-  extends Promise<AsyncIterator<AggregateVote>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface AggregateInvoice {
-  count: Int;
-}
-
-export interface AggregateInvoicePromise
-  extends Promise<AggregateInvoice>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateInvoiceSubscription
-  extends Promise<AsyncIterator<AggregateInvoice>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface VendorPreviousValues {
-  id: ID_Output;
-  createdAt: DateTimeOutput;
-  name: String;
-  contact: String;
-}
-
-export interface VendorPreviousValuesPromise
-  extends Promise<VendorPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  name: () => Promise<String>;
-  contact: () => Promise<String>;
-}
-
-export interface VendorPreviousValuesSubscription
-  extends Promise<AsyncIterator<VendorPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  name: () => Promise<AsyncIterator<String>>;
-  contact: () => Promise<AsyncIterator<String>>;
+  node: <T = VendorSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface Vendor {
@@ -2417,28 +2755,47 @@ export interface VendorSubscription
   postedBy: <T = UserSubscription>() => T;
 }
 
-/*
-The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
-*/
-export type ID_Input = string | number;
-export type ID_Output = string;
+export interface LinkConnection {
+  pageInfo: PageInfo;
+  edges: LinkEdge[];
+}
 
-export type Long = string;
+export interface LinkConnectionPromise
+  extends Promise<LinkConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<LinkEdge>>() => T;
+  aggregate: <T = AggregateLinkPromise>() => T;
+}
 
-/*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
+export interface LinkConnectionSubscription
+  extends Promise<AsyncIterator<LinkConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<LinkEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateLinkSubscription>() => T;
+}
 
-/*
-The `Boolean` scalar type represents `true` or `false`.
-*/
-export type Boolean = boolean;
+export interface UserConnection {
+  pageInfo: PageInfo;
+  edges: UserEdge[];
+}
 
-/*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
-*/
-export type Int = number;
+export interface UserConnectionPromise
+  extends Promise<UserConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<UserEdge>>() => T;
+  aggregate: <T = AggregateUserPromise>() => T;
+}
+
+export interface UserConnectionSubscription
+  extends Promise<AsyncIterator<UserConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateUserSubscription>() => T;
+}
 
 /*
 DateTime scalar input type, allowing Date
@@ -2449,6 +2806,29 @@ export type DateTimeInput = Date | string;
 DateTime scalar output type, which is always a string
 */
 export type DateTimeOutput = string;
+
+export type Long = string;
+
+/*
+The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
+*/
+export type ID_Input = string | number;
+export type ID_Output = string;
+
+/*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
+
+/*
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
+*/
+export type Int = number;
+
+/*
+The `Boolean` scalar type represents `true` or `false`.
+*/
+export type Boolean = boolean;
 
 /**
  * Model Metadata
