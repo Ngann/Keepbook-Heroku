@@ -27,14 +27,14 @@ class CreateVendor extends Component {
           <input
             className="mb2"
             value={name}
-            onChange={e => this.setState({ description: e.target.value })}
+            onChange={e => this.setState({ name: e.target.value })}
             type="text"
             placeholder="A name"
           />
           <input
             className="mb2"
             value={contact}
-            onChange={e => this.setState({ url: e.target.value })}
+            onChange={e => this.setState({ contact: e.target.value })}
             type="text"
             placeholder="contact"
           />
@@ -42,7 +42,8 @@ class CreateVendor extends Component {
         <Mutation
         mutation={ADDVENDOR_MUTATION}
         variables={{ name, contact }}
-        onCompleted={() => this.props.histroy.push('/vendor')}>
+        // onCompleted={() => this.props.histroy.push('/vendor')}
+        >
           {postMutation => <button onClick={postMutation}>Submit</button>}
         </Mutation>
       </div>
