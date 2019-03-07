@@ -54,6 +54,15 @@ render() {
             {vendorsToRender.map(vendor => (
               <Fragment key={vendor.id}>
               <div>Name: {vendor.name} Contact: {vendor.contact}
+              <button >Edit</button>
+              <Mutation
+              mutation={DELETEVENDOR_MUTATION}
+              variables={{ id: vendor.id }}
+              >
+                {deleteVendorMutation => <button onClick={deleteVendorMutation}>delete</button>}
+              </Mutation>
+
+
               <form className="flex flex-column mt3">
                 <input
                   className="mb2"
@@ -73,15 +82,9 @@ render() {
                 <Mutation
                 mutation={UPDATEVENDOR_MUTATION}
                 variables={{ id: vendor.id, name, contact }}>
-                  {updateVendorMutation => <button onClick={updateVendorMutation}>Edit</button>}
+                  {updateVendorMutation => <button onClick={updateVendorMutation}>Update</button>}
                 </Mutation>
-                <Mutation
-                mutation={DELETEVENDOR_MUTATION}
-                variables={{ id: vendor.id }}
-                // onCompleted={() => this.props.push.history('/')}
-                >
-                  {deleteVendorMutation => <button onClick={deleteVendorMutation}>delete</button>}
-                </Mutation>
+
               </div>
               </Fragment>
             ))}
