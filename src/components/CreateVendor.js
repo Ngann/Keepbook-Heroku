@@ -44,8 +44,11 @@ class CreateVendor extends Component {
         variables={{ name, contact }}
         // onCompleted={() => this.props.push.history('/')}
         >
-          {postMutation => <button onClick={postMutation}>Submit</button>}
+          {addVendorMutation => <button onClick={addVendorMutation}>Submit</button>}
         </Mutation>
+        <button onClick={this.props.history.goBack}>
+          Cancel
+        </button>
       </div>
     )
   }
