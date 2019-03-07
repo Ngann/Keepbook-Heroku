@@ -1,0 +1,102 @@
+scalar DateTime
+
+type Query {
+  info: String!
+  feed(filter: String, skip: Int, first: Int, orderBy: LinkOrderByInput): Feed!
+  veed: Veed!
+  vendors: [Vendor!]!
+  vendor(id: ID!): Vendor
+}
+
+enum LinkOrderByInput {
+  description_ASC
+  description_DESC
+  url_ASC
+  url_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type Feed {
+  links: [Link!]!
+  count: Int!
+}
+
+type Veed {
+  vendors: [Vendor!]!
+  count: Int!
+}
+
+type Mutation {
+  post(url: String!, description: String!): Link!
+  addVendor(name: String!, contact: String!): Vendor!
+  signup(email: String!, password: String!, name: String!): AuthPayload
+  login(email: String!, password: String!): AuthPayload
+  vote(linkId: ID!): Vote!
+}
+
+type Subscription {
+  newLink: Link
+  newVote: Vote
+}
+
+type AuthPayload {
+  token: String
+  user: User
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  links: [Link!]!
+  vendors: [Vendor!]!
+}
+
+type Link {
+  id: ID!
+  createdAt: DateTime!
+  description: String!
+  url: String!
+  postedBy: User
+  votes: [Vote!]!
+}
+
+type Vote {
+  id: ID!
+  link: Link!
+  user: User!
+}
+
+type Vendor {
+  id: ID!
+  createdAt: DateTime!
+  name: String!
+  contact: String!
+  postedBy: User
+}
+
+type Customer {
+  id: ID!
+  name: String!
+  contact: String!
+  postedBy: User
+}
+
+type Bill {
+  id: ID!
+  vendor: String!
+  date: String!
+  account: String!
+  amount: Int!
+  postedBy: User
+}
+
+type Invoice {
+  id: ID!
+  customer: String!
+  date: String!
+  account: String!
+  amount: Int!
+  postedBy: User
+}

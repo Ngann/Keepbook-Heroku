@@ -1,0 +1,56 @@
+type Link {
+  id: ID! @unique
+  createdAt: DateTime!
+  description: String!
+  url: String!
+  postedBy: User
+  votes: [Vote!]!
+}
+
+type User {
+  id: ID! @unique
+  name: String!
+  email: String! @unique
+  password: String!
+  links: [Link!]!
+  votes: [Vote!]!
+}
+
+type Vote {
+  id: ID! @unique
+  link: Link!
+  user: User!
+}
+
+type Vendor {
+  id: ID! @unique
+  createdAt: DateTime!
+  name: String!
+  contact: String!
+  postedBy: User
+}
+
+type Customer {
+  id: ID! @unique
+  name: String!
+  contact: String!
+  postedBy: User
+}
+
+type Bill {
+  id: ID! @unique
+  vendor: String!
+  date: String!
+  account: String!
+  amount: Int!
+  postedBy: User
+}
+
+type Invoice {
+  id: ID! @unique
+  customer: String!
+  date: String!
+  account: String!
+  amount: Int!
+  postedBy: User
+}
