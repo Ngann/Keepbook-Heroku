@@ -27,9 +27,6 @@ async function feed(parent, args, context) {
   }
 }
 
-function veed(parent, args, context, info) {
-  return context.prisma.vendors()
-}
 
 function vendors(parent, args, context, info) {
   return context.prisma.vendors()
@@ -38,6 +35,5 @@ function vendors(parent, args, context, info) {
 
 module.exports = {
   feed,
-  veed,
   vendors,
 }

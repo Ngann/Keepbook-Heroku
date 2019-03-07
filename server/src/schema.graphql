@@ -3,10 +3,7 @@ scalar DateTime
 type Query {
   info: String!
   feed(filter: String, skip: Int, first: Int, orderBy: LinkOrderByInput): Feed!
-  veed: Veed!
   vendors: [Vendor!]!
-  vendor(id: ID!): Vendor
-  getVendor(id: ID!): Vendor
 }
 
 enum LinkOrderByInput {
