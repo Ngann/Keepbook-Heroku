@@ -8,63 +8,48 @@ import Nav from 'react-bootstrap/Nav';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 
+
 class Header extends Component {
   render() {
     const authToken = localStorage.getItem(AUTH_TOKEN)
     return (
       <div>
-        <Navbar bg="light" variant="light">
-          <div className="flex flex-fixed black">
-            <div className="fw7 mr1">KeepBook</div>
-              <Link to="/vendor" className="ml1 no-underline black">
-                Vendor List
-              </Link>
-            <div className="ml1">|</div>
-            <Link to="/" className="ml1 no-underline black">
-              Customer List
-            </Link>
-            <div className="ml1">|</div>
-            <Link to="/top" className="ml1 no-underline black">
-              Dashboard
-            </Link>
-            <div className="ml1">|</div>
-            <Link to="/search" className="ml1 no-underline black">
-              Search
-            </Link>
-            {authToken && (
-              <div className="flex">
-                <div className="ml1">|</div>
-                <Link to="/create" className="ml1 no-underline black">
-                  Form
-                </Link>
-                <div className="ml1">|</div>
-                <Link to="/createvendor" className="ml1 no-underline black">
-                  Create Vendor
-                </Link>
-              </div>
-            )}
-          </div>
-          <div className="flex flex-fixed">
-            {authToken ? (
-              <div
-                className="ml1 pointer black"
-                onClick={() => {
-                  localStorage.removeItem(AUTH_TOKEN)
-                  this.props.history.push(`/`)
-                }}
-              >
-                logout
-              </div>
-            ) : (
-                <Link to="/login" className="ml1 no-underline black">
-                  login
-              </Link>
-              )}
-          </div>
-        </Navbar>
+    <Navbar bg="light" variant="light">
+      <Navbar.Brand href="/">Home</Navbar.Brand>
+      {authToken && (
+        <Nav className="mr-auto">
+        <Nav.Link href="/createvendor">CreateVendor</Nav.Link>
+          <Nav.Link href="/vendor">VendorList</Nav.Link>
+          <Nav.Link href="/">News</Nav.Link>
+          <Nav.Link href="/Search">...</Nav.Link>
+          <Nav.Link href="/create">Form</Nav.Link>
+        </Nav>
+      )}
+      <Form inline>
+        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+        <Button variant="outline-primary">Search</Button>
+      </Form>
+      <div className="flex flex-fixed">
+      {authToken ? (
+        <div
+        className="ml1 pointer black"
+        onClick={() => {
+          localStorage.removeItem(AUTH_TOKEN)
+          this.props.history.push(`/`)
+        }}
+        >
+        logout
+        </div>
+      ) : (
+        <Link to="/login" className="ml1 no-underline black">
+        login
+        </Link>
+      )}
       </div>
-    )
+    </Navbar>
+    </div>
+    );
   }
 }
 
-export default withRouter(Header)
+export default Header

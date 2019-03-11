@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react'
 // import Vendor from './Vendor'
 import { Query, Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
+import Table from 'react-bootstrap/Table'
+import Button from 'react-bootstrap/Button'
 
 const VENDORS_QUERY = gql`
   {
@@ -51,18 +53,28 @@ render() {
           // console.table(vendorsToRender)
           return (
             <div>
+            <Table striped bordered hover size="sm">
+            <thead>
+            <tr>
+            <th>Vendor Name</th>
+            <th>Contact</th>
+            <th>Action</th>
+            </tr>
+            </thead>
             {vendorsToRender.map(vendor => (
               <Fragment key={vendor.id}>
-              <div>Name: {vendor.name} Contact: {vendor.contact}
-              <button >Edit</button>
-              <Mutation
-              mutation={DELETEVENDOR_MUTATION}
-              variables={{ id: vendor.id }}
-              >
-                {deleteVendorMutation => <button onClick={deleteVendorMutation}>delete</button>}
-              </Mutation>
-
-
+                <tbody>
+                  <tr>
+                    <td>{vendor.name}</td>
+                    <td>{vendor.contact}</td>
+                    <td><Button>Edit</Button> | <Mutation
+                    mutation={DELETEVENDOR_MUTATION}
+                    variables={{ id: vendor.id }}
+                    >
+                      {deleteVendorMutation => <Button variant="danger" onClick={deleteVendorMutation}>Delete</Button>}
+                    </Mutation></td>
+                  </tr>
+                </tbody>
               <form className="flex flex-column mt3">
                 <input
                   className="mb2"
@@ -84,10 +96,9 @@ render() {
                 variables={{ id: vendor.id, name, contact }}>
                   {updateVendorMutation => <button onClick={updateVendorMutation}>Update</button>}
                 </Mutation>
-
-              </div>
               </Fragment>
             ))}
+            </Table>
             </div>
           )
         }}
