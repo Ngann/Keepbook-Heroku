@@ -103,6 +103,7 @@ type VendorInput {
 
 type Customer {
   id: ID!
+  createdAt: DateTime!
   name: String!
   contact: String!
   postedBy: User
@@ -127,7 +128,7 @@ type Invoice {
 }
 
 type Post {
-  id: ID! 
+  id: ID!
   isPublished: Boolean!
   title: String!
   text: String!

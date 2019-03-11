@@ -28,8 +28,8 @@ class Header extends Component {
         <NavDropdown.Item href="#action/3.4">Search</NavDropdown.Item>
       </NavDropdown>
       <NavDropdown title="Receivable" id="basic-nav-dropdown">
-        <NavDropdown.Item href="/createvendor">Customer</NavDropdown.Item>
-        <NavDropdown.Item href="/vendor">Customer List</NavDropdown.Item>
+        <NavDropdown.Item href="/createcustomer">Customer</NavDropdown.Item>
+        <NavDropdown.Item href="/customer">Customer List</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.3">Invoice</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.3">Invoice List</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.3">Reports</NavDropdown.Item>
