@@ -4,6 +4,7 @@ type Query {
   info: String!
   feed(filter: String, skip: Int, first: Int, orderBy: LinkOrderByInput): Feed!
   vendors: [Vendor!]!
+  bills: [Bill!]!
   customers: [Customer!]!
   getCustomer(id: ID!): Customer
   getVendor(id: ID!): Vendor
@@ -48,6 +49,10 @@ type Mutation {
   createDraft(title: String!, text: String): Post
   deletePost(id: ID!): Post
   publish(id: ID!): Post
+
+  createBill(vendor: String!, date: String!, account: String!, amount: Int!): Bill
+  updateBill(id:ID!, vendor: String!, date: String!, account: String!, amount: Int!): Bill
+  deleteBill(id: ID!): Bill
 }
 
 type Subscription {

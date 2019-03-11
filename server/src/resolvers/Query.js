@@ -48,11 +48,16 @@ function post(parent, { id }, ctx, info) {
       return ctx.db.query.post({ where: { id: id } }, info)
     }
 
+function bills(parent, args, context, info) {
+  return context.prisma.bills()
+}
+
 module.exports = {
   feed,
   vendors,
   customers,
   bfeed,
   drafts,
-  post
+  post,
+  bills
 }

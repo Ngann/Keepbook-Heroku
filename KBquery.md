@@ -55,6 +55,47 @@ mutation {
 }
 
 ---------
+Bills:
+
+mutation {
+createBill(
+  vendor: "one"
+  date: "two"
+  account: "three"
+  amount: 100
+) {
+  id
+  account
+}
+}
+
+mutation {
+updateBill(id:"cjt4xnne31loo0b80derylbeb", vendor: "Adobe", date: "12/24/2009", account: "Office Supplies", amount: 400
+) {
+  id
+  account
+}
+}
+
+mutation {
+  deleteBill(id: "cjt4y8htb1p4i0b80fbegmbs2") {  
+    id
+    amount
+  }
+}
+
+query {
+  bills {
+    vendor
+    account
+    amount
+    id
+    }
+  }
+
+
+
+
 query {
   vendorsList {
     id
@@ -83,15 +124,16 @@ mutation {
 }
 
 
-  mutation {
-  addBill(
-    vendor: "one"
-    date: "two"
-    account: "three"
-    amount: 100
-  ) {
-    id
-  }
+mutation {
+createBill(
+  vendor: "one"
+  date: "two"
+  account: "three"
+  amount: 100
+) {
+  id
+  account
+}
 }
 
 mutation {
