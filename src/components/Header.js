@@ -21,8 +21,8 @@ class Header extends Component {
         <NavDropdown title="Payable" id="basic-nav-dropdown">
         <NavDropdown.Item href="/createvendor">Vendor</NavDropdown.Item>
         <NavDropdown.Item href="/vendor">Vendor List</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.3">Bill</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.3">Bill List</NavDropdown.Item>
+        <NavDropdown.Item href="/createbill">Bill</NavDropdown.Item>
+        <NavDropdown.Item href="/bill">Bill List</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.3">Reports</NavDropdown.Item>
         <NavDropdown.Divider />
         <NavDropdown.Item href="#action/3.4">Search</NavDropdown.Item>
