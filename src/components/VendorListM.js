@@ -4,7 +4,7 @@ import { Query, Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
-import Example from './EditVendorModal'
+// import Example from './EditVendorModal'
 import Modal from 'react-bootstrap/Modal'
 
 const VENDORS_QUERY = gql`

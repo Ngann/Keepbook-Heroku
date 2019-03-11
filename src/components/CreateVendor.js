@@ -23,7 +23,7 @@ class CreateVendor extends Component {
   render() {
     const { name, contact } = this.state
     return (
-      <div>
+      <div className= "container">
         <Form.Group controlId="formBasicVendor">
         <Form.Label>Vendor Name</Form.Label>
         <Form.Control

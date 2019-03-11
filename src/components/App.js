@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
 import LinkList from './LinkList'
 import VendorList from './VendorList'
-import VendorListO from './VendorListO'
-import VendorListM from './VendorListM'
 import CreateLink from './CreateLink'
 import CreateVendor from './CreateVendor'
 import Header from './Header'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import Login from './Login'
 import Search from './Search'
-import VendorForm from './VendorForm'
 
 
 class App extends Component {
@@ -25,10 +22,7 @@ class App extends Component {
             <Route exact path="/search" component={Search} />
             <Route exact path="/top" component={LinkList} />
             <Route exact path="/vendor" component={VendorList} />
-            <Route exact path="/vendormodal" component={VendorListM} />
-            <Route exact path="/vendorO" component={VendorListO} />
             <Route exact path="/new/:page" component={LinkList} />
-            <Route exact path="/form" component={VendorForm} />
           </Switch>
       </div>
     )

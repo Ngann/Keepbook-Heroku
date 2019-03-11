@@ -24,26 +24,39 @@ class Example extends React.Component {
 
   render() {
     return (
-      <div>
-        <Button variant="primary" onClick={this.handleShow}>
-          Edit
+      <Modal show={this.state.show} onHide={this.handleClose} >
+        <Modal.Header closeButton>
+        <Modal.Title>Vendor: {vendor.name}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <form className="flex flex-column mt3">
+          <input
+          className="mb2"
+          value={name}
+          onChange={e => this.setState({ name: e.target.value })}
+          type="text"
+          placeholder="A name"
+          />
+          <input
+          className="mb2"
+          value={contact}
+          onChange={e => this.setState({ contact: e.target.value })}
+          type="text"
+          placeholder="contact"
+          />
+          </form>
+        </Modal.Body>
+        <Modal.Footer>
+        <Button variant="secondary" onClick={this.handleClose}>
+        Close
         </Button>
-
-        <Modal show={this.state.show} onHide={this.handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>arlkjerkjwlejr</Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleClose}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={this.handleClose}>
-              Save Changes
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </div>
+        <Mutation
+        mutation={UPDATEVENDOR_MUTATION}
+        variables={{ id: vendor.id, name, contact }}>
+        {updateVendorMutation => <Button onClick={updateVendorMutation}>Save Changes</Button>}
+        </Mutation>
+        </Modal.Footer>
+      </Modal>
     );
   }
 }
