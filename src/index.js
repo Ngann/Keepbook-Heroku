@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './styles/index.css'
+import './styles/App.css';
 import App from './components/App'
 import * as serviceWorker from './serviceWorker'
 import { ApolloProvider } from 'react-apollo'
@@ -13,6 +14,7 @@ import { AUTH_TOKEN } from './constants'
 import { split } from 'apollo-link'
 import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities'
+import 'bootstrap/dist/css/bootstrap.css';
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:4000',
