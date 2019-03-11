@@ -10,6 +10,7 @@ const BILLS_QUERY = gql`
   bills {
     id
     vendor
+    date
     amount
     account
   }
@@ -77,8 +78,10 @@ render() {
         <Table striped bordered hover size="sm">
         <thead>
         <tr>
-        <th>Bill Name</th>
+        <th>Date</th>
+        <th>Vendor Name</th>
         <th>Account</th>
+        <th>Amount</th>
         <th>Action</th>
         </tr>
         </thead>
@@ -86,8 +89,10 @@ render() {
           <Fragment key={bill.id} >
             <tbody>
               <tr>
+              <td>{bill.date}</td>
               <td>{bill.vendor}</td>
               <td>{bill.account}</td>
+              <td>{bill.amount}</td>
               <td>
               <Button variant="primary" onClick={this.handleShow}>
               Edit

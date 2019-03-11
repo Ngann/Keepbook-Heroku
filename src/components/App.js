@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import LinkList from './LinkList'
 import VendorList from './VendorList'
+import BillList from './BillList'
 import CustomerList from './CustomerList'
 import CreateLink from './CreateLink'
 import CreateVendor from './CreateVendor'
 import CreateCustomer from './CreateCustomer'
+import CreateBill from './CreateBill'
 import Header from './Header'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import Login from './Login'
@@ -21,11 +23,13 @@ class App extends Component {
             <Route exact path="/create" component={CreateLink} />
             <Route exact path="/createvendor" component={CreateVendor} />
             <Route exact path="/createcustomer" component={CreateCustomer} />
+            <Route exact path="/createbill" component={CreateBill} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/search" component={Search} />
             <Route exact path="/top" component={LinkList} />
             <Route exact path="/vendor" component={VendorList} />
             <Route exact path="/customer" component={CustomerList} />
+            <Route exact path="/bill" component={BillList} />
             <Route exact path="/new/:page" component={LinkList} />
           </Switch>
       </div>

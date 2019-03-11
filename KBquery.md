@@ -58,15 +58,15 @@ mutation {
 Bills:
 
 mutation {
-createBill(
-  vendor: "one"
-  date: "two"
-  account: "three"
-  amount: 100
-) {
-  id
-  account
-}
+  createBill(
+    vendor: "one"
+    date: "two"
+    account: "three"
+    amount: 100
+  ) {
+    id
+    account
+  }
 }
 
 mutation {
