@@ -4,6 +4,8 @@ import { Query, Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
+import Example from './EditVendorModal'
+import Modal from 'react-bootstrap/Modal'
 
 const VENDORS_QUERY = gql`
   {
@@ -33,6 +35,24 @@ const UPDATEVENDOR_MUTATION = gql`
 `
 
 class VendorList extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.handleShow = this.handleShow.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+
+    this.state = {
+      show: false,
+    };
+  }
+
+  handleClose() {
+    this.setState({ show: false });
+  }
+
+  handleShow() {
+    this.setState({ show: true });
+  }
 
   state = {
     name: '',
@@ -67,7 +87,9 @@ render() {
                   <tr>
                     <td>{vendor.name}</td>
                     <td>{vendor.contact}</td>
-                    <td><Button>Edit</Button> | <Mutation
+                    <td><Button variant="primary" onClick={this.handleShow}>
+                    Edit
+                    </Button> | <Mutation
                     mutation={DELETEVENDOR_MUTATION}
                     variables={{ id: vendor.id }}
                     >
@@ -75,27 +97,46 @@ render() {
                     </Mutation></td>
                   </tr>
                 </tbody>
-              <form className="flex flex-column mt3">
+
+
+
+                <Modal show={this.state.show} onHide={this.handleClose}>
+                <Modal.Header closeButton>
+                <Modal.Title>Modal heading</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                <form className="flex flex-column mt3">
                 <input
-                  className="mb2"
-                  value={name}
-                  onChange={e => this.setState({ name: e.target.value })}
-                  type="text"
-                  placeholder="A name"
+                className="mb2"
+                value={name}
+                onChange={e => this.setState({ name: e.target.value })}
+                type="text"
+                placeholder="A name"
                 />
                 <input
-                  className="mb2"
-                  value={contact}
-                  onChange={e => this.setState({ contact: e.target.value })}
-                  type="text"
-                  placeholder="contact"
+                className="mb2"
+                value={contact}
+                onChange={e => this.setState({ contact: e.target.value })}
+                type="text"
+                placeholder="contact"
                 />
-              </form>
+                </form>
                 <Mutation
                 mutation={UPDATEVENDOR_MUTATION}
                 variables={{ id: vendor.id, name, contact }}>
-                  {updateVendorMutation => <button onClick={updateVendorMutation}>Update</button>}
+                {updateVendorMutation => <button onClick={updateVendorMutation}>Update</button>}
                 </Mutation>
+                </Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={this.handleClose}>
+                Close
+                </Button>
+                <Button variant="primary" onClick={this.handleClose}>
+                Save Changes
+                </Button>
+                </Modal.Footer>
+                </Modal>
+
               </Fragment>
             ))}
             </Table>
