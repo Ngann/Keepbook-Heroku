@@ -4,7 +4,7 @@ import { Form , Button} from 'react-bootstrap'
 class VendorForm extends Component {
   render() {
     return (
-      <div>
+      <div className="container">
         <Form >
         <h4>New Vendor Form</h4>
           <Form.Group controlId="formBasicEmail">

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
+import { Form , Button} from 'react-bootstrap'
 
 const ADDVENDOR_MUTATION = gql`
   mutation AddVendortMutation($name: String!, $contact: String!) {
@@ -23,22 +24,26 @@ class CreateVendor extends Component {
     const { name, contact } = this.state
     return (
       <div>
-        <div className="flex flex-column mt3">
-          <input
-            className="mb2"
-            value={name}
-            onChange={e => this.setState({ name: e.target.value })}
-            type="text"
-            placeholder="A name"
-          />
-          <input
+        <Form.Group controlId="formBasicVendor">
+        <Form.Label>Vendor Name</Form.Label>
+        <Form.Control
+          className="mb2"
+          value={name}
+          onChange={e => this.setState({ name: e.target.value })}
+          type="text"
+          placeholder="A name"
+        />
+          </Form.Group>
+          <Form.Group controlId="formBasicContact">
+          <Form.Label>Contact</Form.Label>
+          <Form.Control
             className="mb2"
             value={contact}
             onChange={e => this.setState({ contact: e.target.value })}
             type="text"
             placeholder="contact"
           />
-        </div>
+        </Form.Group>
         <Mutation
         mutation={ADDVENDOR_MUTATION}
         variables={{ name, contact }}
