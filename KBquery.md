@@ -94,6 +94,46 @@ query {
   }
 
 
+Invoices:
+
+mutation {
+createInvoice(
+  customer: "one"
+  date: "two"
+  account: "three"
+  amount: 100
+) {
+  id
+  account
+}
+}
+
+query {
+  invoices {
+    customer
+    account
+    amount
+    id
+    date
+    }
+  }
+
+mutation {
+  deleteInvoice(id: "cjt4zr93e298k0b64dy7z9upa") {  
+    id
+    amount
+    date
+  }
+}
+
+mutation {
+updateInvoice(id:"cjt4zts521yea0b805c85bzuq", customer: "Adobe", date: "12/24/2009", account: "Sales", amount: 400
+) {
+  id
+  account
+}
+}
+
 
 
 query {

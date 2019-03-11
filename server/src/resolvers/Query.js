@@ -52,6 +52,10 @@ function bills(parent, args, context, info) {
   return context.prisma.bills()
 }
 
+function invoices(parent, args, context, info) {
+  return context.prisma.invoices()
+}
+
 module.exports = {
   feed,
   vendors,
@@ -59,5 +63,6 @@ module.exports = {
   bfeed,
   drafts,
   post,
-  bills
+  bills,
+  invoices
 }

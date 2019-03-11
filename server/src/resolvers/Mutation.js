@@ -82,6 +82,33 @@ function deleteBill(parent, {id}, context) {
   })
 }
 
+function createInvoice(parent, args, context) {
+  return context.prisma.createInvoice({
+    customer: args.customer,
+    date: args.date,
+    account: args.account,
+    amount: args.amount,
+  })
+}
+
+function updateInvoice(parent, args, context) {
+  return context.prisma.updateInvoice({
+    where: { id: args.id},
+    data: {
+      customer: args.customer,
+      date: args.date,
+      account: args.account,
+      amount: args.amount,
+    }
+  })
+}
+
+function deleteInvoice(parent, {id}, context) {
+  return context.prisma.deleteInvoice({
+    id,
+  })
+}
+
 async function signup(parent, args, context) {
   const password = await bcrypt.hash(args.password, 10)
   const user = await context.prisma.createUser({ ...args, password })
@@ -165,5 +192,8 @@ module.exports = {
   publish,
   createBill,
   updateBill,
-  deleteBill
+  deleteBill,
+  createInvoice,
+  updateInvoice,
+  deleteInvoice
 }
