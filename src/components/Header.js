@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { withRouter } from 'react-router'
 import { AUTH_TOKEN } from '../constants'
 import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
@@ -16,6 +15,8 @@ class Header extends Component {
       <div>
     <Navbar bg="light" variant="light">
       <Navbar.Brand href="/">Home</Navbar.Brand>
+      <Nav.Link href="/vendorm">VendorM</Nav.Link>
+      <Nav.Link href="/vendoro">VendorO</Nav.Link>
       {authToken && (
         <Nav className="mr-auto">
         <Nav.Link href="/createvendor">CreateVendor</Nav.Link>
