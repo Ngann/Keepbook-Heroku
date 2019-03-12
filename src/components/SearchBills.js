@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { withApollo } from 'react-apollo'
 import gql from 'graphql-tag'
-import Bill from './BillList'
+import Bill from './Bill'
 
 const BILL_SEARCH_QUERY = gql`
   query BillSearchQuery($filter: String!) {
