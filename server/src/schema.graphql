@@ -4,6 +4,7 @@ type Query {
   info: String!
   feed(filter: String, skip: Int, first: Int, orderBy: LinkOrderByInput): Feed!
   searchBills(filter: String, skip: Int, first: Int, orderBy: LinkOrderByInput): SearchBills!
+  searchInvoices(filter: String, skip: Int, first: Int, orderBy: LinkOrderByInput): SearchInvoices!
   vendors: [Vendor!]!
   bills: [Bill!]!
   invoices: [Invoice!]!
@@ -33,6 +34,11 @@ type Feed {
 
 type SearchBills {
   bills: [Bill!]!
+  count: Int!
+}
+
+type SearchInvoices {
+  invoices: [Invoice!]!
   count: Int!
 }
 

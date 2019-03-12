@@ -15,6 +15,7 @@ import Login from './Login'
 import Search from './Search'
 import DashboardControl from './DashboardControl'
 import SearchBills from './SearchBills'
+import SearchInvoices from './SearchInvoices'
 
 
 class App extends Component {
@@ -32,6 +33,7 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/search" component={Search} />
             <Route exact path="/searchbills" component={SearchBills} />
+            <Route exact path="/searchinvoices" component={SearchInvoices} />
             <Route exact path="/top" component={LinkList} />
             <Route exact path="/vendor" component={VendorList} />
             <Route exact path="/customer" component={CustomerList} />

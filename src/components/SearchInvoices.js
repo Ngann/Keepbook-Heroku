@@ -1,17 +1,17 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { withApollo } from 'react-apollo'
 import gql from 'graphql-tag'
-import Bill from './Bill'
+import Invoice from './Invoice'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
 
-const BILL_SEARCH_QUERY = gql`
-  query BillSearchQuery($filter: String!) {
-    searchBills(filter: $filter) {
-      bills {
+const INVOICE_SEARCH_QUERY = gql`
+  query InvoiceSearchQuery($filter: String!) {
+    searchInvoices(filter: $filter) {
+      invoices {
         id
-        vendor
+        customer
         date
         account
         amount
@@ -20,9 +20,9 @@ const BILL_SEARCH_QUERY = gql`
   }
 `
 
-class SearchBills extends Component {
+class SearchInvoices extends Component {
   state = {
-    bills: [],
+    invoices: [],
     filter: '',
   }
 
@@ -30,11 +30,11 @@ class SearchBills extends Component {
     return (
       <div className="container">
         <Form inline>
-        <FormControl type="text" placeholder="Search" className="mr-sm-2"   onChange={e => this.setState({ filter: e.target.value })}/>
+        <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={e => this.setState({ filter: e.target.value })}/>
         <Button variant="outline-primary" onClick={() => this._executeSearch()}>Search</Button>
         </Form>
-        {this.state.bills.map((bill, index) => (
-          <Bill key={bill.id} bill={bill} index={index} />
+        {this.state.invoices.map((invoice, index) => (
+          <Invoice key={invoice.id} invoice={invoice} index={index} />
         ))}
       </div>
     )
@@ -44,12 +44,12 @@ class SearchBills extends Component {
   _executeSearch = async () => {
     const { filter } = this.state
     const result = await this.props.client.query({
-      query: BILL_SEARCH_QUERY,
+      query: INVOICE_SEARCH_QUERY,
       variables: { filter },
     })
-    const bills = result.data.searchBills.bills
-    this.setState({ bills })
+    const invoices = result.data.searchInvoices.invoices
+    this.setState({ invoices })
   }
 }
 
-export default withApollo(SearchBills)
+export default withApollo(SearchInvoices)

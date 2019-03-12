@@ -2,11 +2,9 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { AUTH_TOKEN } from '../constants'
 import Navbar from 'react-bootstrap/Navbar';
-import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
+
 
 
 class Header extends Component {
@@ -34,9 +32,9 @@ class Header extends Component {
         <NavDropdown.Item href="/invoice">Invoice List</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.3">Reports</NavDropdown.Item>
         <NavDropdown.Divider />
-        <NavDropdown.Item href="#action/3.4">Search</NavDropdown.Item>
+        <NavDropdown.Item href="/searchinvoices">Search</NavDropdown.Item>
       </NavDropdown>
-      <NavDropdown title="DashBoard" id="basic-nav-dropdown">
+      <NavDropdown title="Dashboard" id="basic-nav-dropdown">
         <NavDropdown.Item href="/chart">Charts</NavDropdown.Item>
         <NavDropdown.Item href="/news">News</NavDropdown.Item>
         <NavDropdown.Item href="/Search">...</NavDropdown.Item>
