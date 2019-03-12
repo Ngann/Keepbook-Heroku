@@ -15,6 +15,11 @@ const CREATEBILL_MUTATION = gql`
   }
 `
 
+const containerStyle = {
+  marginTop: '10%',
+  backgroundColor: '#FDFFFC'
+};
+
 class CreateBill extends Component {
   state = {
     vendor: '',
@@ -26,7 +31,7 @@ class CreateBill extends Component {
   render() {
     const { vendor, date, account, amount } = this.state
     return (
-      <div className= "container">
+      <div className= "container" style={containerStyle}>
         <Form.Group controlId="formBasicBill">
           <Form.Label>Vendor Name</Form.Label>
           <Form.Control

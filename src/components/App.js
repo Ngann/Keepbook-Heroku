@@ -16,21 +16,14 @@ import Search from './Search'
 import DashboardControl from './DashboardControl'
 import SearchBills from './SearchBills'
 import SearchInvoices from './SearchInvoices'
-import Main from './Main'
-import Info from './Info'
-import Contact from './Contact'
-
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <Header />
-        <Main/>
-        <Info/>
-        <Contact/>
           <Switch>
-            <Route exact path="/" render={() => <Redirect to="/main" />} />
+            <Route exact path="/" render={() => <Redirect to="/chart" />} />
             <Route exact path="/create" component={CreateLink} />
             <Route exact path="/createvendor" component={CreateVendor} />
             <Route exact path="/createcustomer" component={CreateCustomer} />

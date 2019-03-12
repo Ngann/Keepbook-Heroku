@@ -28,12 +28,19 @@ const data = {
   ]
 };
 
+const containerStyle = {
+  marginTop: '3%',
+  backgroundColor: '#eeeeee',
+	padding: '3%'
+  // border: '1px solid #f4ff81'
+};
+
 class LineCharts extends Component {
   displayName: 'Revenue'
 
   render() {
     return (
-      <div>
+      <div style={containerStyle}>
         <h2>Revenue</h2>
         <Line data={data} />
       </div>

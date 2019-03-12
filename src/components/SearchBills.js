@@ -19,6 +19,10 @@ const BILL_SEARCH_QUERY = gql`
     }
   }
 `
+const containerStyle = {
+  marginTop: '10%',
+  backgroundColor: '#FDFFFC'
+};
 
 class SearchBills extends Component {
   state = {
@@ -28,7 +32,7 @@ class SearchBills extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container" style={containerStyle}>
         <Form inline>
           <FormControl type="text" placeholder="Search" className="mr-sm-2"   onChange={e => this.setState({ filter: e.target.value })}/>
           <Button variant="outline-primary" onClick={() => this._executeSearch()}>Search</Button>

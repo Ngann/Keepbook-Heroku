@@ -33,6 +33,32 @@ const LOGIN_MUTATION = gql`
   }
 `
 
+const containerStyle = {
+  backgroundColor: '#FDFFFC'
+};
+
+const cardStyle = {
+  align: 'center',
+  verticalAlign: 'middle',
+  border: '1px solid #020100',
+  // backgroundColor: "#020100"
+  // backgroundColor: '#FDFFFC'
+};
+
+const rowStyle = {
+  marginTop:'70px',
+  marginRight:'25%',
+  marginLeft:'25%',
+  paddingTop:'25%',
+  paddingBottom:'25%',
+  // backgroundColor: '#235789'
+};
+
+const buttonStyle = {
+  backgroundColor: "#00acc1",
+  color: 'white'
+};
+
 class Login extends Component {
   state = {
     login: true, // switch between Login and SignUp
@@ -44,14 +70,14 @@ class Login extends Component {
   render() {
     const { login, email, password, name } = this.state
     return (
-      <MDBContainer>
-        <MDBRow>
-          <MDBCol md="6">
-            <MDBCard>
-              <MDBCardBody>
-                <MDBCardHeader className="form-header warm-flame-gradient rounded">
-                  <h3 className="my-3">
-                    <MDBIcon icon="lock" />{login ? 'Login' : 'Sign Up'}
+      <MDBContainer style={containerStyle} >
+        <MDBRow style={rowStyle}>
+          <MDBCol >
+            <MDBCard style={cardStyle}>
+              <MDBCardBody >
+                <MDBCardHeader  className="form-header warm-flame-gradient rounded">
+                  <h3 className="my-3" >
+                    <MDBIcon  icon="lock" />{login ? 'Login' : 'Sign Up'}
                   </h3>
                 </MDBCardHeader>
                 {!login && (
@@ -100,7 +126,7 @@ class Login extends Component {
                   onCompleted={data => this._confirm(data)}
                 >
                 {mutation => (
-                  <MDBBtn className="mb-3" onClick={mutation}>
+                  <MDBBtn className="mb-3" style={buttonStyle} onClick={mutation}>
                   {login ? 'Login' : 'Create'}
                   </MDBBtn>
                 )}

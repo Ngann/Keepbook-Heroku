@@ -35,6 +35,11 @@ mutation UpdateInvoiceMutation($id: ID!, $customer: String!, $date:String!, $acc
 }
 `
 
+const containerStyle = {
+  marginTop: '10%',
+  backgroundColor: '#FDFFFC'
+};
+
 class InvoiceList extends Component {constructor(props, context) {
   super(props, context);
 
@@ -74,7 +79,7 @@ render() {
       const invoicesToRender = data.invoices
 
       return (
-        <div className="container">
+        <div className="container" style={containerStyle}>
           <Table striped bordered hover size="sm">
           <thead>
           <tr>

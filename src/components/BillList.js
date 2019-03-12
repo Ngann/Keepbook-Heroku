@@ -34,6 +34,10 @@ mutation UpdateBillMutation($id: ID!, $vendor: String!, $date:String!, $account:
   }
 }
 `
+const containerStyle = {
+  marginTop: '10%',
+  // backgroundColor: '#FDFFFC'
+};
 
 class BillList extends Component {constructor(props, context) {
   super(props, context);
@@ -74,7 +78,7 @@ render() {
       const billsToRender = data.bills
 
       return (
-        <div className="container">
+        <div className="container" style={containerStyle}>
           <Table striped bordered hover size="sm" >
           <thead>
             <tr>

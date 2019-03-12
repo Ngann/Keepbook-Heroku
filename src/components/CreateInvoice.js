@@ -15,6 +15,11 @@ const CREATEINVOICE_MUTATION = gql`
   }
 `
 
+const containerStyle = {
+  marginTop: '10%',
+  backgroundColor: '#FDFFFC'
+};
+
 class CreateInvoice extends Component {
   state = {
     customer: '',
@@ -26,7 +31,7 @@ class CreateInvoice extends Component {
   render() {
     const { customer, date, account, amount } = this.state
     return (
-      <div className= "container">
+      <div className= "container" style={containerStyle}>
         <Form.Group controlId="formBasicInvoice">
           <Form.Label>Customer Name</Form.Label>
           <Form.Control

@@ -14,6 +14,11 @@ const CREATECUSTOMER_MUTATION = gql`
   }
 `
 
+const containerStyle = {
+  marginTop: '10%',
+  backgroundColor: '#FDFFFC'
+};
+
 class CreateCustomer extends Component {
   state = {
     name: '',
@@ -23,7 +28,7 @@ class CreateCustomer extends Component {
   render() {
     const { name, contact } = this.state
     return (
-      <div className= "container">
+      <div className= "container" style={containerStyle}>
         <Form.Group controlId="formBasicCustomer">
           <Form.Label>Customer Name</Form.Label>
           <Form.Control

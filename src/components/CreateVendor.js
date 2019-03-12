@@ -13,6 +13,10 @@ const ADDVENDOR_MUTATION = gql`
     }
   }
 `
+const containerStyle = {
+  marginTop: '10%',
+  backgroundColor: '#FDFFFC'
+};
 
 class CreateVendor extends Component {
   state = {
@@ -23,7 +27,7 @@ class CreateVendor extends Component {
   render() {
     const { name, contact } = this.state
     return (
-      <div className= "container">
+      <div className= "container" style={containerStyle}>
         <Form.Group controlId="formBasicVendor">
           <Form.Label>Vendor Name</Form.Label>
           <Form.Control

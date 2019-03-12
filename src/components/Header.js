@@ -6,13 +6,19 @@ import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
 
+const divStyle = {
+  align: 'center',
+  verticalAlign: 'middle',
+  backgroundColor: "#00bcd4",
+  // borderBottom: ' 1px solid #00acc1'
+};
 
 class Header extends Component {
   render() {
     const authToken = localStorage.getItem(AUTH_TOKEN)
     return (
       <div>
-        <Navbar bg="light" variant="light">
+        <Navbar style={divStyle}>
           <Navbar.Brand href="/">Home</Navbar.Brand>
           {authToken && (
             <Nav className="mr-auto">

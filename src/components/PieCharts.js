@@ -19,12 +19,19 @@ const data = {
 	}]
 };
 
+const containerStyle = {
+  marginTop: '3%',
+  backgroundColor: '#eeeeee',
+	padding: '3%'
+  // border: '1px solid #f4ff81'
+};
+
 class PieCharts extends Component {
   displayName: 'Bills and Invoices'
 
   render() {
     return (
-      <div>
+      <div style={containerStyle}>
         <h2>Bills and Invoices</h2>
         <Pie data={data} />
       </div>

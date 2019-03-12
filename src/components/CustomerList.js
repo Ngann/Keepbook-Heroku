@@ -32,6 +32,11 @@ mutation UpdateCustomerMutation($id: ID!, $name: String!, $contact: String!) {
 }
 `
 
+const containerStyle = {
+  marginTop: '10%',
+  backgroundColor: '#FDFFFC'
+};
+
 class CustomerList extends Component {constructor(props, context) {
   super(props, context);
 
@@ -69,7 +74,7 @@ render() {
       const customersToRender = data.customers
 
       return (
-        <div className="container">
+        <div className="container" style={containerStyle}>
           <Table striped bordered hover size="sm">
           <thead>
           <tr>

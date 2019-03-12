@@ -23,11 +23,18 @@ const data = {
 	}]
 };
 
+const containerStyle = {
+  marginTop: '3%',
+  backgroundColor: '#eeeeee',
+	padding: '3%'
+  // border: '1px solid #f4ff81'
+};
+
 class DoughnutCharts extends Component {
   displayName: 'DoughnutExample'
   render() {
     return (
-      <div>
+      <div style={containerStyle}>
         <h2>Bills by Vendor</h2>
         <Doughnut data={data} />
       </div>

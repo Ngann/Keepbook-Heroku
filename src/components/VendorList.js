@@ -32,6 +32,11 @@ mutation UpdateVendorMutation($id: ID!, $name: String!, $contact: String!) {
 }
 `
 
+const containerStyle = {
+  marginTop: '10%',
+  backgroundColor: '#FDFFFC'
+};
+
 class VendorList extends Component {constructor(props, context) {
   super(props, context);
 
@@ -69,7 +74,7 @@ render() {
       const vendorsToRender = data.vendors
 
       return (
-        <div className="container">
+        <div className="container" style={containerStyle}>
           <Table striped bordered hover size="sm">
           <thead>
             <tr>
