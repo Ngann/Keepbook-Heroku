@@ -132,7 +132,7 @@ render() {
               </Button>
               <Mutation
               mutation={UPDATEBILL_MUTATION}
-              variables={{ id: bill.id, vendor, amount }}>
+              variables={{ id: bill.id, vendor, date, account, amount }}>
               {updateBillMutation => <Button onClick={updateBillMutation}>Save Changes</Button>}
               </Mutation>
               </Modal.Footer>
