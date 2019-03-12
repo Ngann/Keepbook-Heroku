@@ -1,91 +1,95 @@
-# React & Apollo Tutorial
+<h3 align="center"> KeepBook </h3>
+<h4 align="center"> By Ngan Nguyen </h4>
 
-This is the sample project that belongs to the [React & Apollo Tutorial](https://www.howtographql.com/react-apollo/0-introduction/) on How to GraphQL.
+## Description
 
-## How to use
+_This application allows user to create bills and invoices. It will also have the option to view the cashflow statement ._
 
-### 1. Clone repository
+## Component Tree
 
-```sh
-git clone https://github.com/howtographql/react-apollo/
+# ![tree](./src/assets/images/tree.jpg)
+
+## User Role
+
+# ![user](./src/assets/images/user.jpg)
+
+## Simple Database for User and Transactions
+
+# ![db](./src/assets/images/db.png)
+
+_DB setup per schema_
+* https://github.com/Ngann/KeepBook-DB.git
+
+_FullStack environment setup: Node, React, AWS Aurora_
+* https://github.com/Ngann/KeepBook-FS.git
+
+## Static Version of Application
+_See below link for static version of site._
+* https://github.com/Ngann/KeepBookStatic.git
+
+## Table of content
+
+- [Installation](#installation)
+- [Features](#Features)
+- [Technology](#technology)
+- [License](#license)
+
+
+## Step 1: Break The UI Into A Component Hierarchy
+1. Filterable List of Invoices or bills
+2. SearchBar to filter through Invoices or Bills by customer/vendors etc..
+3. Invoices List Table
+4. Bills List Table
+5. Invoice form
+6. Bills form
+7. Dashboard Control
+
+## Component Tree
+
+
+
+## Installation
+
+1. Go to terminal and clone this repository:
 ```
-
-### 2. Install dependencies & Deploy the Prisma database API
-
-To install the Prisma CLI globally with Yarn, use the following command:
-```sh
-yarn global add prisma
+$ git clone git repository link
 ```
-
-Also, run the following commands:
-```sh
-cd react-apollo/server
-yarn install
-prisma deploy
+2. Change into the project directory and install npm
 ```
-
-Then, follow these steps in the interactive CLI wizard:
-
-1. Select **Demo server**
-1. **Authenticate** with Prisma Cloud in your browser (if necessary)
-1. Back in your terminal, **confirm all suggested values**
-
-<details>
- <summary>Alternative: Run Prisma locally via Docker</summary>
-
-1. Ensure you have Docker installed on your machine. If not, you can get it from [here](https://store.docker.com/search?offering=community&type=edition).
-1. Create `docker-compose.yml` for MySQL (see [here](https://www.prisma.io/docs/prisma-server/database-connector-POSTGRES-jgfr/) for Postgres):
-    ```yml
-    version: '3'
-    services:
-      prisma:
-        image: prismagraphql/prisma:1.23
-        restart: always
-        ports:
-        - "4466:4466"
-        environment:
-          PRISMA_CONFIG: |
-            port: 4466
-            databases:
-              default:
-                connector: mysql
-                host: mysql
-                port: 3306
-                user: root
-                password: prisma
-                migrations: true
-      mysql:
-        image: mysql:5.7
-        restart: always
-        environment:
-          MYSQL_ROOT_PASSWORD: prisma
-        volumes:
-          - mysql:/var/lib/mysql
-    volumes:
-      mysql:
-    ```
-1. Run `docker-compose up -d`
-1. Run `prisma deploy`
-
-</details>
-
-### 3. Start the server
-
-To start the server, all you need to do is execute the `start` script by running the following command inside the `server` directory:
-
-```sh
-yarn start
+$ npm install
 ```
-
-> **Note**: If you want to interact with the GraphQL API of the server inside a [GraphQL Playground](https://github.com/prisma/graphql-playground), you can navigate to [http://localhost:4000](http://localhost:4000).
-
-### 4. Run the app
-
-Now that the server is running, you can start the React app as well. The commands need to be run in a new terminal tab/window inside the root directory `react-apollo` (because the current tab is blocked by the process running the server):
-
-```sh
-yarn install
-yarn start
+3. To run the program:
 ```
+$ npm start
+```
+4. Open project  at http://localhost:8080/
 
-You can now open your browser and use the app on [http://localhost:3000](http://localhost:3000).
+## Features
+
+## Planned Features
+* User can add Vendors and Customers
+* User can add Bills and Invoices
+* User can mark transactions as paid
+* User can go to dashboard to see Income and Expense by category, outstanding Bills/Invoices and Bank Account Balances
+
+
+## Technology
+* Javascript
+* React
+* Materialize / Material UI
+* NodeJs
+* GraphQL
+* Prisma
+* AWS Aurora
+* Bcrypt
+* JWT
+
+## Research for Stack to use
+_React, Okta, Sqlite3_
+* https://github.com/Ngann/React-Sqlite3.git
+
+_Node, GraphQL , Prism, AWS Aurora_
+* https://github.com/Ngann/hackernews-node.git
+
+## License
+* This project is licensed under the MIT License - see the LICENSE.md file for details
