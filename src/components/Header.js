@@ -37,6 +37,7 @@ class Header extends Component {
         <NavDropdown.Item href="#action/3.4">Search</NavDropdown.Item>
       </NavDropdown>
       <NavDropdown title="DashBoard" id="basic-nav-dropdown">
+        <NavDropdown.Item href="/chart">Charts</NavDropdown.Item>
         <NavDropdown.Item href="/news">News</NavDropdown.Item>
         <NavDropdown.Item href="/Search">...</NavDropdown.Item>
         <NavDropdown.Item href="/create">Form</NavDropdown.Item>

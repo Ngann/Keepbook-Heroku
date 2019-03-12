@@ -13,6 +13,7 @@ import Header from './Header'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import Login from './Login'
 import Search from './Search'
+import DashboardControl from './DashboardControl'
 import SearchBills from './SearchBills'
 
 
@@ -22,7 +23,7 @@ class App extends Component {
       <div className="App">
         <Header />
           <Switch>
-            <Route exact path="/" render={() => <Redirect to="/new/1" />} />
+            <Route exact path="/" render={() => <Redirect to="/main" />} />
             <Route exact path="/create" component={CreateLink} />
             <Route exact path="/createvendor" component={CreateVendor} />
             <Route exact path="/createcustomer" component={CreateCustomer} />
@@ -37,6 +38,7 @@ class App extends Component {
             <Route exact path="/bill" component={BillList} />
             <Route exact path="/invoice" component={InvoiceList} />
             <Route exact path="/new/:page" component={LinkList} />
+            <Route exact path="/chart" component={DashboardControl} />
           </Switch>
       </div>
     )

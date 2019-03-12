@@ -70,6 +70,10 @@ _DB setup per schema_
 * Bcrypt
 * JWT
 
+##Packages
+* React Charts https://github.com/jerairrest/react-chartjs-2
+* React Bootstrap Component
+
 ## Research
 _React, Okta, Sqlite3_
 * https://github.com/Ngann/React-Sqlite3.git
