@@ -3,32 +3,29 @@ import {Pie} from 'react-chartjs-2';
 
 const data = {
 	labels: [
-		'Red',
-		'Green',
-		'Yellow'
+		'Bills',
+		'Invoices',
 	],
 	datasets: [{
-		data: [300, 50, 100],
+		data: [300, 50],
 		backgroundColor: [
-		'#FF6384',
-		'#36A2EB',
-		'#FFCE56'
+		'#F3D250',
+		'#90CCF4',
 		],
 		hoverBackgroundColor: [
-		'#FF6384',
-		'#36A2EB',
-		'#FFCE56'
+		'#5DA2D5',
+		'#F78888',
 		]
 	}]
 };
 
 class PieCharts extends Component {
-  ddisplayName: 'PieExample'
+  displayName: 'Bills and Invoices'
 
   render() {
     return (
       <div>
-        <h2>Pie Example</h2>
+        <h2>Bills and Invoices</h2>
         <Pie data={data} />
       </div>
     );
