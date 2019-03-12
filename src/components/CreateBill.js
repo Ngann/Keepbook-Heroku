@@ -71,7 +71,7 @@ class CreateBill extends Component {
         mutation={CREATEBILL_MUTATION}
         variables={{ vendor, date, account, amount }}
         >
-          {createBillMutation => <Button variant="info" onClick={createBillMutation}>Add</Button>}
+          {createBillMutation => <Button variant="secondary" onClick={createBillMutation}>Add</Button>}
         </Mutation>
         <Button variant="danger" onClick={this.props.history.goBack}>
           Cancel

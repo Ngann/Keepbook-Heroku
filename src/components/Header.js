@@ -13,7 +13,7 @@ class Header extends Component {
     return (
       <div>
         <Navbar bg="light" variant="light">
-        <Navbar.Brand href="/">Home</Navbar.Brand>
+          <Navbar.Brand href="/">Home</Navbar.Brand>
           {authToken && (
             <Nav className="mr-auto">
               <NavDropdown title="Payable" id="basic-nav-dropdown">
