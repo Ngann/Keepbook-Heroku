@@ -80,9 +80,5 @@ _Node, GraphQL , Prism, AWS Aurora_
 _FullStack environment setup: Node, React, AWS Aurora_
 * https://github.com/Ngann/KeepBook-FS.git
 
-_See below link for static old version of site._
-* https://github.com/Ngann/KeepBookStatic.git
-
-
 ## License
 * This project is licensed under the MIT License - see the LICENSE.md file for details
