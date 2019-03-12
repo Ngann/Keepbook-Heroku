@@ -75,71 +75,71 @@ render() {
 
       return (
         <div className="container">
-        <Table striped bordered hover size="sm">
-        <thead>
-        <tr>
-        <th>Date</th>
-        <th>Customer Name</th>
-        <th>Account</th>
-        <th>Amount</th>
-        <th>Action</th>
-        </tr>
-        </thead>
-        {invoicesToRender.map(invoice => (
-          <Fragment key={invoice.id} >
-            <tbody>
-              <tr>
-              <td>{invoice.date}</td>
-              <td>{invoice.customer}</td>
-              <td>{invoice.account}</td>
-              <td>{invoice.amount}</td>
-              <td>
-              <Button variant="primary" onClick={this.handleShow}>
-              Edit
-              </Button>| <Mutation
-              mutation={DELETEINVOICE_MUTATION}
-              variables={{ id: invoice.id }}
-              >
-              {deleteInvoiceMutation => <Button variant="danger" onClick={deleteInvoiceMutation}>Delete</Button>}
-              </Mutation></td>
-              </tr>
-            </tbody>
-            <Modal show={this.state.show} onHide={this.handleClose} >
-              <Modal.Header closeButton>
-              <Modal.Title>Invoice: {invoice.customer}</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <form className="flex flex-column mt3">
-                <input
-                className="mb2"
-                value={customer}
-                onChange={e => this.setState({ customer: e.target.value })}
-                type="text"
-                placeholder="A customer"
-                />
-                <input
-                className="mb2"
-                value={account}
-                onChange={e => this.setState({ amount: e.target.value })}
-                type="text"
-                placeholder="amount"
-                />
-                </form>
-              </Modal.Body>
-              <Modal.Footer>
-              <Button variant="secondary" onClick={this.handleClose}>
-              Close
-              </Button>
-              <Mutation
-              mutation={UPDATEINVOICE_MUTATION}
-              variables={{ id: invoice.id, customer, date, amount, account }}>
-              {updateInvoiceMutation => <Button onClick={updateInvoiceMutation}>Save Changes</Button>}
-              </Mutation>
-              </Modal.Footer>
-            </Modal>
-          </Fragment>
-        ))}
-        </Table>
+          <Table striped bordered hover size="sm">
+          <thead>
+          <tr>
+          <th>Date</th>
+          <th>Customer Name</th>
+          <th>Account</th>
+          <th>Amount</th>
+          <th>Action</th>
+          </tr>
+          </thead>
+          {invoicesToRender.map(invoice => (
+            <Fragment key={invoice.id} >
+              <tbody>
+                <tr>
+                  <td>{invoice.date}</td>
+                  <td>{invoice.customer}</td>
+                  <td>{invoice.account}</td>
+                  <td>{invoice.amount}</td>
+                  <td>
+                  <Button variant="primary" onClick={this.handleShow}>
+                  Edit
+                  </Button>| <Mutation
+                  mutation={DELETEINVOICE_MUTATION}
+                  variables={{ id: invoice.id }}
+                  >
+                  {deleteInvoiceMutation => <Button variant="danger" onClick={deleteInvoiceMutation}>Delete</Button>}
+                  </Mutation></td>
+                </tr>
+              </tbody>
+              <Modal show={this.state.show} onHide={this.handleClose} >
+                <Modal.Header closeButton>
+                  <Modal.Title>Invoice: {invoice.customer}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <form className="flex flex-column mt3">
+                    <input
+                    className="mb2"
+                    value={customer}
+                    onChange={e => this.setState({ customer: e.target.value })}
+                    type="text"
+                    placeholder="A customer"
+                    />
+                    <input
+                    className="mb2"
+                    value={account}
+                    onChange={e => this.setState({ amount: e.target.value })}
+                    type="text"
+                    placeholder="amount"
+                    />
+                  </form>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={this.handleClose}>
+                  Close
+                  </Button>
+                  <Mutation
+                  mutation={UPDATEINVOICE_MUTATION}
+                  variables={{ id: invoice.id, customer, date, amount, account }}>
+                  {updateInvoiceMutation => <Button onClick={updateInvoiceMutation}>Save Changes</Button>}
+                  </Mutation>
+                </Modal.Footer>
+              </Modal>
+            </Fragment>
+          ))}
+          </Table>
         </div>
       )
     }}

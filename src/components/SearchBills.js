@@ -30,8 +30,8 @@ class SearchBills extends Component {
     return (
       <div className="container">
         <Form inline>
-        <FormControl type="text" placeholder="Search" className="mr-sm-2"   onChange={e => this.setState({ filter: e.target.value })}/>
-        <Button variant="outline-primary" onClick={() => this._executeSearch()}>Search</Button>
+          <FormControl type="text" placeholder="Search" className="mr-sm-2"   onChange={e => this.setState({ filter: e.target.value })}/>
+          <Button variant="outline-primary" onClick={() => this._executeSearch()}>Search</Button>
         </Form>
         {this.state.bills.map((bill, index) => (
           <Bill key={bill.id} bill={bill} index={index} />

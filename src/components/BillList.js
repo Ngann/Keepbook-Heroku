@@ -75,71 +75,71 @@ render() {
 
       return (
         <div className="container">
-        <Table striped bordered hover size="sm">
-        <thead>
-        <tr>
-        <th>Date</th>
-        <th>Vendor Name</th>
-        <th>Account</th>
-        <th>Amount</th>
-        <th>Action</th>
-        </tr>
-        </thead>
-        {billsToRender.map(bill => (
-          <Fragment key={bill.id} >
-            <tbody>
-              <tr>
-              <td>{bill.date}</td>
-              <td>{bill.vendor}</td>
-              <td>{bill.account}</td>
-              <td>{bill.amount}</td>
-              <td>
-              <Button variant="primary" onClick={this.handleShow}>
-              Edit
-              </Button>| <Mutation
-              mutation={DELETEBILL_MUTATION}
-              variables={{ id: bill.id }}
-              >
-              {deleteBillMutation => <Button variant="danger" onClick={deleteBillMutation}>Delete</Button>}
-              </Mutation></td>
-              </tr>
-            </tbody>
-            <Modal show={this.state.show} onHide={this.handleClose} >
-              <Modal.Header closeButton>
-              <Modal.Title>Bill: {bill.vendor}</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <form className="flex flex-column mt3">
-                <input
-                className="mb2"
-                value={vendor}
-                onChange={e => this.setState({ vendor: e.target.value })}
-                type="text"
-                placeholder="A vendor"
-                />
-                <input
-                className="mb2"
-                value={account}
-                onChange={e => this.setState({ amount: e.target.value })}
-                type="text"
-                placeholder="amount"
-                />
-                </form>
-              </Modal.Body>
-              <Modal.Footer>
-              <Button variant="secondary" onClick={this.handleClose}>
-              Close
-              </Button>
-              <Mutation
-              mutation={UPDATEBILL_MUTATION}
-              variables={{ id: bill.id, vendor, date, account, amount }}>
-              {updateBillMutation => <Button onClick={updateBillMutation}>Save Changes</Button>}
-              </Mutation>
-              </Modal.Footer>
-            </Modal>
-          </Fragment>
-        ))}
-        </Table>
+          <Table striped bordered hover size="sm">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Vendor Name</th>
+              <th>Account</th>
+              <th>Amount</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          {billsToRender.map(bill => (
+            <Fragment key={bill.id} >
+              <tbody>
+                <tr>
+                  <td>{bill.date}</td>
+                  <td>{bill.vendor}</td>
+                  <td>{bill.account}</td>
+                  <td>{bill.amount}</td>
+                  <td>
+                  <Button variant="primary" onClick={this.handleShow}>
+                  Edit
+                  </Button>| <Mutation
+                  mutation={DELETEBILL_MUTATION}
+                  variables={{ id: bill.id }}
+                  >
+                  {deleteBillMutation => <Button variant="danger" onClick={deleteBillMutation}>Delete</Button>}
+                  </Mutation></td>
+                </tr>
+              </tbody>
+              <Modal show={this.state.show} onHide={this.handleClose} >
+                <Modal.Header closeButton>
+                  <Modal.Title>Bill: {bill.vendor}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <form className="flex flex-column mt3">
+                  <input
+                  className="mb2"
+                  value={vendor}
+                  onChange={e => this.setState({ vendor: e.target.value })}
+                  type="text"
+                  placeholder="A vendor"
+                  />
+                  <input
+                  className="mb2"
+                  value={account}
+                  onChange={e => this.setState({ amount: e.target.value })}
+                  type="text"
+                  placeholder="amount"
+                  />
+                  </form>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={this.handleClose}>
+                  Close
+                  </Button>
+                  <Mutation
+                  mutation={UPDATEBILL_MUTATION}
+                  variables={{ id: bill.id, vendor, date, account, amount }}>
+                  {updateBillMutation => <Button onClick={updateBillMutation}>Save Changes</Button>}
+                  </Mutation>
+                </Modal.Footer>
+              </Modal>
+            </Fragment>
+          ))}
+          </Table>
         </div>
       )
     }}

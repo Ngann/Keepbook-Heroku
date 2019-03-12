@@ -25,16 +25,16 @@ class CreateCustomer extends Component {
     return (
       <div className= "container">
         <Form.Group controlId="formBasicCustomer">
-        <Form.Label>Customer Name</Form.Label>
-        <Form.Control
-          className="mb2"
-          value={name}
-          onChange={e => this.setState({ name: e.target.value })}
-          type="text"
-          placeholder="A name"
-        />
-          </Form.Group>
-          <Form.Group controlId="formBasicContact">
+          <Form.Label>Customer Name</Form.Label>
+          <Form.Control
+            className="mb2"
+            value={name}
+            onChange={e => this.setState({ name: e.target.value })}
+            type="text"
+            placeholder="A name"
+          />
+        </Form.Group>
+        <Form.Group controlId="formBasicContact">
           <Form.Label>Contact</Form.Label>
           <Form.Control
             className="mb2"

@@ -70,67 +70,67 @@ render() {
 
       return (
         <div className="container">
-        <Table striped bordered hover size="sm">
-        <thead>
-        <tr>
-        <th>Customer Name</th>
-        <th>Contact</th>
-        <th>Action</th>
-        </tr>
-        </thead>
-        {customersToRender.map(customer => (
-          <Fragment key={customer.id} >
-            <tbody>
-              <tr>
-              <td>{customer.name}</td>
-              <td>{customer.contact}</td>
-              <td>
-              <Button variant="primary" onClick={this.handleShow}>
-              Edit
-              </Button>| <Mutation
-              mutation={DELETECUSTOMER_MUTATION}
-              variables={{ id: customer.id }}
-              >
-              {deleteCustomerMutation => <Button variant="danger" onClick={deleteCustomerMutation}>Delete</Button>}
-              </Mutation></td>
-              </tr>
-            </tbody>
-            <Modal show={this.state.show} onHide={this.handleClose} >
-              <Modal.Header closeButton>
-              <Modal.Title>Customer: {customer.name}</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <form className="flex flex-column mt3">
-                <input
-                className="mb2"
-                value={name}
-                onChange={e => this.setState({ name: e.target.value })}
-                type="text"
-                placeholder="A name"
-                />
-                <input
-                className="mb2"
-                value={contact}
-                onChange={e => this.setState({ contact: e.target.value })}
-                type="text"
-                placeholder="contact"
-                />
-                </form>
-              </Modal.Body>
-              <Modal.Footer>
-              <Button variant="secondary" onClick={this.handleClose}>
-              Close
-              </Button>
-              <Mutation
-              mutation={UPDATECUSTOMER_MUTATION}
-              variables={{ id: customer.id, name, contact }}>
-              {updateCustomerMutation => <Button onClick={updateCustomerMutation}>Save Changes</Button>}
-              </Mutation>
-              </Modal.Footer>
-            </Modal>
-          </Fragment>
-        ))}
-        </Table>
+          <Table striped bordered hover size="sm">
+          <thead>
+          <tr>
+          <th>Customer Name</th>
+          <th>Contact</th>
+          <th>Action</th>
+          </tr>
+          </thead>
+          {customersToRender.map(customer => (
+            <Fragment key={customer.id} >
+              <tbody>
+                  <tr>
+                    <td>{customer.name}</td>
+                    <td>{customer.contact}</td>
+                    <td>
+                    <Button variant="primary" onClick={this.handleShow}>
+                    Edit
+                    </Button>| <Mutation
+                    mutation={DELETECUSTOMER_MUTATION}
+                    variables={{ id: customer.id }}
+                    >
+                    {deleteCustomerMutation => <Button variant="danger" onClick={deleteCustomerMutation}>Delete</Button>}
+                    </Mutation></td>
+                  </tr>
+              </tbody>
+              <Modal show={this.state.show} onHide={this.handleClose} >
+                <Modal.Header closeButton>
+                  <Modal.Title>Customer: {customer.name}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <form className="flex flex-column mt3">
+                    <input
+                    className="mb2"
+                    value={name}
+                    onChange={e => this.setState({ name: e.target.value })}
+                    type="text"
+                    placeholder="A name"
+                    />
+                    <input
+                    className="mb2"
+                    value={contact}
+                    onChange={e => this.setState({ contact: e.target.value })}
+                    type="text"
+                    placeholder="contact"
+                    />
+                  </form>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={this.handleClose}>
+                  Close
+                  </Button>
+                  <Mutation
+                  mutation={UPDATECUSTOMER_MUTATION}
+                  variables={{ id: customer.id, name, contact }}>
+                  {updateCustomerMutation => <Button onClick={updateCustomerMutation}>Save Changes</Button>}
+                  </Mutation>
+                </Modal.Footer>
+              </Modal>
+            </Fragment>
+          ))}
+          </Table>
         </div>
       )
     }}

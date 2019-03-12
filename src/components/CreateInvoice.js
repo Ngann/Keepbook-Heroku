@@ -28,16 +28,16 @@ class CreateInvoice extends Component {
     return (
       <div className= "container">
         <Form.Group controlId="formBasicInvoice">
-        <Form.Label>Customer Name</Form.Label>
-        <Form.Control
-          className="mb2"
-          value={customer}
-          onChange={e => this.setState({ customer: e.target.value })}
-          type="text"
-          placeholder="A customer"
-        />
-          </Form.Group>
-          <Form.Group controlId="formBasicDate">
+          <Form.Label>Customer Name</Form.Label>
+          <Form.Control
+            className="mb2"
+            value={customer}
+            onChange={e => this.setState({ customer: e.target.value })}
+            type="text"
+            placeholder="A customer"
+          />
+        </Form.Group>
+        <Form.Group controlId="formBasicDate">
           <Form.Label>Date</Form.Label>
           <Form.Control
             className="mb2"
@@ -48,25 +48,25 @@ class CreateInvoice extends Component {
           />
         </Form.Group>
         <Form.Group controlId="formBasicAccount">
-        <Form.Label>Account</Form.Label>
-        <Form.Control
-          className="mb2"
-          value={account}
-          onChange={e => this.setState({ account: e.target.value })}
-          type="text"
-          placeholder="account"
-        />
-      </Form.Group>
-      <Form.Group controlId="formBasicAmount">
-      <Form.Label>Amount</Form.Label>
-      <Form.Control
-        className="mb2"
-        value={amount}
-        onChange={e => this.setState({ amount: parseInt(e.target.value) })}
-        type="text"
-        placeholder="amount"
-      />
-    </Form.Group>
+          <Form.Label>Account</Form.Label>
+          <Form.Control
+            className="mb2"
+            value={account}
+            onChange={e => this.setState({ account: e.target.value })}
+            type="text"
+            placeholder="account"
+          />
+        </Form.Group>
+        <Form.Group controlId="formBasicAmount">
+          <Form.Label>Amount</Form.Label>
+          <Form.Control
+            className="mb2"
+            value={amount}
+            onChange={e => this.setState({ amount: parseInt(e.target.value) })}
+            type="text"
+            placeholder="amount"
+          />
+        </Form.Group>
         <Mutation
         mutation={CREATEINVOICE_MUTATION}
         variables={{ customer, date, account, amount }}
