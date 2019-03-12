@@ -5,13 +5,39 @@
 
 _This application allows user to create bills and invoices. It will also have the option to view the cashflow statement ._
 
+## Table of Content
+
+- [Component](#component)
+- [Database](#database)
+- [User](#user)
+- [Features](#Features)
+- [Technology](#technology)
+- [Research](#research)
+- [License](#license)
+
 ## Component Tree
 
 # ![tree](./src/assets/images/tree.jpg)
 
-## User Role
+## Static Website of Component Tree
+* https://github.com/Ngann/KBStatic.git
 
-# ![user](./src/assets/images/user.jpg)
+## Application Component Hierarchy
+1. Payable Control
+2. Bill Form
+3. Bill List
+4. Vendor Form
+5. Vendor List
+6. Receivable Control
+7. Customer Form
+8. Customer List
+9. Invoice Form
+10. Invoice List
+11. Header
+12. Search
+13. DashBoard Control
+
+## Database
 
 ## Simple Database for User and Transactions
 
@@ -20,49 +46,9 @@ _This application allows user to create bills and invoices. It will also have th
 _DB setup per schema_
 * https://github.com/Ngann/KeepBook-DB.git
 
-_FullStack environment setup: Node, React, AWS Aurora_
-* https://github.com/Ngann/KeepBook-FS.git
+## User
 
-## Static Version of Application
-_See below link for static version of site._
-* https://github.com/Ngann/KeepBookStatic.git
-
-## Table of content
-
-- [Installation](#installation)
-- [Features](#Features)
-- [Technology](#technology)
-- [License](#license)
-
-
-## Step 1: Break The UI Into A Component Hierarchy
-1. Filterable List of Invoices or bills
-2. SearchBar to filter through Invoices or Bills by customer/vendors etc..
-3. Invoices List Table
-4. Bills List Table
-5. Invoice form
-6. Bills form
-7. Dashboard Control
-
-## Component Tree
-
-
-
-## Installation
-
-1. Go to terminal and clone this repository:
-```
-$ git clone git repository link
-```
-2. Change into the project directory and install npm
-```
-$ npm install
-```
-3. To run the program:
-```
-$ npm start
-```
-4. Open project  at http://localhost:8080/
+# ![user](./src/assets/images/user.jpg)
 
 ## Features
 
@@ -84,12 +70,19 @@ $ npm start
 * Bcrypt
 * JWT
 
-## Research for Stack to use
+## Research
 _React, Okta, Sqlite3_
 * https://github.com/Ngann/React-Sqlite3.git
 
 _Node, GraphQL , Prism, AWS Aurora_
 * https://github.com/Ngann/hackernews-node.git
+
+_FullStack environment setup: Node, React, AWS Aurora_
+* https://github.com/Ngann/KeepBook-FS.git
+
+_See below link for static old version of site._
+* https://github.com/Ngann/KeepBookStatic.git
+
 
 ## License
 * This project is licensed under the MIT License - see the LICENSE.md file for details
