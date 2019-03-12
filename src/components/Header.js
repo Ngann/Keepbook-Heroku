@@ -46,10 +46,6 @@ class Header extends Component {
       </NavDropdown>
     </Nav>
       )}
-      <Form inline>
-        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-        <Button variant="outline-primary">Search</Button>
-      </Form>
       <div className="flex flex-fixed">
       {authToken ? (
         <div
