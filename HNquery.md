@@ -87,3 +87,26 @@ subscription {
     }
   }
 }
+
+Feed Query:
+
+query {
+  feed(filter: "graph") {
+    links {
+      id
+      url
+      description
+      createdAt
+      postedBy {
+        id
+        name
+      }
+      votes {
+        id
+        user {
+          id
+        }
+      }
+    }
+  }
+}

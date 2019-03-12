@@ -3,6 +3,7 @@ scalar DateTime
 type Query {
   info: String!
   feed(filter: String, skip: Int, first: Int, orderBy: LinkOrderByInput): Feed!
+  searchBills(filter: String, skip: Int, first: Int, orderBy: LinkOrderByInput): SearchBills!
   vendors: [Vendor!]!
   bills: [Bill!]!
   invoices: [Invoice!]!
@@ -27,6 +28,11 @@ enum LinkOrderByInput {
 
 type Feed {
   links: [Link!]!
+  count: Int!
+}
+
+type SearchBills {
+  bills: [Bill!]!
   count: Int!
 }
 

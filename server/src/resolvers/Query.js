@@ -56,6 +56,35 @@ function invoices(parent, args, context, info) {
   return context.prisma.invoices()
 }
 
+async function searchBills(parent, args, context) {
+  const count = await context.prisma
+    .billsConnection({
+      where: {
+        OR: [
+          { vendor_contains: args.filter },
+          { account_contains: args.filter },
+        ],
+      },
+    })
+    .aggregate()
+    .count()
+  const bills = await context.prisma.bills({
+    where: {
+      OR: [
+        { vendor_contains: args.filter },
+        { account_contains: args.filter },
+      ],
+    },
+    skip: args.skip,
+    first: args.first,
+    orderBy: args.orderBy,
+  })
+  return {
+    count,
+    bills,
+  }
+}
+
 module.exports = {
   feed,
   vendors,
@@ -64,5 +93,6 @@ module.exports = {
   drafts,
   post,
   bills,
-  invoices
+  invoices,
+  searchBills
 }

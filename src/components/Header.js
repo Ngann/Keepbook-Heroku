@@ -25,7 +25,7 @@ class Header extends Component {
         <NavDropdown.Item href="/bill">Bill List</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.3">Reports</NavDropdown.Item>
         <NavDropdown.Divider />
-        <NavDropdown.Item href="#action/3.4">Search</NavDropdown.Item>
+        <NavDropdown.Item href="/searchbills">Search</NavDropdown.Item>
       </NavDropdown>
       <NavDropdown title="Receivable" id="basic-nav-dropdown">
         <NavDropdown.Item href="/createcustomer">Customer</NavDropdown.Item>
@@ -41,7 +41,7 @@ class Header extends Component {
         <NavDropdown.Item href="/Search">...</NavDropdown.Item>
         <NavDropdown.Item href="/create">Form</NavDropdown.Item>
         <NavDropdown.Divider />
-        <NavDropdown.Item href="#action/3.4">Search</NavDropdown.Item>
+        <NavDropdown.Item href="/search">Search</NavDropdown.Item>
       </NavDropdown>
     </Nav>
       )}

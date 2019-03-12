@@ -94,6 +94,23 @@ query {
   }
 
 
+  query {
+    searchBills(filter: "Adobe") {
+      bills {
+        id
+        vendor
+        date
+        account
+        amount
+        postedBy {
+          id
+          name
+        }
+      }
+    }
+  }
+
+
 Invoices:
 
 mutation {
