@@ -15,7 +15,9 @@ const ADDVENDOR_MUTATION = gql`
 `
 const containerStyle = {
   marginTop: '10%',
-  backgroundColor: '#FDFFFC'
+  padding:'3%',
+  backgroundColor: '#FDFFFC',
+  border: '1px solid lightgrey'
 };
 
 class CreateVendor extends Component {

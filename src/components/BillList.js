@@ -80,7 +80,7 @@ render() {
       return (
         <div className="container" style={containerStyle}>
           <Table striped bordered hover size="sm" >
-          <thead>
+          <thead >
             <tr>
               <th>Date</th>
               <th>Vendor Name</th>

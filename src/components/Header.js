@@ -3,33 +3,41 @@ import { Link } from 'react-router-dom'
 import { AUTH_TOKEN } from '../constants'
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import Button from 'react-bootstrap/Button';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
-
-const divStyle = {
-  align: 'center',
-  verticalAlign: 'middle',
-  backgroundColor: "#00bcd4",
+const containerStyle = {
+  color:'white'
   // borderBottom: ' 1px solid #00acc1'
+};
+
+const navStyle = {
+  backgroundColor: "#ff8a80",
+  color:'#FFFFFF'
+  // borderBottom: ' 1px solid #00acc1'
+};
+
+const dropStyle = {
+  // backgroundColor: "#ffcdd2",
 };
 
 class Header extends Component {
   render() {
     const authToken = localStorage.getItem(AUTH_TOKEN)
     return (
-      <div>
-        <Navbar style={divStyle}>
-          <Navbar.Brand href="/">Home</Navbar.Brand>
+      <div style={containerStyle}>
+        <Navbar style={navStyle}>
+          <Navbar.Brand href="/">LOGO</Navbar.Brand>
           {authToken && (
-            <Nav className="mr-auto">
-              <NavDropdown title="Payable" id="basic-nav-dropdown">
-                <NavDropdown.Item href="/createvendor">Vendor</NavDropdown.Item>
-                <NavDropdown.Item href="/vendor">Vendor List</NavDropdown.Item>
-                <NavDropdown.Item href="/createbill">Bill</NavDropdown.Item>
-                <NavDropdown.Item href="/bill">Bill List</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Reports</NavDropdown.Item>
+            <Nav className="mr-auto" >
+              <NavDropdown title="Payable" id="basic-nav-dropdown" >
+                <NavDropdown.Item style={dropStyle} href="/createvendor">Vendor</NavDropdown.Item>
+                <NavDropdown.Item style={dropStyle} href="/vendor">Vendor List</NavDropdown.Item>
+                <NavDropdown.Item style={dropStyle} href="/createbill">Bill</NavDropdown.Item>
+                <NavDropdown.Item style={dropStyle} href="/bill">Bill List</NavDropdown.Item>
+                <NavDropdown.Item style={dropStyle} href="#action/3.3">Reports</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="/searchbills">Search</NavDropdown.Item>
+                <NavDropdown.Item style={dropStyle} href="/searchbills">Search</NavDropdown.Item>
               </NavDropdown>
               <NavDropdown title="Receivable" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/createcustomer">Customer</NavDropdown.Item>
@@ -52,7 +60,7 @@ class Header extends Component {
           )}
         <div className="flex flex-fixed">
           {authToken ? (
-            <div
+            <Button variant="light"
               className="ml1 pointer black"
               onClick={() => {
                 localStorage.removeItem(AUTH_TOKEN)
@@ -60,7 +68,7 @@ class Header extends Component {
               }}
               >
               Logout
-            </div>
+            </Button>
           ) : (
             <Link to="/login" className="ml1 no-underline black">
               Login
