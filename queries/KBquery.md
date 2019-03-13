@@ -1,3 +1,39 @@
+Signup:
+
+mutation {
+  signup(
+    name: "Alice"
+    email: "alice@prisma.io"
+    password: "graphql"
+  ) {
+    token
+    user {
+      id
+    }
+  }
+}
+
+Token:
+
+{
+  "Authorization": "Bearer __TOKEN__"
+}
+
+Login user:
+
+mutation {
+  login(
+    email: "alice@prisma.io"
+    password: "graphql"
+  ) {
+    token
+    user {
+      email
+    }
+  }
+}
+
+
 Add Vendor:
 
 mutation {
