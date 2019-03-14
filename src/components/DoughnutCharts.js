@@ -4,21 +4,27 @@ import {Doughnut} from 'react-chartjs-2'
 
 const data = {
 	labels: [
-		'Adobe',
-		'Starbucks',
+		'Nokia',
+		'State Farm',
+		'Oregon Tax Board',
+		'Staples',
 		'Other'
 	],
 	datasets: [{
-		data: [300, 50, 100],
+		data: [500, 500, 1000, 700, 1200],
 		backgroundColor: [
 		'#4056A1',
 		'#EFE2BA',
-		'#F13C20'
+		'#F13C20',
+		'#F3D250',
+		'#90CCF4'
 		],
 		hoverBackgroundColor: [
     '#D79922',
 		'#C5CBE3',
-		'#FFCE56'
+		'#FFCE56',
+		'#5DA2D5',
+		'#F78888'
 		]
 	}]
 };

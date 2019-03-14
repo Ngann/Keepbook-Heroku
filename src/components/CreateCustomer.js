@@ -55,7 +55,7 @@ class CreateCustomer extends Component {
         mutation={CREATECUSTOMER_MUTATION}
         variables={{ name, contact }}
         >
-          {createCustomerMutation => <Button variant="info" onClick={createCustomerMutation}>Submit</Button>}
+          {createCustomerMutation => <Button variant="secondary" onClick={createCustomerMutation}>Submit</Button>}
         </Mutation>
         <Button variant="danger" onClick={this.props.history.goBack}>
           Cancel

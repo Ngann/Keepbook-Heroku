@@ -5,11 +5,11 @@ const data = {
   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
   datasets: [
     {
-      label: 'My first datasets',
+      label: 'Revenue',
       fill: false,
       lineTension: 0.1,
       backgroundColor: 'rgba(75,192,192,0.4)',
-      borderColor: 'rgba(75,192,192,1)',
+      borderColor: '#F13C20',
       borderCapStyle: 'butt',
       borderDash: [],
       borderDashOffset: 0.0,

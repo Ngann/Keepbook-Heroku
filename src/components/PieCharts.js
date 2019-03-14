@@ -3,8 +3,8 @@ import {Pie} from 'react-chartjs-2';
 
 const data = {
 	labels: [
-		'Bills',
-		'Invoices',
+		'Expense',
+		'Revenue',
 	],
 	datasets: [{
 		data: [300, 50],
@@ -27,12 +27,12 @@ const containerStyle = {
 };
 
 class PieCharts extends Component {
-  displayName: 'Bills and Invoices'
+  displayName: 'Revenue and Expense'
 
   render() {
     return (
       <div style={containerStyle}>
-        <h2>Bills and Invoices</h2>
+        <h2>Revenue and Expense</h2>
         <Pie data={data} />
       </div>
     );

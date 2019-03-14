@@ -33,7 +33,6 @@ class Header extends Component {
             src={logo}
             width="80"
             height="50"
-            // className="d-inline-block align-top"
           />
           </Navbar.Brand>
           {authToken && (

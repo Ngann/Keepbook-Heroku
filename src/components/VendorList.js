@@ -90,9 +90,9 @@ render() {
                   <td>{vendor.name}</td>
                   <td>{vendor.contact}</td>
                   <td>
-                  <Button variant="primary" onClick={this.handleShow}>
+                  <Button variant="secondary" onClick={this.handleShow}>
                   Edit
-                  </Button>| <Mutation
+                  </Button> | <Mutation
                   mutation={DELETEVENDOR_MUTATION}
                   variables={{ id: vendor.id }}
                   >

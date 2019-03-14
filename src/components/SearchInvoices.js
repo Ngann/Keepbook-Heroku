@@ -21,7 +21,8 @@ const INVOICE_SEARCH_QUERY = gql`
 `
 const containerStyle = {
   marginTop: '10%',
-  backgroundColor: '#FDFFFC'
+  backgroundColor: '#FDFFFC',
+  align: 'center'
 };
 
 

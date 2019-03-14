@@ -6,7 +6,7 @@ class Bill extends Component {
     return (
       <div>
         <div>
-          {this.props.bill.vendor} ({this.props.bill.amount})
+          {this.props.bill.vendor} {this.props.bill.date} {this.props.bill.account} {this.props.bill.amount} 
         </div>
       </div>
     )

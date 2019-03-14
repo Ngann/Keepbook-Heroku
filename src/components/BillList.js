@@ -98,13 +98,13 @@ render() {
                   <td>{bill.account}</td>
                   <td>{bill.amount}</td>
                   <td>
-                  <Button variant="link" onClick={this.handleShow}>
+                  <Button variant="secondary" onClick={this.handleShow}>
                   Edit
                   </Button>| <Mutation
                   mutation={DELETEBILL_MUTATION}
                   variables={{ id: bill.id }}
                   >
-                  {deleteBillMutation => <Button variant="link" onClick={deleteBillMutation}>Delete</Button>}
+                  {deleteBillMutation => <Button variant="danger" onClick={deleteBillMutation}>Delete</Button>}
                   </Mutation></td>
                 </tr>
               </tbody>

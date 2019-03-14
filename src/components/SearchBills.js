@@ -21,7 +21,8 @@ const BILL_SEARCH_QUERY = gql`
 `
 const containerStyle = {
   marginTop: '10%',
-  backgroundColor: '#FDFFFC'
+  backgroundColor: '#FDFFFC',
+  padding: '0 0 20% 20%'
 };
 
 class SearchBills extends Component {
