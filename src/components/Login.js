@@ -84,7 +84,7 @@ class Login extends Component {
                       width="160"
                       height="80"
                       className="d-inline-block align-center"
-                      alt=" Login"
+                      alt="Login"
                     /> : 'Sign Up'}
                   </h3>
                 </MDBCardHeader>

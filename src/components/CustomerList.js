@@ -77,32 +77,32 @@ render() {
         <div className="container" style={containerStyle}>
           <Table striped bordered hover size="sm">
           <thead>
-          <tr>
-          <th>Customer Name</th>
-          <th>Contact</th>
-          <th>Action</th>
-          </tr>
+            <tr>
+              <th>Customer Name</th>
+              <th>Contact</th>
+              <th>Action</th>
+            </tr>
           </thead>
           {customersToRender.map(customer => (
             <Fragment key={customer.id} >
               <tbody>
-                  <tr>
-                    <td>{customer.name}</td>
-                    <td>{customer.contact}</td>
-                    <td>
-                    <Button variant="primary" onClick={this.handleShow}>
-                    Edit
-                    </Button>| <Mutation
-                    mutation={DELETECUSTOMER_MUTATION}
-                    variables={{ id: customer.id }}
-                    >
-                    {deleteCustomerMutation => <Button variant="danger" onClick={deleteCustomerMutation}>Delete</Button>}
-                    </Mutation></td>
-                  </tr>
+                <tr>
+                  <td>{customer.name}</td>
+                  <td>{customer.contact}</td>
+                  <td>
+                  <Button variant="primary" onClick={this.handleShow}>
+                  Edit
+                  </Button>| <Mutation
+                  mutation={DELETECUSTOMER_MUTATION}
+                  variables={{ id: customer.id }}
+                  >
+                  {deleteCustomerMutation => <Button variant="danger" onClick={deleteCustomerMutation}>Delete</Button>}
+                  </Mutation></td>
+                </tr>
               </tbody>
               <Modal show={this.state.show} onHide={this.handleClose} >
                 <Modal.Header closeButton>
-                  <Modal.Title>Customer: {customer.name}</Modal.Title>
+                <Modal.Title>Customer: {customer.name}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                   <form className="flex flex-column mt3">

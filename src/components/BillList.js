@@ -36,7 +36,7 @@ mutation UpdateBillMutation($id: ID!, $vendor: String!, $date:String!, $account:
 `
 const containerStyle = {
   marginTop: '10%',
-  // backgroundColor: '#FDFFFC'
+  backgroundColor: '#FDFFFC'
 };
 
 class BillList extends Component {constructor(props, context) {
