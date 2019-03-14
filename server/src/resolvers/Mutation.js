@@ -2,13 +2,6 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { APP_SECRET, getUserId } = require('../utils')
 
-function post(parent, args, context) {
-  return context.prisma.createLink({
-    url: args.url,
-    description: args.description,
-  })
-}
-
 function addVendor(parent, args, context) {
   return context.prisma.createVendor({
     name: args.name,
@@ -154,42 +147,15 @@ async function vote(parent, args, context) {
   })
 }
 
-
-function createDraft(parent, { title, text }, ctx, info) {
-  return ctx.db.mutation.createPost(
-    { data: { title, text, isPublished: false } },
-    info,
-  )
-}
-
-function deletePost(parent, { id }, ctx, info) {
-  return ctx.db.mutation.deletePost({where: { id } }, info)
-}
-
-function publish(parent, { id }, ctx, info) {
-  return ctx.db.mutation.updatePost(
-    {
-      where: { id },
-      data: { isPublished: true },
-    },
-    info,
-  )
-}
-
 module.exports = {
-  post,
   signup,
   login,
-  vote,
   addVendor,
   createCustomer,
   updateCustomer,
   deleteCustomer,
   deleteVendor,
   updateVendor,
-  createDraft,
-  deletePost,
-  publish,
   createBill,
   updateBill,
   deleteBill,

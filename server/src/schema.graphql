@@ -1,8 +1,6 @@
 scalar DateTime
 
 type Query {
-  info: String!
-  feed(filter: String, skip: Int, first: Int, orderBy: LinkOrderByInput): Feed!
   searchBills(filter: String, skip: Int, first: Int, orderBy: LinkOrderByInput): SearchBills!
   searchInvoices(filter: String, skip: Int, first: Int, orderBy: LinkOrderByInput): SearchInvoices!
   vendors: [Vendor!]!
@@ -11,11 +9,6 @@ type Query {
   customers: [Customer!]!
   getCustomer(id: ID!): Customer
   getVendor(id: ID!): Vendor
-
-  bfeed: [Post!]!
-  drafts: [Post!]!
-  post(id: ID!): Post
-
 }
 
 enum LinkOrderByInput {
@@ -25,11 +18,6 @@ enum LinkOrderByInput {
   url_DESC
   createdAt_ASC
   createdAt_DESC
-}
-
-type Feed {
-  links: [Link!]!
-  count: Int!
 }
 
 type SearchBills {
@@ -42,26 +30,17 @@ type SearchInvoices {
   count: Int!
 }
 
-type Veed {
-  vendors: [Vendor!]!
-  count: Int!
-}
-
 type Mutation {
-  post(url: String!, description: String!): Link!
   addVendor(name: String!, contact: String!): Vendor!
   updateVendor(id: ID!, name:String! , contact: String!):Vendor
   deleteVendor(id: ID!): Vendor
+
   signup(email: String!, password: String!, name: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
-  vote(linkId: ID!): Vote!
+
   createCustomer(name: String!, contact: String!): Customer
   updateCustomer(id: ID!, name: String!, contact: String!): Customer
   deleteCustomer(id: ID!): Customer
-
-  createDraft(title: String!, text: String): Post
-  deletePost(id: ID!): Post
-  publish(id: ID!): Post
 
   createBill(vendor: String!, date: String!, account: String!, amount: Int!): Bill
   updateBill(id:ID!, vendor: String!, date: String!, account: String!, amount: Int!): Bill
@@ -73,8 +52,6 @@ type Mutation {
 }
 
 type Subscription {
-  newLink: Link
-  newVote: Vote
   customerAdded: Customer
   customerEdited: Customer
   customerDeleted: Customer
@@ -90,24 +67,8 @@ type User {
   id: ID!
   name: String!
   email: String!
-  links: [Link!]!
   vendors: [Vendor!]!
   customers: [Customer!]!
-}
-
-type Link {
-  id: ID!
-  createdAt: DateTime!
-  description: String!
-  url: String!
-  postedBy: User
-  votes: [Vote!]!
-}
-
-type Vote {
-  id: ID!
-  link: Link!
-  user: User!
 }
 
 type Vendor {
@@ -116,11 +77,6 @@ type Vendor {
   name: String!
   contact: String!
   postedBy: User
-}
-
-type VendorInput {
-  name: String!
-  contact: String!
 }
 
 type Customer {
@@ -147,11 +103,4 @@ type Invoice {
   account: String!
   amount: Int!
   postedBy: User
-}
-
-type Post {
-  id: ID!
-  isPublished: Boolean!
-  title: String!
-  text: String!
 }

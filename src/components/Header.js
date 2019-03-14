@@ -50,11 +50,9 @@ class Header extends Component {
               </NavDropdown>
               <NavDropdown title="Dashboard" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/chart">Charts</NavDropdown.Item>
-                <NavDropdown.Item href="/news">News</NavDropdown.Item>
-                <NavDropdown.Item href="/Search">...</NavDropdown.Item>
-                <NavDropdown.Item href="/create">Form</NavDropdown.Item>
+                <NavDropdown.Item href="/report">Reports</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="/search">Search</NavDropdown.Item>
+                <NavDropdown.Item href="/globalsearch">Search</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           )}

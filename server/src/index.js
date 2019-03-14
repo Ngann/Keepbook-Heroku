@@ -4,11 +4,8 @@ const Query = require('./resolvers/Query')
 const Mutation = require('./resolvers/Mutation')
 const Subscription = require('./resolvers/Subscription')
 const User = require('./resolvers/User')
-const Link = require('./resolvers/Link')
-const Vote = require('./resolvers/Vote')
 const Vendor = require('./resolvers/Vendor')
 const Customer = require('./resolvers/Customer')
-const Post = require('./resolvers/Post')
 const Bill = require('./resolvers/Bill')
 const Invoice = require('./resolvers/Invoice')
 
@@ -17,11 +14,8 @@ const resolvers = {
   Mutation,
   Subscription,
   User,
-  Link,
-  Vote,
   Vendor,
   Customer,
-  Post,
   Bill,
   Invoice,
 }

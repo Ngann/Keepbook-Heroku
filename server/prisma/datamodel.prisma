@@ -1,19 +1,8 @@
-type Link {
-  id: ID! @unique
-  createdAt: DateTime!
-  description: String!
-  url: String!
-  postedBy: User
-  votes: [Vote!]!
-}
-
 type User {
   id: ID! @unique
   name: String!
   email: String! @unique
   password: String!
-  links: [Link!]!
-  votes: [Vote!]!
   vendors: [Vendor!]!
   customers: [Customer!]!
 }
@@ -56,11 +45,4 @@ type Invoice {
   account: String!
   amount: Int!
   postedBy: User
-}
-
-type Post {
-  id: ID! @unique
-  isPublished: Boolean!
-  title: String!
-  text: String!
 }
