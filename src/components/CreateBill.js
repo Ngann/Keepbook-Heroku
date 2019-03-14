@@ -41,7 +41,7 @@ class CreateBill extends Component {
             value={vendor}
             onChange={e => this.setState({ vendor: e.target.value })}
             type="text"
-            placeholder="A vendor"
+            placeholder="name"
           />
         </Form.Group>
         <Form.Group controlId="formBasicDate">

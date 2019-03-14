@@ -21,8 +21,21 @@ const BILL_SEARCH_QUERY = gql`
 `
 const containerStyle = {
   marginTop: '10%',
-  backgroundColor: '#FDFFFC',
-  padding: '0 0 20% 20%'
+  // backgroundColor: '#DDFFFC',
+  padding: '0 20% 0 20%'
+};
+
+const titleStyle = {
+  marginTop: '3%',
+  padding: '0 20% 0 20%'
+  // backgroundColor: '#FDFFCC',
+  // padding: '20% 20% 20% 20%',
+};
+
+const searchStyle = {
+  marginTop: '3%',
+  // backgroundColor: '#FDFFDD',
+  padding: '0 20% 5% 20%'
 };
 
 class SearchBills extends Component {
@@ -34,7 +47,8 @@ class SearchBills extends Component {
   render() {
     return (
       <div className="container" style={containerStyle}>
-        <Form inline>
+        <h2 style={titleStyle}>Search Payable</h2>
+        <Form inline style={searchStyle}>
           <FormControl type="text" placeholder="Search" className="mr-sm-2"   onChange={e => this.setState({ filter: e.target.value })}/>
           <Button variant="outline-primary" onClick={() => this._executeSearch()}>Search</Button>
         </Form>
