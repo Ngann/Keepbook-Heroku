@@ -5,6 +5,7 @@ import gql from 'graphql-tag'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
+import logo from '../assets/images/logo.png'
 import {
   MDBContainer,
   MDBRow,
@@ -77,7 +78,14 @@ class Login extends Component {
               <MDBCardBody >
                 <MDBCardHeader  className="form-header warm-flame-gradient rounded">
                   <h3 className="my-3" >
-                    <MDBIcon  icon="lock" />{login ? 'Login' : 'Sign Up'}
+
+                    <MDBIcon  icon="lock" />{login ? <img
+                      src={logo}
+                      width="160"
+                      height="80"
+                      className="d-inline-block align-center"
+                      alt=" Login"
+                    /> : 'Sign Up'}
                   </h3>
                 </MDBCardHeader>
                 {!login && (
