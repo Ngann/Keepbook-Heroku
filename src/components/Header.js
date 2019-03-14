@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { AUTH_TOKEN } from '../constants'
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import Button from 'react-bootstrap/Button';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+import Button from 'react-bootstrap/Button'
+import NavDropdown from 'react-bootstrap/NavDropdown'
+import logo from '../assets/images/logo.png'
 
 const containerStyle = {
   color:'white'
@@ -27,7 +28,14 @@ class Header extends Component {
     return (
       <div style={containerStyle}>
         <Navbar style={navStyle}>
-          <Navbar.Brand href="/">LOGO</Navbar.Brand>
+        <Navbar.Brand href="#home">
+          <img
+            src={logo}
+            width="80"
+            height="50"
+            // className="d-inline-block align-top"
+          />
+          </Navbar.Brand>
           {authToken && (
             <Nav className="mr-auto" >
               <NavDropdown title="Payable" id="basic-nav-dropdown" >
