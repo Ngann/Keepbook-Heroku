@@ -47,7 +47,7 @@ class CreateVendor extends Component {
             value={name}
             onChange={e => this.setState({ name: e.target.value })}
             type="text"
-            placeholder="A name"
+            placeholder=""
           />
         </Form.Group>
         <Form.Group controlId="formBasicContact">
@@ -57,7 +57,7 @@ class CreateVendor extends Component {
             value={contact}
             onChange={e => this.setState({ contact: e.target.value })}
             type="text"
-            placeholder="contact"
+            placeholder=""
           />
         </Form.Group>
         <Form.Group controlId="formBasicContact">
@@ -67,7 +67,7 @@ class CreateVendor extends Component {
             value={address}
             onChange={e => this.setState({ address: e.target.value })}
             type="text"
-            placeholder="contact"
+            placeholder=""
           />
         </Form.Group>
         <Form.Group controlId="formBasicContact">
@@ -77,7 +77,7 @@ class CreateVendor extends Component {
             value={addressTwo}
             onChange={e => this.setState({ addressTwo: e.target.value })}
             type="text"
-            placeholder="contact"
+            placeholder=""
           />
         </Form.Group>
         <Form.Group controlId="formBasicContact">
@@ -87,7 +87,7 @@ class CreateVendor extends Component {
             value={city}
             onChange={e => this.setState({ city: e.target.value })}
             type="text"
-            placeholder="contact"
+            placeholder=""
           />
         </Form.Group>
         <Form.Group controlId="formBasicContact">
@@ -97,7 +97,7 @@ class CreateVendor extends Component {
             value={state}
             onChange={e => this.setState({ state: e.target.value })}
             type="text"
-            placeholder="contact"
+            placeholder=""
           />
         </Form.Group>
         <Form.Group controlId="formBasicContact">
@@ -107,7 +107,7 @@ class CreateVendor extends Component {
             value={country}
             onChange={e => this.setState({ country: e.target.value })}
             type="text"
-            placeholder="contact"
+            placeholder=""
           />
         </Form.Group>
         <Mutation
