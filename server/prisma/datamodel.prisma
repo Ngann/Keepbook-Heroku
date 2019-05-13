@@ -1,5 +1,5 @@
 type User {
-  id: ID! @unique
+  id: ID! @id
   name: String!
   email: String! @unique
   password: String!
@@ -7,30 +7,24 @@ type User {
   customers: [Customer!]!
 }
 
-type Vote {
-  id: ID! @unique
-  link: Link!
-  user: User!
-}
-
 type Vendor {
-  id: ID! @unique
-  createdAt: DateTime!
+  id: ID! @id
+  createdAt: DateTime! @createdAt
   name: String!
   contact: String!
   postedBy: User
 }
 
 type Customer {
-  id: ID! @unique
-  createdAt: DateTime!
+  id: ID! @id
+  createdAt: DateTime! @createdAt
   name: String!
   contact: String!
   postedBy: User
 }
 
 type Bill {
-  id: ID! @unique
+  id: ID! @id
   vendor: String!
   date: String!
   account: String!
@@ -39,7 +33,7 @@ type Bill {
 }
 
 type Invoice {
-  id: ID! @unique
+  id: ID! @id
   customer: String!
   date: String!
   account: String!
