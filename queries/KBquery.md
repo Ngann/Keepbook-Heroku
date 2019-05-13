@@ -50,7 +50,11 @@ query {
     id
     name
     contact
+    address
     createdAt
+    postedBy {
+      name
+    }
   }
 }
 

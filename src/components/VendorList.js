@@ -11,6 +11,11 @@ const VENDORS_QUERY = gql`
     id
     name
     contact
+    address
+    addressTwo
+    city
+    state
+    country
     createdAt
   }
 }
@@ -80,6 +85,9 @@ render() {
             <tr>
               <th>Vendor Name</th>
               <th>Contact</th>
+              <th>Address</th>
+              <th>City</th>
+              <th>State</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -89,6 +97,9 @@ render() {
                 <tr>
                   <td>{vendor.name}</td>
                   <td>{vendor.contact}</td>
+                  <td>{vendor.address}</td>
+                  <td>{vendor.city}</td>
+                  <td>{vendor.state}</td>
                   <td>
                   <Button variant="secondary" onClick={this.handleShow}>
                   Edit
