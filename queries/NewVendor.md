@@ -174,7 +174,7 @@ ngans-mbp:server ngan$
 ```
 
 ## Update Vendor Schema
-1. `server/src/schema.graphql` add new fields
+1. `server/src/schema.graphql` and `server/prisma/datamodel.prisma` add new fields
     ```
     type Vendor {
       id: ID!
