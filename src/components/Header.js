@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link , withRouter } from 'react-router-dom'
 import { AUTH_TOKEN } from '../constants'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
@@ -23,6 +23,7 @@ const dropStyle = {
 };
 
 class Header extends Component {
+
   render() {
     const authToken = localStorage.getItem(AUTH_TOKEN)
     return (
@@ -69,7 +70,7 @@ class Header extends Component {
               className="ml1 pointer black"
               onClick={() => {
                 localStorage.removeItem(AUTH_TOKEN)
-                this.props.history.push(`/`)
+                this.props.history.push(`/login`)
               }}
               >
               Logout
@@ -86,4 +87,4 @@ class Header extends Component {
   }
 }
 
-export default Header
+export default withRouter(Header)
