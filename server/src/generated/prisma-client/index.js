@@ -40,6 +40,6 @@ var models = [
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
   typeDefs,
   models,
-  endpoint: `https://eu1.prisma.sh/ngan-nguyen-13344c/graphql-js/dev`
+  endpoint: ``
 });
 exports.prisma = new exports.Prisma();
