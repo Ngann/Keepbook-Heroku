@@ -29,6 +29,8 @@ type BatchPayload {
 
 type Bill {
   id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
   vendor: String!
   date: String!
   account: String!
@@ -59,6 +61,10 @@ type BillEdge {
 enum BillOrderByInput {
   id_ASC
   id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
   vendor_ASC
   vendor_DESC
   date_ASC
@@ -71,6 +77,8 @@ enum BillOrderByInput {
 
 type BillPreviousValues {
   id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
   vendor: String!
   date: String!
   account: String!
@@ -125,6 +133,22 @@ input BillWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   vendor: String
   vendor_not: String
   vendor_in: [String!]
@@ -188,6 +212,7 @@ input BillWhereUniqueInput {
 type Customer {
   id: ID!
   createdAt: DateTime!
+  updatedAt: DateTime!
   name: String!
   contact: String!
   postedBy: User
@@ -227,6 +252,8 @@ enum CustomerOrderByInput {
   id_DESC
   createdAt_ASC
   createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
   name_ASC
   name_DESC
   contact_ASC
@@ -236,6 +263,7 @@ enum CustomerOrderByInput {
 type CustomerPreviousValues {
   id: ID!
   createdAt: DateTime!
+  updatedAt: DateTime!
   name: String!
   contact: String!
 }
@@ -263,6 +291,14 @@ input CustomerScalarWhereInput {
   createdAt_lte: DateTime
   createdAt_gt: DateTime
   createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   name: String
   name_not: String
   name_in: [String!]
@@ -386,6 +422,14 @@ input CustomerWhereInput {
   createdAt_lte: DateTime
   createdAt_gt: DateTime
   createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   name: String
   name_not: String
   name_in: [String!]
@@ -428,6 +472,8 @@ scalar DateTime
 
 type Invoice {
   id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
   customer: String!
   date: String!
   account: String!
@@ -458,6 +504,10 @@ type InvoiceEdge {
 enum InvoiceOrderByInput {
   id_ASC
   id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
   customer_ASC
   customer_DESC
   date_ASC
@@ -470,6 +520,8 @@ enum InvoiceOrderByInput {
 
 type InvoicePreviousValues {
   id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
   customer: String!
   date: String!
   account: String!
@@ -524,6 +576,22 @@ input InvoiceWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   customer: String
   customer_not: String
   customer_in: [String!]
@@ -665,6 +733,8 @@ type Subscription {
 
 type User {
   id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
   name: String!
   email: String!
   password: String!
@@ -726,6 +796,10 @@ type UserEdge {
 enum UserOrderByInput {
   id_ASC
   id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
   name_ASC
   name_DESC
   email_ASC
@@ -736,6 +810,8 @@ enum UserOrderByInput {
 
 type UserPreviousValues {
   id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
   name: String!
   email: String!
   password: String!
@@ -852,6 +928,22 @@ input UserWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   name: String
   name_not: String
   name_in: [String!]
@@ -913,6 +1005,7 @@ input UserWhereUniqueInput {
 type Vendor {
   id: ID!
   createdAt: DateTime!
+  updatedAt: DateTime!
   name: String!
   contact: String!
   address: String!
@@ -967,6 +1060,8 @@ enum VendorOrderByInput {
   id_DESC
   createdAt_ASC
   createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
   name_ASC
   name_DESC
   contact_ASC
@@ -986,6 +1081,7 @@ enum VendorOrderByInput {
 type VendorPreviousValues {
   id: ID!
   createdAt: DateTime!
+  updatedAt: DateTime!
   name: String!
   contact: String!
   address: String!
@@ -1018,6 +1114,14 @@ input VendorScalarWhereInput {
   createdAt_lte: DateTime
   createdAt_gt: DateTime
   createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   name: String
   name_not: String
   name_in: [String!]
@@ -1231,6 +1335,14 @@ input VendorWhereInput {
   createdAt_lte: DateTime
   createdAt_gt: DateTime
   createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   name: String
   name_not: String
   name_in: [String!]

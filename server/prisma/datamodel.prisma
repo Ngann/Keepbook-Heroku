@@ -1,5 +1,7 @@
 type User {
   id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
   name: String!
   email: String! @unique
   password: String!
@@ -10,6 +12,7 @@ type User {
 type Vendor {
   id: ID! @id
   createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
   name: String!
   contact: String!
   address: String!
@@ -23,6 +26,7 @@ type Vendor {
 type Customer {
   id: ID! @id
   createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
   name: String!
   contact: String!
   postedBy: User
@@ -30,6 +34,8 @@ type Customer {
 
 type Bill {
   id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
   vendor: String!
   date: String!
   account: String!
@@ -39,6 +45,8 @@ type Bill {
 
 type Invoice {
   id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
   customer: String!
   date: String!
   account: String!
