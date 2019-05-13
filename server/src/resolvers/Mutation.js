@@ -2,12 +2,12 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { APP_SECRET, getUserId } = require('../utils')
 
-function addVendor(parent, args, context) {
-  const userId = getUserId
+function addVendor(parent, args, context, info) {
+  const userId = getUserId(context)
   return context.prisma.createVendor({
     name: args.name,
     contact: args.contact,
-    postedBy:{ connect: { id: userId}},
+    postedBy: { connect: { id: userId } },
   })
 }
 
