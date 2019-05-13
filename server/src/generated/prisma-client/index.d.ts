@@ -267,7 +267,15 @@ export type VendorOrderByInput =
   | "contact_ASC"
   | "contact_DESC"
   | "address_ASC"
-  | "address_DESC";
+  | "address_DESC"
+  | "addressTwo_ASC"
+  | "addressTwo_DESC"
+  | "city_ASC"
+  | "city_DESC"
+  | "state_ASC"
+  | "state_DESC"
+  | "country_ASC"
+  | "country_DESC";
 
 export type CustomerOrderByInput =
   | "id_ASC"
@@ -384,6 +392,62 @@ export interface VendorWhereInput {
   address_not_starts_with?: Maybe<String>;
   address_ends_with?: Maybe<String>;
   address_not_ends_with?: Maybe<String>;
+  addressTwo?: Maybe<String>;
+  addressTwo_not?: Maybe<String>;
+  addressTwo_in?: Maybe<String[] | String>;
+  addressTwo_not_in?: Maybe<String[] | String>;
+  addressTwo_lt?: Maybe<String>;
+  addressTwo_lte?: Maybe<String>;
+  addressTwo_gt?: Maybe<String>;
+  addressTwo_gte?: Maybe<String>;
+  addressTwo_contains?: Maybe<String>;
+  addressTwo_not_contains?: Maybe<String>;
+  addressTwo_starts_with?: Maybe<String>;
+  addressTwo_not_starts_with?: Maybe<String>;
+  addressTwo_ends_with?: Maybe<String>;
+  addressTwo_not_ends_with?: Maybe<String>;
+  city?: Maybe<String>;
+  city_not?: Maybe<String>;
+  city_in?: Maybe<String[] | String>;
+  city_not_in?: Maybe<String[] | String>;
+  city_lt?: Maybe<String>;
+  city_lte?: Maybe<String>;
+  city_gt?: Maybe<String>;
+  city_gte?: Maybe<String>;
+  city_contains?: Maybe<String>;
+  city_not_contains?: Maybe<String>;
+  city_starts_with?: Maybe<String>;
+  city_not_starts_with?: Maybe<String>;
+  city_ends_with?: Maybe<String>;
+  city_not_ends_with?: Maybe<String>;
+  state?: Maybe<String>;
+  state_not?: Maybe<String>;
+  state_in?: Maybe<String[] | String>;
+  state_not_in?: Maybe<String[] | String>;
+  state_lt?: Maybe<String>;
+  state_lte?: Maybe<String>;
+  state_gt?: Maybe<String>;
+  state_gte?: Maybe<String>;
+  state_contains?: Maybe<String>;
+  state_not_contains?: Maybe<String>;
+  state_starts_with?: Maybe<String>;
+  state_not_starts_with?: Maybe<String>;
+  state_ends_with?: Maybe<String>;
+  state_not_ends_with?: Maybe<String>;
+  country?: Maybe<String>;
+  country_not?: Maybe<String>;
+  country_in?: Maybe<String[] | String>;
+  country_not_in?: Maybe<String[] | String>;
+  country_lt?: Maybe<String>;
+  country_lte?: Maybe<String>;
+  country_gt?: Maybe<String>;
+  country_gte?: Maybe<String>;
+  country_contains?: Maybe<String>;
+  country_not_contains?: Maybe<String>;
+  country_starts_with?: Maybe<String>;
+  country_not_starts_with?: Maybe<String>;
+  country_ends_with?: Maybe<String>;
+  country_not_ends_with?: Maybe<String>;
   postedBy?: Maybe<UserWhereInput>;
   AND?: Maybe<VendorWhereInput[] | VendorWhereInput>;
   OR?: Maybe<VendorWhereInput[] | VendorWhereInput>;
@@ -709,6 +773,10 @@ export interface VendorCreateWithoutPostedByInput {
   name: String;
   contact: String;
   address: String;
+  addressTwo: String;
+  city: String;
+  state: String;
+  country: String;
 }
 
 export interface CustomerCreateManyWithoutPostedByInput {
@@ -781,6 +849,10 @@ export interface VendorUpdateWithoutPostedByDataInput {
   name?: Maybe<String>;
   contact?: Maybe<String>;
   address?: Maybe<String>;
+  addressTwo?: Maybe<String>;
+  city?: Maybe<String>;
+  state?: Maybe<String>;
+  country?: Maybe<String>;
 }
 
 export interface VendorUpsertWithWhereUniqueWithoutPostedByInput {
@@ -854,6 +926,62 @@ export interface VendorScalarWhereInput {
   address_not_starts_with?: Maybe<String>;
   address_ends_with?: Maybe<String>;
   address_not_ends_with?: Maybe<String>;
+  addressTwo?: Maybe<String>;
+  addressTwo_not?: Maybe<String>;
+  addressTwo_in?: Maybe<String[] | String>;
+  addressTwo_not_in?: Maybe<String[] | String>;
+  addressTwo_lt?: Maybe<String>;
+  addressTwo_lte?: Maybe<String>;
+  addressTwo_gt?: Maybe<String>;
+  addressTwo_gte?: Maybe<String>;
+  addressTwo_contains?: Maybe<String>;
+  addressTwo_not_contains?: Maybe<String>;
+  addressTwo_starts_with?: Maybe<String>;
+  addressTwo_not_starts_with?: Maybe<String>;
+  addressTwo_ends_with?: Maybe<String>;
+  addressTwo_not_ends_with?: Maybe<String>;
+  city?: Maybe<String>;
+  city_not?: Maybe<String>;
+  city_in?: Maybe<String[] | String>;
+  city_not_in?: Maybe<String[] | String>;
+  city_lt?: Maybe<String>;
+  city_lte?: Maybe<String>;
+  city_gt?: Maybe<String>;
+  city_gte?: Maybe<String>;
+  city_contains?: Maybe<String>;
+  city_not_contains?: Maybe<String>;
+  city_starts_with?: Maybe<String>;
+  city_not_starts_with?: Maybe<String>;
+  city_ends_with?: Maybe<String>;
+  city_not_ends_with?: Maybe<String>;
+  state?: Maybe<String>;
+  state_not?: Maybe<String>;
+  state_in?: Maybe<String[] | String>;
+  state_not_in?: Maybe<String[] | String>;
+  state_lt?: Maybe<String>;
+  state_lte?: Maybe<String>;
+  state_gt?: Maybe<String>;
+  state_gte?: Maybe<String>;
+  state_contains?: Maybe<String>;
+  state_not_contains?: Maybe<String>;
+  state_starts_with?: Maybe<String>;
+  state_not_starts_with?: Maybe<String>;
+  state_ends_with?: Maybe<String>;
+  state_not_ends_with?: Maybe<String>;
+  country?: Maybe<String>;
+  country_not?: Maybe<String>;
+  country_in?: Maybe<String[] | String>;
+  country_not_in?: Maybe<String[] | String>;
+  country_lt?: Maybe<String>;
+  country_lte?: Maybe<String>;
+  country_gt?: Maybe<String>;
+  country_gte?: Maybe<String>;
+  country_contains?: Maybe<String>;
+  country_not_contains?: Maybe<String>;
+  country_starts_with?: Maybe<String>;
+  country_not_starts_with?: Maybe<String>;
+  country_ends_with?: Maybe<String>;
+  country_not_ends_with?: Maybe<String>;
   AND?: Maybe<VendorScalarWhereInput[] | VendorScalarWhereInput>;
   OR?: Maybe<VendorScalarWhereInput[] | VendorScalarWhereInput>;
   NOT?: Maybe<VendorScalarWhereInput[] | VendorScalarWhereInput>;
@@ -868,6 +996,10 @@ export interface VendorUpdateManyDataInput {
   name?: Maybe<String>;
   contact?: Maybe<String>;
   address?: Maybe<String>;
+  addressTwo?: Maybe<String>;
+  city?: Maybe<String>;
+  state?: Maybe<String>;
+  country?: Maybe<String>;
 }
 
 export interface CustomerUpdateManyWithoutPostedByInput {
@@ -1082,6 +1214,10 @@ export interface VendorCreateInput {
   name: String;
   contact: String;
   address: String;
+  addressTwo: String;
+  city: String;
+  state: String;
+  country: String;
   postedBy?: Maybe<UserCreateOneWithoutVendorsInput>;
 }
 
@@ -1102,6 +1238,10 @@ export interface VendorUpdateInput {
   name?: Maybe<String>;
   contact?: Maybe<String>;
   address?: Maybe<String>;
+  addressTwo?: Maybe<String>;
+  city?: Maybe<String>;
+  state?: Maybe<String>;
+  country?: Maybe<String>;
   postedBy?: Maybe<UserUpdateOneWithoutVendorsInput>;
 }
 
@@ -1130,6 +1270,10 @@ export interface VendorUpdateManyMutationInput {
   name?: Maybe<String>;
   contact?: Maybe<String>;
   address?: Maybe<String>;
+  addressTwo?: Maybe<String>;
+  city?: Maybe<String>;
+  state?: Maybe<String>;
+  country?: Maybe<String>;
 }
 
 export interface BillSubscriptionWhereInput {
@@ -1326,6 +1470,10 @@ export interface Vendor {
   name: String;
   contact: String;
   address: String;
+  addressTwo: String;
+  city: String;
+  state: String;
+  country: String;
 }
 
 export interface VendorPromise extends Promise<Vendor>, Fragmentable {
@@ -1334,6 +1482,10 @@ export interface VendorPromise extends Promise<Vendor>, Fragmentable {
   name: () => Promise<String>;
   contact: () => Promise<String>;
   address: () => Promise<String>;
+  addressTwo: () => Promise<String>;
+  city: () => Promise<String>;
+  state: () => Promise<String>;
+  country: () => Promise<String>;
   postedBy: <T = UserPromise>() => T;
 }
 
@@ -1345,6 +1497,10 @@ export interface VendorSubscription
   name: () => Promise<AsyncIterator<String>>;
   contact: () => Promise<AsyncIterator<String>>;
   address: () => Promise<AsyncIterator<String>>;
+  addressTwo: () => Promise<AsyncIterator<String>>;
+  city: () => Promise<AsyncIterator<String>>;
+  state: () => Promise<AsyncIterator<String>>;
+  country: () => Promise<AsyncIterator<String>>;
   postedBy: <T = UserSubscription>() => T;
 }
 
@@ -1356,6 +1512,10 @@ export interface VendorNullablePromise
   name: () => Promise<String>;
   contact: () => Promise<String>;
   address: () => Promise<String>;
+  addressTwo: () => Promise<String>;
+  city: () => Promise<String>;
+  state: () => Promise<String>;
+  country: () => Promise<String>;
   postedBy: <T = UserPromise>() => T;
 }
 
@@ -1981,6 +2141,10 @@ export interface VendorPreviousValues {
   name: String;
   contact: String;
   address: String;
+  addressTwo: String;
+  city: String;
+  state: String;
+  country: String;
 }
 
 export interface VendorPreviousValuesPromise
@@ -1991,6 +2155,10 @@ export interface VendorPreviousValuesPromise
   name: () => Promise<String>;
   contact: () => Promise<String>;
   address: () => Promise<String>;
+  addressTwo: () => Promise<String>;
+  city: () => Promise<String>;
+  state: () => Promise<String>;
+  country: () => Promise<String>;
 }
 
 export interface VendorPreviousValuesSubscription
@@ -2001,6 +2169,10 @@ export interface VendorPreviousValuesSubscription
   name: () => Promise<AsyncIterator<String>>;
   contact: () => Promise<AsyncIterator<String>>;
   address: () => Promise<AsyncIterator<String>>;
+  addressTwo: () => Promise<AsyncIterator<String>>;
+  city: () => Promise<AsyncIterator<String>>;
+  state: () => Promise<AsyncIterator<String>>;
+  country: () => Promise<AsyncIterator<String>>;
 }
 
 /*

@@ -211,7 +211,7 @@ ngans-mbp:server ngan$
 }
   ```
 3.  `server/prisma/datamodel.prisma` also add this schema here
-5. prisma generate to update the graphQL schema
+5. prisma deploy to update the graphQL schema
 5. yarn start to deploy graphyQl playground
 
 ```
@@ -284,7 +284,7 @@ Resolution: `server/prisma/datamodel.prisma` also add this schema here, see step
 }
 ```
 
-Error:
+Error: Issue was due to using prisma generate instead of deploy. 
 ```
 {
   "data": null,

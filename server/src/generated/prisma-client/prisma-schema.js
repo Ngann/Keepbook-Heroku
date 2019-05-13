@@ -916,6 +916,10 @@ type Vendor {
   name: String!
   contact: String!
   address: String!
+  addressTwo: String!
+  city: String!
+  state: String!
+  country: String!
   postedBy: User
 }
 
@@ -930,6 +934,10 @@ input VendorCreateInput {
   name: String!
   contact: String!
   address: String!
+  addressTwo: String!
+  city: String!
+  state: String!
+  country: String!
   postedBy: UserCreateOneWithoutVendorsInput
 }
 
@@ -943,6 +951,10 @@ input VendorCreateWithoutPostedByInput {
   name: String!
   contact: String!
   address: String!
+  addressTwo: String!
+  city: String!
+  state: String!
+  country: String!
 }
 
 type VendorEdge {
@@ -961,6 +973,14 @@ enum VendorOrderByInput {
   contact_DESC
   address_ASC
   address_DESC
+  addressTwo_ASC
+  addressTwo_DESC
+  city_ASC
+  city_DESC
+  state_ASC
+  state_DESC
+  country_ASC
+  country_DESC
 }
 
 type VendorPreviousValues {
@@ -969,6 +989,10 @@ type VendorPreviousValues {
   name: String!
   contact: String!
   address: String!
+  addressTwo: String!
+  city: String!
+  state: String!
+  country: String!
 }
 
 input VendorScalarWhereInput {
@@ -1036,6 +1060,62 @@ input VendorScalarWhereInput {
   address_not_starts_with: String
   address_ends_with: String
   address_not_ends_with: String
+  addressTwo: String
+  addressTwo_not: String
+  addressTwo_in: [String!]
+  addressTwo_not_in: [String!]
+  addressTwo_lt: String
+  addressTwo_lte: String
+  addressTwo_gt: String
+  addressTwo_gte: String
+  addressTwo_contains: String
+  addressTwo_not_contains: String
+  addressTwo_starts_with: String
+  addressTwo_not_starts_with: String
+  addressTwo_ends_with: String
+  addressTwo_not_ends_with: String
+  city: String
+  city_not: String
+  city_in: [String!]
+  city_not_in: [String!]
+  city_lt: String
+  city_lte: String
+  city_gt: String
+  city_gte: String
+  city_contains: String
+  city_not_contains: String
+  city_starts_with: String
+  city_not_starts_with: String
+  city_ends_with: String
+  city_not_ends_with: String
+  state: String
+  state_not: String
+  state_in: [String!]
+  state_not_in: [String!]
+  state_lt: String
+  state_lte: String
+  state_gt: String
+  state_gte: String
+  state_contains: String
+  state_not_contains: String
+  state_starts_with: String
+  state_not_starts_with: String
+  state_ends_with: String
+  state_not_ends_with: String
+  country: String
+  country_not: String
+  country_in: [String!]
+  country_not_in: [String!]
+  country_lt: String
+  country_lte: String
+  country_gt: String
+  country_gte: String
+  country_contains: String
+  country_not_contains: String
+  country_starts_with: String
+  country_not_starts_with: String
+  country_ends_with: String
+  country_not_ends_with: String
   AND: [VendorScalarWhereInput!]
   OR: [VendorScalarWhereInput!]
   NOT: [VendorScalarWhereInput!]
@@ -1063,6 +1143,10 @@ input VendorUpdateInput {
   name: String
   contact: String
   address: String
+  addressTwo: String
+  city: String
+  state: String
+  country: String
   postedBy: UserUpdateOneWithoutVendorsInput
 }
 
@@ -1070,12 +1154,20 @@ input VendorUpdateManyDataInput {
   name: String
   contact: String
   address: String
+  addressTwo: String
+  city: String
+  state: String
+  country: String
 }
 
 input VendorUpdateManyMutationInput {
   name: String
   contact: String
   address: String
+  addressTwo: String
+  city: String
+  state: String
+  country: String
 }
 
 input VendorUpdateManyWithoutPostedByInput {
@@ -1099,6 +1191,10 @@ input VendorUpdateWithoutPostedByDataInput {
   name: String
   contact: String
   address: String
+  addressTwo: String
+  city: String
+  state: String
+  country: String
 }
 
 input VendorUpdateWithWhereUniqueWithoutPostedByInput {
@@ -1177,6 +1273,62 @@ input VendorWhereInput {
   address_not_starts_with: String
   address_ends_with: String
   address_not_ends_with: String
+  addressTwo: String
+  addressTwo_not: String
+  addressTwo_in: [String!]
+  addressTwo_not_in: [String!]
+  addressTwo_lt: String
+  addressTwo_lte: String
+  addressTwo_gt: String
+  addressTwo_gte: String
+  addressTwo_contains: String
+  addressTwo_not_contains: String
+  addressTwo_starts_with: String
+  addressTwo_not_starts_with: String
+  addressTwo_ends_with: String
+  addressTwo_not_ends_with: String
+  city: String
+  city_not: String
+  city_in: [String!]
+  city_not_in: [String!]
+  city_lt: String
+  city_lte: String
+  city_gt: String
+  city_gte: String
+  city_contains: String
+  city_not_contains: String
+  city_starts_with: String
+  city_not_starts_with: String
+  city_ends_with: String
+  city_not_ends_with: String
+  state: String
+  state_not: String
+  state_in: [String!]
+  state_not_in: [String!]
+  state_lt: String
+  state_lte: String
+  state_gt: String
+  state_gte: String
+  state_contains: String
+  state_not_contains: String
+  state_starts_with: String
+  state_not_starts_with: String
+  state_ends_with: String
+  state_not_ends_with: String
+  country: String
+  country_not: String
+  country_in: [String!]
+  country_not_in: [String!]
+  country_lt: String
+  country_lte: String
+  country_gt: String
+  country_gte: String
+  country_contains: String
+  country_not_contains: String
+  country_starts_with: String
+  country_not_starts_with: String
+  country_ends_with: String
+  country_not_ends_with: String
   postedBy: UserWhereInput
   AND: [VendorWhereInput!]
   OR: [VendorWhereInput!]
