@@ -3,9 +3,11 @@ const jwt = require('jsonwebtoken')
 const { APP_SECRET, getUserId } = require('../utils')
 
 function addVendor(parent, args, context) {
+  const userId = getUserId
   return context.prisma.createVendor({
     name: args.name,
     contact: args.contact,
+    postedBy:{ connect: { id: userId}},
   })
 }
 
