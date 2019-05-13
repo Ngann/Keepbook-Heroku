@@ -76,15 +76,5 @@ _DB setup per schema_
 * React Charts https://github.com/jerairrest/react-chartjs-2
 * React Bootstrap Component
 
-## Research
-_React, Okta, Sqlite3_
-* https://github.com/Ngann/React-Sqlite3.git
-
-_Node, GraphQL , Prism, AWS Aurora_
-* https://github.com/Ngann/hackernews-node.git
-
-_FullStack environment setup: Node, React, AWS Aurora_
-* https://github.com/Ngann/KeepBook-FS.git
-
 ## License
 * This project is licensed under the MIT License - see the LICENSE.md file for details
