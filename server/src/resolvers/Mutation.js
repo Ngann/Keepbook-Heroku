@@ -7,6 +7,12 @@ function addVendor(parent, args, context, info) {
   return context.prisma.createVendor({
     name: args.name,
     contact: args.contact,
+    address: args.address,
+    // addressTwo: args.addressTwo,
+    // city: args.city,
+    // state: args.state,
+    // country: args.country,
+    // phone: args.phone,
     postedBy: { connect: { id: userId } },
   })
 }

@@ -12,6 +12,7 @@ type Vendor {
   createdAt: DateTime! @createdAt
   name: String!
   contact: String!
+  address: String!
   postedBy: User
 }
 
@@ -40,3 +41,5 @@ type Invoice {
   amount: Int!
   postedBy: User
 }
+
+

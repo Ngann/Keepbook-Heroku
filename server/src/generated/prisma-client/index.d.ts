@@ -265,7 +265,9 @@ export type VendorOrderByInput =
   | "name_ASC"
   | "name_DESC"
   | "contact_ASC"
-  | "contact_DESC";
+  | "contact_DESC"
+  | "address_ASC"
+  | "address_DESC";
 
 export type CustomerOrderByInput =
   | "id_ASC"
@@ -368,6 +370,20 @@ export interface VendorWhereInput {
   contact_not_starts_with?: Maybe<String>;
   contact_ends_with?: Maybe<String>;
   contact_not_ends_with?: Maybe<String>;
+  address?: Maybe<String>;
+  address_not?: Maybe<String>;
+  address_in?: Maybe<String[] | String>;
+  address_not_in?: Maybe<String[] | String>;
+  address_lt?: Maybe<String>;
+  address_lte?: Maybe<String>;
+  address_gt?: Maybe<String>;
+  address_gte?: Maybe<String>;
+  address_contains?: Maybe<String>;
+  address_not_contains?: Maybe<String>;
+  address_starts_with?: Maybe<String>;
+  address_not_starts_with?: Maybe<String>;
+  address_ends_with?: Maybe<String>;
+  address_not_ends_with?: Maybe<String>;
   postedBy?: Maybe<UserWhereInput>;
   AND?: Maybe<VendorWhereInput[] | VendorWhereInput>;
   OR?: Maybe<VendorWhereInput[] | VendorWhereInput>;
@@ -692,6 +708,7 @@ export interface VendorCreateWithoutPostedByInput {
   id?: Maybe<ID_Input>;
   name: String;
   contact: String;
+  address: String;
 }
 
 export interface CustomerCreateManyWithoutPostedByInput {
@@ -763,6 +780,7 @@ export interface VendorUpdateWithWhereUniqueWithoutPostedByInput {
 export interface VendorUpdateWithoutPostedByDataInput {
   name?: Maybe<String>;
   contact?: Maybe<String>;
+  address?: Maybe<String>;
 }
 
 export interface VendorUpsertWithWhereUniqueWithoutPostedByInput {
@@ -822,6 +840,20 @@ export interface VendorScalarWhereInput {
   contact_not_starts_with?: Maybe<String>;
   contact_ends_with?: Maybe<String>;
   contact_not_ends_with?: Maybe<String>;
+  address?: Maybe<String>;
+  address_not?: Maybe<String>;
+  address_in?: Maybe<String[] | String>;
+  address_not_in?: Maybe<String[] | String>;
+  address_lt?: Maybe<String>;
+  address_lte?: Maybe<String>;
+  address_gt?: Maybe<String>;
+  address_gte?: Maybe<String>;
+  address_contains?: Maybe<String>;
+  address_not_contains?: Maybe<String>;
+  address_starts_with?: Maybe<String>;
+  address_not_starts_with?: Maybe<String>;
+  address_ends_with?: Maybe<String>;
+  address_not_ends_with?: Maybe<String>;
   AND?: Maybe<VendorScalarWhereInput[] | VendorScalarWhereInput>;
   OR?: Maybe<VendorScalarWhereInput[] | VendorScalarWhereInput>;
   NOT?: Maybe<VendorScalarWhereInput[] | VendorScalarWhereInput>;
@@ -835,6 +867,7 @@ export interface VendorUpdateManyWithWhereNestedInput {
 export interface VendorUpdateManyDataInput {
   name?: Maybe<String>;
   contact?: Maybe<String>;
+  address?: Maybe<String>;
 }
 
 export interface CustomerUpdateManyWithoutPostedByInput {
@@ -1048,6 +1081,7 @@ export interface VendorCreateInput {
   id?: Maybe<ID_Input>;
   name: String;
   contact: String;
+  address: String;
   postedBy?: Maybe<UserCreateOneWithoutVendorsInput>;
 }
 
@@ -1067,6 +1101,7 @@ export interface UserCreateWithoutVendorsInput {
 export interface VendorUpdateInput {
   name?: Maybe<String>;
   contact?: Maybe<String>;
+  address?: Maybe<String>;
   postedBy?: Maybe<UserUpdateOneWithoutVendorsInput>;
 }
 
@@ -1094,6 +1129,7 @@ export interface UserUpsertWithoutVendorsInput {
 export interface VendorUpdateManyMutationInput {
   name?: Maybe<String>;
   contact?: Maybe<String>;
+  address?: Maybe<String>;
 }
 
 export interface BillSubscriptionWhereInput {
@@ -1289,6 +1325,7 @@ export interface Vendor {
   createdAt: DateTimeOutput;
   name: String;
   contact: String;
+  address: String;
 }
 
 export interface VendorPromise extends Promise<Vendor>, Fragmentable {
@@ -1296,6 +1333,7 @@ export interface VendorPromise extends Promise<Vendor>, Fragmentable {
   createdAt: () => Promise<DateTimeOutput>;
   name: () => Promise<String>;
   contact: () => Promise<String>;
+  address: () => Promise<String>;
   postedBy: <T = UserPromise>() => T;
 }
 
@@ -1306,6 +1344,7 @@ export interface VendorSubscription
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   name: () => Promise<AsyncIterator<String>>;
   contact: () => Promise<AsyncIterator<String>>;
+  address: () => Promise<AsyncIterator<String>>;
   postedBy: <T = UserSubscription>() => T;
 }
 
@@ -1316,6 +1355,7 @@ export interface VendorNullablePromise
   createdAt: () => Promise<DateTimeOutput>;
   name: () => Promise<String>;
   contact: () => Promise<String>;
+  address: () => Promise<String>;
   postedBy: <T = UserPromise>() => T;
 }
 
@@ -1940,6 +1980,7 @@ export interface VendorPreviousValues {
   createdAt: DateTimeOutput;
   name: String;
   contact: String;
+  address: String;
 }
 
 export interface VendorPreviousValuesPromise
@@ -1949,6 +1990,7 @@ export interface VendorPreviousValuesPromise
   createdAt: () => Promise<DateTimeOutput>;
   name: () => Promise<String>;
   contact: () => Promise<String>;
+  address: () => Promise<String>;
 }
 
 export interface VendorPreviousValuesSubscription
@@ -1958,6 +2000,7 @@ export interface VendorPreviousValuesSubscription
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   name: () => Promise<AsyncIterator<String>>;
   contact: () => Promise<AsyncIterator<String>>;
+  address: () => Promise<AsyncIterator<String>>;
 }
 
 /*

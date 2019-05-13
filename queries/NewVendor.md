@@ -172,3 +172,137 @@ You can view & edit your data here:
 
 ngans-mbp:server ngan$ 
 ```
+
+## Update Vendor Schema
+1. `server/src/schema.graphql` add new fields
+    ```
+    type Vendor {
+      id: ID!
+      createdAt: DateTime!
+      name: String!
+      address: String!
+      addressTwo: String!
+      city: String!
+      state: String!
+      country: String!
+      contact: String!
+      phone: String!
+      postedBy: User
+    }
+
+    type Mutation {
+    addVendor(name: String!, contact: String!, address: String!, addressTwo: String!, city: String!, state: String!, country: String!, contact: String!, phone: String!): Vendor! }
+    ```
+2. `server/src/resolvers/Mutation.js` Update addVendor mutation to include new fields
+  ```
+  function addVendor(parent, args, context, info) {
+  const userId = getUserId(context)
+  return context.prisma.createVendor({
+    name: args.name,
+    contact: args.contact,
+    address: args.address,
+    addressTwo: args.addressTwo,
+    city: args.city,
+    state: args.state,
+    country: args.country,
+    phone: args.phone,
+    postedBy: { connect: { id: userId } },
+  })
+}
+  ```
+3.  `server/prisma/datamodel.prisma` also add this schema here
+5. prisma generate to update the graphQL schema
+5. yarn start to deploy graphyQl playground
+
+```
+mutation {
+  addVendor(
+    name: "New Vendor"
+    contact: "777-777-777"
+    address: "test"
+    addressTwo: "test"
+    city: "test"
+    country: "test"
+    phone: "test"
+    state: "test"
+  ) {
+    id
+    name
+    contact
+    # address
+    # addressTwo
+    # city
+    # country
+    # phone
+    # state
+  }
+}
+```
+
+Error: resolve in step two
+```
+{
+  "data": null,
+  "errors": [
+    {
+      "message": "Cannot return null for non-nullable field Vendor.address.",
+      "locations": [
+        {
+          "line": 6,
+          "column": 5
+        }
+      ],
+      "path": [
+        "addVendor",
+        "address"
+      ]
+    }
+  ]
+}
+```
+
+Error: 
+Reason: `server/src/generated/prisma-client/prisma-schema.js` does not have the update schema for all the add feilds
+Resolution: `server/prisma/datamodel.prisma` also add this schema here, see step 3
+```
+{
+  "data": null,
+  "errors": [
+    {
+      "message": "Variable '$data' expected value of type 'VendorCreateInput!' but got: {\"name\":\"New Vendor\",\"contact\":\"777-777-777\",\"address\":\"test\",\"addressTwo\":\"test\",\"city\":\"test\",\"state\":\"test\",\"country\":\"test\",\"phone\":\"test\",\"postedBy\":{\"connect\":{\"id\":\"cjvmnugkn2nta0b997eyk1bvc\"}}}. Reason: 'city' Field 'city' is not defined in the input type 'VendorCreateInput'. (line 1, column 11):\nmutation ($data: VendorCreateInput!) {\n          ^",
+      "locations": [
+        {
+          "line": 2,
+          "column": 3
+        }
+      ],
+      "path": [
+        "addVendor"
+      ]
+    }
+  ]
+}
+```
+
+Error:
+```
+{
+  "data": null,
+  "errors": [
+    {
+      "message": "Cannot query field 'address' on type 'Vendor'. (line 7, column 5):\n    address\n    ^",
+      "locations": [
+        {
+          "line": 2,
+          "column": 3
+        }
+      ],
+      "path": [
+        "vendors"
+      ]
+    }
+  ]
+}
+```
+
+schema.graphql  , add to datamodel.prisma, create new schema resolver, add to index.js, update resolver.

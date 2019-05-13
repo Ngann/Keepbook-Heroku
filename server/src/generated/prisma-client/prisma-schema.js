@@ -915,6 +915,7 @@ type Vendor {
   createdAt: DateTime!
   name: String!
   contact: String!
+  address: String!
   postedBy: User
 }
 
@@ -928,6 +929,7 @@ input VendorCreateInput {
   id: ID
   name: String!
   contact: String!
+  address: String!
   postedBy: UserCreateOneWithoutVendorsInput
 }
 
@@ -940,6 +942,7 @@ input VendorCreateWithoutPostedByInput {
   id: ID
   name: String!
   contact: String!
+  address: String!
 }
 
 type VendorEdge {
@@ -956,6 +959,8 @@ enum VendorOrderByInput {
   name_DESC
   contact_ASC
   contact_DESC
+  address_ASC
+  address_DESC
 }
 
 type VendorPreviousValues {
@@ -963,6 +968,7 @@ type VendorPreviousValues {
   createdAt: DateTime!
   name: String!
   contact: String!
+  address: String!
 }
 
 input VendorScalarWhereInput {
@@ -1016,6 +1022,20 @@ input VendorScalarWhereInput {
   contact_not_starts_with: String
   contact_ends_with: String
   contact_not_ends_with: String
+  address: String
+  address_not: String
+  address_in: [String!]
+  address_not_in: [String!]
+  address_lt: String
+  address_lte: String
+  address_gt: String
+  address_gte: String
+  address_contains: String
+  address_not_contains: String
+  address_starts_with: String
+  address_not_starts_with: String
+  address_ends_with: String
+  address_not_ends_with: String
   AND: [VendorScalarWhereInput!]
   OR: [VendorScalarWhereInput!]
   NOT: [VendorScalarWhereInput!]
@@ -1042,17 +1062,20 @@ input VendorSubscriptionWhereInput {
 input VendorUpdateInput {
   name: String
   contact: String
+  address: String
   postedBy: UserUpdateOneWithoutVendorsInput
 }
 
 input VendorUpdateManyDataInput {
   name: String
   contact: String
+  address: String
 }
 
 input VendorUpdateManyMutationInput {
   name: String
   contact: String
+  address: String
 }
 
 input VendorUpdateManyWithoutPostedByInput {
@@ -1075,6 +1098,7 @@ input VendorUpdateManyWithWhereNestedInput {
 input VendorUpdateWithoutPostedByDataInput {
   name: String
   contact: String
+  address: String
 }
 
 input VendorUpdateWithWhereUniqueWithoutPostedByInput {
@@ -1139,6 +1163,20 @@ input VendorWhereInput {
   contact_not_starts_with: String
   contact_ends_with: String
   contact_not_ends_with: String
+  address: String
+  address_not: String
+  address_in: [String!]
+  address_not_in: [String!]
+  address_lt: String
+  address_lte: String
+  address_gt: String
+  address_gte: String
+  address_contains: String
+  address_not_contains: String
+  address_starts_with: String
+  address_not_starts_with: String
+  address_ends_with: String
+  address_not_ends_with: String
   postedBy: UserWhereInput
   AND: [VendorWhereInput!]
   OR: [VendorWhereInput!]
