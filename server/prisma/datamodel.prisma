@@ -54,4 +54,8 @@ type Invoice {
   postedBy: User
 }
 
-
+# type rollDice {
+#   id: ID! @id
+#   numDice: int!
+#   numSides: int
+# }

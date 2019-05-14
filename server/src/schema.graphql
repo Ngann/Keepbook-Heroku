@@ -1,7 +1,7 @@
 scalar DateTime
 
 type Query {
-  searchBills(filter: String, skip: Int, first: Int, orderBy: LinkOrderByInput): SearchBills!
+  searchBills(filter: String, skip: Int, first: Int, orderBy: BillsOrderByInput): SearchBills!
   searchInvoices(filter: String, skip: Int, first: Int, orderBy: LinkOrderByInput): SearchInvoices!
   vendors: [Vendor!]!
   bills: [Bill!]!
@@ -9,11 +9,23 @@ type Query {
   customers: [Customer!]!
   getCustomer(id: ID!): Customer
   getVendor(id: ID!): Vendor
+  # rollDice(numDice: Int!, numSides: Int): [Int]
 }
 
 enum LinkOrderByInput {
   description_ASC
   description_DESC
+  url_ASC
+  url_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+enum BillsOrderByInput {
+  name_ASC
+  name_DESC
+  amount_ASC
+  amount_DESC
   url_ASC
   url_DESC
   createdAt_ASC
@@ -108,4 +120,8 @@ type Invoice {
   account: String!
   amount: Int!
   postedBy: User
+}
+
+type Subscription {
+  newVendor: Vendor
 }
