@@ -1,13 +1,50 @@
 import React, { Component } from 'react'
 import {Pie} from 'react-chartjs-2';
+import { Query} from 'react-apollo'
+import gql from 'graphql-tag'
+
+const VENDORS_QUERY = gql`
+{
+  vendors {
+    id
+    name
+    contact
+    address
+    addressTwo
+    city
+    state
+    country
+    createdAt
+  }
+}
+`
+const Vendors = () => (
+  <Query query={VENDORS_QUERY}>
+    {({ loading, error, data }) => {
+      if (loading) return "Loading...";
+      if (error) return `Error! ${error.message}`;
+
+      return (
+        <select name="dog" >
+          {data.vendors.map(vendor => (
+            <option key={vendor.id} value={vendor.name}>
+            </option>
+
+
+          ))}
+        </select>
+	);
+}}
+</Query>
+);
+
+const count = [50 ,50]
+const name = ['Expense', 'Revenue']
 
 const data = {
-	labels: [
-		'Expense',
-		'Revenue',
-	],
+	labels: name ,
 	datasets: [{
-		data: [300, 50],
+		data: count,
 		backgroundColor: [
 		'#F3D250',
 		'#90CCF4',
@@ -18,6 +55,8 @@ const data = {
 		]
 	}]
 };
+
+	console.log(Vendors)
 
 const containerStyle = {
   marginTop: '3%',

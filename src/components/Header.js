@@ -75,10 +75,10 @@ class Header extends Component {
               >
               Logout
             </Button>
-          ) : (
+          ) : ( 
             <Link to="/login" className="ml1 no-underline black">
               Login
-            </Link>
+          </Link> 
           )}
         </div>
         </Navbar>

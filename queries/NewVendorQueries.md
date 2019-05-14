@@ -33,3 +33,15 @@ mutation {
     # phone
   }
 }
+
+
+query {
+  searchBills {
+    count
+    bills {
+      id
+      vendor
+      amount
+    }
+  }
+}

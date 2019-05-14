@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { AUTH_TOKEN } from '../constants'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-import Form from 'react-bootstrap/Form'
-import FormControl from 'react-bootstrap/FormControl'
-import Button from 'react-bootstrap/Button'
+// import Form from 'react-bootstrap/Form'
+// import FormControl from 'react-bootstrap/FormControl'
+// import Button from 'react-bootstrap/Button'
 import logo from '../assets/images/logo.png'
 import {
   MDBContainer,

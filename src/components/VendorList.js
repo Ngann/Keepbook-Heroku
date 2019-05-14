@@ -37,6 +37,20 @@ mutation UpdateVendorMutation($id: ID!, $name: String!, $contact: String!) {
 }
 `
 
+const NEW_VENDORS_SUBSCRIPTION = gql `
+  subscription {
+    newVendor {
+        id
+        name
+        state
+        postedBy {
+          id
+          name
+        }
+    }
+  }
+`
+
 const containerStyle = {
   marginTop: '10%',
   backgroundColor: '#FDFFFC'
@@ -52,6 +66,24 @@ class VendorList extends Component {constructor(props, context) {
     show: false,
   };
 }
+
+_subscribeToNewVendors = subscribeToMore => {
+  subscribeToMore({
+    document: NEW_VENDORS_SUBSCRIPTION,
+    updateQuery: (prev, { subscriptionData}) => {
+      if (!subscriptionData.data) return prev
+      const newVendor = subscriptionData.data.newVendor
+      const exists = prev.vendors.find(({id}) => id === newVendor.id);
+      if (exists) return prev;
+
+      return Object.assign({}, prev, {
+        vendors : [newVendor, ...prev.vendors], 
+        __typename: prev.vendors.__typename
+      })
+    }
+  })
+}
+
 
 handleClose() {
   this.setState({ show: false });
@@ -69,13 +101,15 @@ state = {
 render() {
 
   const { name, contact } = this.state
+
   return (
 
     <Query query={VENDORS_QUERY}>
-    {({ loading, error, data }) => {
+    {({ loading, error, data, subscribeToMore }) => {
       if (loading)return <div>Fetching</div>
       if (error) return <div>Error</div>
 
+      this._subscribeToNewVendors(subscribeToMore)
       const vendorsToRender = data.vendors
 
       return (
