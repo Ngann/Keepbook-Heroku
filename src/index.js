@@ -17,7 +17,7 @@ import { getMainDefinition } from 'apollo-utilities'
 import 'bootstrap/dist/css/bootstrap.css';
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:4000',
+  uri: 'https://kbapp-123-456.herokuapp.com',
 })
 
 const authLink = setContext((_, { headers }) => {
