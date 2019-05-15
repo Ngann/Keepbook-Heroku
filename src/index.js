@@ -31,7 +31,7 @@ const authLink = setContext((_, { headers }) => {
 })
 
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:4000`,
+  uri: `ws://kbapp-123-456.herokuapp.com`,
   options: {
     reconnect: true,
     connectionParams: {
