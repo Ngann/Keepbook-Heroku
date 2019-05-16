@@ -5,7 +5,20 @@
 
 _This application allows user to create bills and invoices. It will also have the option to view the cashflow statement ._
 
-https://keepbook-ngann.herokuapp.com
+
+## Installation
+Frontend 
+```
+yarn install
+yarn start
+```
+Backend
+```
+cd server
+yarn install
+yarn start
+```
+
 
 ## Table of Content
 
