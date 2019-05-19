@@ -76,8 +76,7 @@ class CreateBill extends Component {
               value={date}
               onChange={e => this.setState({ date: e.target.value })}
               type="date"
-            >
-        </Form.Control>
+            />
           </Form.Group>
           <Form.Group controlId="formBasicAccount">
             <Form.Label>Account</Form.Label>
