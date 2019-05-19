@@ -53,25 +53,20 @@ class CreateBill extends Component {
             return (
               <Form.Group controlId="formGridState">
               <Form.Label>Vendor</Form.Label>
-              <Form.Control as="select" >
+              <Form.Control as="select" 
+                value={this.state.value}
+                onChange={e => this.setState({ vendor: e.target.value })}
+              >
               {vendorList.map(vendor => (
-                <option key={vendor.id}>{vendor.name}</option>
+                <option key={vendor.id} value={vendor.name}>
+                {vendor.name}
+                </option>
               ))}
               </Form.Control>
             </Form.Group>
             )
           }}
         </Query>
-        {/* <Query query={VENDORS_QUERY}>
-          {({ loading, error, data }) => {
-            if (loading) return <div>Fetching</div>
-            if (error) return <div>Error</div>
-
-            const vendorsToRender = data.vendors
-              vendorsToRender.map(vendor => (
-                <option key={vendor.id} >{vendor.name}</option>
-              
-         </Query> */}
           {/* <Form.Group controlId="formBasicBill">
           <Form.Label>Vendor Name</Form.Label>
           <Form.Control
