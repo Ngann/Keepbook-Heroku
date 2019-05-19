@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Mutation, Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import { Form, Button } from 'react-bootstrap'
+import DateInput from "react-day-picker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const CREATEBILL_MUTATION = gql`
   mutation CreateBilltMutation($vendor: String!, $date: String!, $account: String!, $amount: Int!) {
@@ -46,7 +48,7 @@ class CreateBill extends Component {
 
         <Query query={VENDORS_QUERY}>
           {({loading, error, data}) => {
-            if (loading) return <div>Fetching</div>
+            if (loading) return <div>Loading vendors</div>
             if (error) return <div>Error</div>
 
             const vendorList = data.vendors 
@@ -67,25 +69,15 @@ class CreateBill extends Component {
             )
           }}
         </Query>
-          {/* <Form.Group controlId="formBasicBill">
-          <Form.Label>Vendor Name</Form.Label>
-          <Form.Control
-            className="mb2"
-            value={vendor}
-            onChange={e => this.setState({ vendor: e.target.value })}
-            type="text"
-            placeholder="name"
-          />
-        </Form.Group> */}
           <Form.Group controlId="formBasicDate">
             <Form.Label>Date</Form.Label>
             <Form.Control
               className="mb2"
               value={date}
               onChange={e => this.setState({ date: e.target.value })}
-              type="text"
-              placeholder="date"
-            />
+              type="date"
+            >
+        </Form.Control>
           </Form.Group>
           <Form.Group controlId="formBasicAccount">
             <Form.Label>Account</Form.Label>
