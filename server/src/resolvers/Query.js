@@ -14,6 +14,10 @@ function invoices(parent, args, context, info) {
   return context.prisma.invoices()
 }
 
+function accounts(parent, args, context, info) {
+  return context.prisma.accounts()
+}
+
 async function searchBills(parent, args, context) {
   const count = await context.prisma
     .billsConnection({
@@ -77,6 +81,7 @@ module.exports = {
   customers,
   bills,
   invoices,
+  accounts,
   searchBills,
   searchInvoices
 }

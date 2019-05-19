@@ -104,6 +104,31 @@ function updateInvoice(parent, args, context) {
   })
 }
 
+function createAccount(parent, args, context) {
+  const userId = getUserId(context)
+  return context.prisma.createAccount({
+    name: args.name,
+    number: args.number,
+    postedBy: { connect: { id: userId } },
+  })
+}
+
+function updateAccount(parent, args, context) {
+  return context.prisma.updateAccount({
+    where: { id: args.id},
+    data: {
+      name: args.name,
+      number: args.number,
+    }
+  })
+}
+
+function deleteAccount(parent, {id}, context) {
+  return context.prisma.deleteAccount({
+    id,
+  })
+}
+
 function deleteInvoice(parent, {id}, context) {
   return context.prisma.deleteInvoice({
     id,
@@ -169,5 +194,8 @@ module.exports = {
   deleteBill,
   createInvoice,
   updateInvoice,
-  deleteInvoice
+  deleteInvoice,
+  createAccount,
+  updateAccount,
+  deleteAccount
 }

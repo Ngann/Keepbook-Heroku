@@ -6,6 +6,7 @@ type Query {
   vendors: [Vendor!]!
   bills: [Bill!]!
   invoices: [Invoice!]!
+  accounts: [Account!]!
   customers: [Customer!]!
   getCustomer(id: ID!): Customer
   getVendor(id: ID!): Vendor
@@ -49,6 +50,10 @@ type Mutation {
   createInvoice(customer: String!, date: String!, account: String!, amount: Int!): Invoice
   updateInvoice(id:ID!, customer: String!, date: String!, account: String!, amount: Int!): Invoice
   deleteInvoice(id: ID!): Invoice
+
+  createAccount(name: String!, number: String!): Account
+  updateAccount(id: ID!, name: String!, number: String!): Account
+  deleteAccount(id: ID!): Account
 }
 
 type Subscription {
@@ -107,5 +112,12 @@ type Invoice {
   date: String!
   account: String!
   amount: Int!
+  postedBy: User
+}
+
+type Account {
+  id: ID! 
+  name: String!
+  number: String!
   postedBy: User
 }
