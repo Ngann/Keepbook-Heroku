@@ -15,9 +15,12 @@ import SearchBills from './SearchBills'
 import SearchInvoices from './SearchInvoices'
 import CreateAccount from './CreateAccount'
 import AccountList from './AccountList'
+import FileUpload from './FileUpload'
+import ProfilePage from './ProfilePage';
 
 
 class App extends Component {
+
   render() {
     return (
       <div className="App">
@@ -38,6 +41,8 @@ class App extends Component {
             <Route exact path="/chart" component={DashboardControl} />
             <Route exact path="/createaccount" component={CreateAccount} />
             <Route exact path="/accountlist" component={AccountList} />
+            <Route exact path="/fileupload" component={FileUpload} />
+            <Route exact path="/upload" component={ProfilePage} />
           </Switch>
       </div>
     )

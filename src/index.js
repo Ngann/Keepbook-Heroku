@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './styles/index.css'
-import './styles/App.css';
+import './styles/App.css'
 import App from './components/App'
 import * as serviceWorker from './serviceWorker'
 import { ApolloProvider } from 'react-apollo'
@@ -14,7 +14,8 @@ import { AUTH_TOKEN } from './constants'
 import { split } from 'apollo-link'
 import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities'
-import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.css'
+import firebase from 'firebase'
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:4000',
@@ -53,6 +54,15 @@ const client = new ApolloClient({
   link,
   cache: new InMemoryCache(),
 })
+
+const config = {
+  apiKey: "<API_KEY>",
+  authDomain: "<PROJECT_ID>.firebaseapp.com",
+  databaseURL: "https://<DATABASE_NAME>.firebaseio.com",
+  storageBucket: "<BUCKET>.appspot.com",
+  };
+
+firebase.initializeApp(config);
 
 ReactDOM.render(
   <BrowserRouter>
