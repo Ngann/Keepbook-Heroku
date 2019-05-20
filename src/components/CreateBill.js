@@ -25,6 +25,14 @@ const VENDORS_QUERY = gql`
   }
 }
 `
+const ACCOUNTS_QUERY = gql`
+{
+  accounts {
+    name
+    number
+  }
+}
+`
 
 const containerStyle = {
   marginTop: '10%',
@@ -47,38 +55,39 @@ class CreateBill extends Component {
       <div className="container" style={containerStyle}>
 
         <Query query={VENDORS_QUERY}>
-          {({loading, error, data}) => {
+          {({ loading, error, data }) => {
             if (loading) return <div>Loading vendors</div>
             if (error) return <div>Error</div>
 
-            const vendorList = data.vendors 
+            const vendorList = data.vendors
             return (
               <Form.Group controlId="formGridState">
-              <Form.Label>Vendor</Form.Label>
-              <Form.Control as="select" 
-                value={this.state.value}
-                onChange={e => this.setState({ vendor: e.target.value })}
-              >
-              {vendorList.map(vendor => (
-                <option key={vendor.id} value={vendor.name}>
-                {vendor.name}
-                </option>
-              ))}
-              </Form.Control>
-            </Form.Group>
+                <Form.Label>Vendor</Form.Label>
+                <Form.Control as="select"
+                  value={this.state.value}
+                  onChange={e => this.setState({ vendor: e.target.value })}
+                >
+                  <option>Select Vendor</option>
+                  {vendorList.map(vendor => (
+                    <option key={vendor.id} value={vendor.name}>
+                      {vendor.name}
+                    </option>
+                  ))}
+                </Form.Control>
+              </Form.Group>
             )
           }}
         </Query>
-          <Form.Group controlId="formBasicDate">
-            <Form.Label>Date</Form.Label>
-            <Form.Control
-              className="mb2"
-              value={date}
-              onChange={e => this.setState({ date: e.target.value })}
-              type="date"
-            />
-          </Form.Group>
-          <Form.Group controlId="formBasicAccount">
+        <Form.Group controlId="formBasicDate">
+          <Form.Label>Date</Form.Label>
+          <Form.Control
+            className="mb2"
+            value={date}
+            onChange={e => this.setState({ date: e.target.value })}
+            type="date"
+          />
+        </Form.Group>
+        {/* <Form.Group controlId="formBasicAccount">
             <Form.Label>Account</Form.Label>
             <Form.Control
               className="mb2"
@@ -87,29 +96,53 @@ class CreateBill extends Component {
               type="text"
               placeholder="account"
             />
-          </Form.Group>
-          <Form.Group controlId="formBasicAmount">
-            <Form.Label>Amount</Form.Label>
-            <Form.Control
-              className="mb2"
-              value={amount}
-              onChange={e => this.setState({ amount: parseInt(e.target.value) })}
-              type="text"
-              placeholder="amount"
-            />
-          </Form.Group>
-          <Mutation
-            mutation={CREATEBILL_MUTATION}
-            variables={{ vendor, date, account, amount }}
-          >
-            {createBillMutation => <Button variant="secondary" onClick={createBillMutation}>Add</Button>}
-          </Mutation>
-          <Button variant="danger" onClick={this.props.history.goBack}>
-            Cancel
+          </Form.Group> */}
+        <Query query={ACCOUNTS_QUERY}>
+          {({ loading, error, data }) => {
+            if (loading) return <div>Loading accounts</div>
+            if (error) return <div>Error</div>
+
+            const accountList = data.accounts
+            return (
+              <Form.Group controlId="formGridState">
+                <Form.Label>account</Form.Label>
+                <Form.Control as="select"
+                  value={this.state.value}
+                  onChange={e => this.setState({ account: e.target.value })}
+                >
+                  <option>Select Account</option>
+                  {accountList.map(account => (
+                    <option key={account.id} value={account.name}>
+                      {account.number}-{account.name}
+                    </option>
+                  ))}
+                </Form.Control>
+              </Form.Group>
+            )
+          }}
+        </Query>
+        <Form.Group controlId="formBasicAmount">
+          <Form.Label>Amount</Form.Label>
+          <Form.Control
+            className="mb2"
+            value={amount}
+            onChange={e => this.setState({ amount: parseInt(e.target.value) })}
+            type="text"
+            placeholder="amount"
+          />
+        </Form.Group>
+        <Mutation
+          mutation={CREATEBILL_MUTATION}
+          variables={{ vendor, date, account, amount }}
+        >
+          {createBillMutation => <Button variant="secondary" onClick={createBillMutation}>Add</Button>}
+        </Mutation>
+        <Button variant="danger" onClick={this.props.history.goBack}>
+          Cancel
         </Button >
       </div>
-        )
-      }
-    }
-    
-    export default CreateBill
+    )
+  }
+}
+
+export default CreateBill
