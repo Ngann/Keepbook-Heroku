@@ -8,6 +8,7 @@ const Vendor = require('./resolvers/Vendor')
 const Customer = require('./resolvers/Customer')
 const Bill = require('./resolvers/Bill')
 const Invoice = require('./resolvers/Invoice')
+const Account = require('./resolvers/Account')
 
 const resolvers = {
   Query,
@@ -18,6 +19,7 @@ const resolvers = {
   Customer,
   Bill,
   Invoice,
+  Account,
 }
 
 const server = new GraphQLServer({
