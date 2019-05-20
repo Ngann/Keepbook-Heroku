@@ -26,6 +26,7 @@ const VENDORS_QUERY = gql`
 const ACCOUNTS_QUERY = gql`
 {
   accounts {
+    id
     name
     number
   }
@@ -68,7 +69,7 @@ class CreateBill extends Component {
                   <option>Select Vendor</option>
                   {vendorList.map(vendor => (
                     <option key={vendor.id} value={vendor.name}>
-                      {vendor.name}
+                      {vendor.id}-{vendor.name}
                     </option>
                   ))}
                 </Form.Control>
@@ -85,16 +86,6 @@ class CreateBill extends Component {
             type="date"
           />
         </Form.Group>
-        {/* <Form.Group controlId="formBasicAccount">
-            <Form.Label>Account</Form.Label>
-            <Form.Control
-              className="mb2"
-              value={account}
-              onChange={e => this.setState({ account: e.target.value })}
-              type="text"
-              placeholder="account"
-            />
-          </Form.Group> */}
         <Query query={ACCOUNTS_QUERY}>
           {({ loading, error, data }) => {
             if (loading) return <div>Loading accounts</div>
@@ -107,6 +98,7 @@ class CreateBill extends Component {
                 <Form.Control as="select"
                   value={this.state.value}
                   onChange={e => this.setState({ account: e.target.value })}
+                  placeholder="Select Account"
                 >
                   <option>Select Account</option>
                   {accountList.map(account => (
@@ -125,8 +117,8 @@ class CreateBill extends Component {
             className="mb2"
             value={amount}
             onChange={e => this.setState({ amount: parseInt(e.target.value) })}
-            type="text"
-            placeholder="amount"
+            type="float"
+            placeholder="Amount"
           />
         </Form.Group>
         <Mutation
