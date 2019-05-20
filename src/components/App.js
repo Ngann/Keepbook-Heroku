@@ -13,6 +13,8 @@ import Login from './Login'
 import DashboardControl from './DashboardControl'
 import SearchBills from './SearchBills'
 import SearchInvoices from './SearchInvoices'
+import CreateAccount from './CreateAccount'
+import AccountList from './AccountList'
 
 
 class App extends Component {
@@ -34,6 +36,8 @@ class App extends Component {
             <Route exact path="/bill" component={BillList} />
             <Route exact path="/invoice" component={InvoiceList} />
             <Route exact path="/chart" component={DashboardControl} />
+            <Route exact path="/createaccount" component={CreateAccount} />
+            <Route exact path="/accountlist" component={AccountList} />
           </Switch>
       </div>
     )

@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { Mutation, Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import { Form, Button } from 'react-bootstrap'
-import DateInput from "react-day-picker";
-import "react-datepicker/dist/react-datepicker.css";
 
 const CREATEBILL_MUTATION = gql`
   mutation CreateBilltMutation($vendor: String!, $date: String!, $account: String!, $amount: Int!) {
