@@ -7,6 +7,7 @@ type User {
   password: String!
   vendors: [Vendor!]!
   customers: [Customer!]!
+  accounts: [Account!]!
 }
 
 type Vendor {
@@ -54,4 +55,11 @@ type Invoice {
   postedBy: User
 }
 
-
+type Account {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  name: String!
+  number: String!
+  postedBy: User
+}
