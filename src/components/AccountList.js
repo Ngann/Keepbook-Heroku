@@ -1,10 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Query, Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-import Table from 'react-bootstrap/Table'
-import Button from 'react-bootstrap/Button'
-import Modal from 'react-bootstrap/Modal'
-
+import { Modal, Button, Table, ButtonGroup } from 'react-bootstrap'
 const ACCOUNTS_QUERY = gql`
 {
   accounts {
@@ -74,12 +71,12 @@ render() {
 
       return (
         <div className="container" style={containerStyle}>
-          <Table striped bordered hover size="sm">
-          <thead>
-            <tr>
-              <th>account Name</th>
-              <th>number</th>
-              <th>Action</th>
+          <Table striped hover size="sm" flex-column>
+          <thead >
+            <tr >
+              <th>Account Name</th>
+              <th>Number</th>
+              <th >Action</th>
             </tr>
           </thead>
           {accountsToRender.map(account => (
@@ -89,14 +86,25 @@ render() {
                   <td>{account.name}</td>
                   <td>{account.number}</td>
                   <td>
-                  <Button variant="primary" onClick={this.handleShow}>
+                < ButtonGroup size="sm">
+                    <Button variant="outline-secondary" onClick={this.handleShow} size="small" >Edit</Button>
+                    <Mutation
+                  mutation={DELETEACCOUNT_MUTATION}
+                  variables={{ id: account.id }}
+                  >
+                  {deleteAccountMutation => <Button variant="outline-secondary" onClick={deleteAccountMutation}>Delete</Button>}
+                  </Mutation>
+                 </ButtonGroup>
+
+                  {/* <Button variant="primary" onClick={this.handleShow}>
                   Edit
                   </Button>| <Mutation
                   mutation={DELETEACCOUNT_MUTATION}
                   variables={{ id: account.id }}
                   >
                   {deleteAccountMutation => <Button variant="danger" onClick={deleteAccountMutation}>Delete</Button>}
-                  </Mutation></td>
+                  </Mutation> */}
+                  </td>
                 </tr>
               </tbody>
               <Modal show={this.state.show} onHide={this.handleClose} >
