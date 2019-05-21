@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, ButtonGroup } from 'react-bootstrap'
 
 const CREATEACCCOUNT_MUTATION = gql`
   mutation CreateAccountMutation($name: String!, $number: String!) {
@@ -37,11 +37,11 @@ class CreateAccount extends Component {
                         value={name}
                         onChange={e => this.setState({ name: e.target.value })}
                         type="text"
-                        placeholder="A name"
+                        placeholder="name"
                     />
                 </Form.Group>
                 <Form.Group controlId="formBasicnumber">
-                    <Form.Label>number</Form.Label>
+                    <Form.Label>Number</Form.Label>
                     <Form.Control
                         className="mb2"
                         value={number}
@@ -50,15 +50,17 @@ class CreateAccount extends Component {
                         placeholder="number"
                     />
                 </Form.Group>
-                <Mutation
-                    mutation={CREATEACCCOUNT_MUTATION}
-                    variables={{ name, number }}
-                >
-                    {CreateAccountMutation => <Button variant="secondary" onClick={CreateAccountMutation}>Submit</Button>}
-                </Mutation>
-                <Button variant="danger" onClick={this.props.history.goBack}>
-                    Cancel
-        </Button >
+                <ButtonGroup>
+                    <Mutation
+                        mutation={CREATEACCCOUNT_MUTATION}
+                        variables={{ name, number }}
+                    >
+                        {CreateAccountMutation => <Button variant="secondary" onClick={CreateAccountMutation}>Submit</Button>}
+                    </Mutation>
+                    <Button variant="danger" onClick={this.props.history.goBack}>
+                        Cancel
+                    </Button >
+                 </ButtonGroup>
             </div>
         )
     }

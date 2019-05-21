@@ -30,7 +30,8 @@ mutation UpdateAccountMutation($id: ID!, $name: String!, $number: String!) {
 
 const containerStyle = {
   marginTop: '10%',
-  backgroundColor: '#FDFFFC'
+  backgroundColor: '#FDFFFC',
+  color: 'rgb(61, 85, 107)'
 };
 
 class AccountList extends Component {constructor(props, context) {
@@ -71,7 +72,7 @@ render() {
 
       return (
         <div className="container" style={containerStyle}>
-          <Table striped hover size="sm" flex-column>
+          <Table striped hover size="sm" >
           <thead >
             <tr >
               <th>Account Name</th>
@@ -89,21 +90,12 @@ render() {
                 < ButtonGroup size="sm">
                     <Button variant="outline-secondary" onClick={this.handleShow} size="small" >Edit</Button>
                     <Mutation
-                  mutation={DELETEACCOUNT_MUTATION}
-                  variables={{ id: account.id }}
-                  >
-                  {deleteAccountMutation => <Button variant="outline-secondary" onClick={deleteAccountMutation}>Delete</Button>}
-                  </Mutation>
+                    mutation={DELETEACCOUNT_MUTATION}
+                    variables={{ id: account.id }}
+                    >
+                    {deleteAccountMutation => <Button variant="outline-secondary" onClick={deleteAccountMutation}>Delete</Button>}
+                    </Mutation>
                  </ButtonGroup>
-
-                  {/* <Button variant="primary" onClick={this.handleShow}>
-                  Edit
-                  </Button>| <Mutation
-                  mutation={DELETEACCOUNT_MUTATION}
-                  variables={{ id: account.id }}
-                  >
-                  {deleteAccountMutation => <Button variant="danger" onClick={deleteAccountMutation}>Delete</Button>}
-                  </Mutation> */}
                   </td>
                 </tr>
               </tbody>
