@@ -1,9 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Query, Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-import Table from 'react-bootstrap/Table'
-import Button from 'react-bootstrap/Button'
-import Modal from 'react-bootstrap/Modal'
+import { ButtonGroup, Table, Button, Modal } from 'react-bootstrap';
 
 const VENDORS_QUERY = gql`
 {
@@ -87,7 +85,7 @@ class VendorList extends Component {
 
           return (
             <div className="container" style={containerStyle}>
-              <Table striped bordered hover size="sm">
+              <Table striped hover size="sm" >
                 <thead>
                   <tr>
                     <th>Vendor Name</th>
@@ -108,23 +106,19 @@ class VendorList extends Component {
                         <td>{vendor.city}</td>
                         <td>{vendor.state}</td>
                         <td>
-                          <Button variant="secondary" onClick={this.handleShow}>
+                          <ButtonGroup size="sm">
+                          <Button variant="outline-secondary" onClick={this.handleShow}>
                             Edit
-                  </Button> | <Mutation
+                          </Button> 
+                          <Mutation
                             mutation={DELETEVENDOR_MUTATION}
                             variables={{ id: vendor.id }}
                             onCompleted={() => this.props.history.push('/')}
-                            // update={(store, { data: { vendor } }) => {
-                            //   const data = store.readQuery({ query: VENDORS_QUERY })
-                            //   data.vendors.unshift(vendor)
-                            //   store.writeQuery({
-                            //     query: VENDORS_QUERY,
-                            //     data
-                            //   })
-                            // }}
                           >
-                            {deleteVendorMutation => <Button variant="danger" onClick={deleteVendorMutation}>Delete</Button>}
-                          </Mutation></td>
+                            {deleteVendorMutation => <Button variant="outline-secondary" onClick={deleteVendorMutation}>Delete</Button>}
+                          </Mutation>
+                          </ButtonGroup>
+                          </td>
                       </tr>
                     </tbody>
                     <Modal show={this.state.show} onHide={this.handleClose} >
