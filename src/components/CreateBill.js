@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Mutation, Query } from 'react-apollo'
 import gql from 'graphql-tag'
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, ButtonGroup } from 'react-bootstrap'
 
 const CREATEBILL_MUTATION = gql`
   mutation CreateBilltMutation($vendor: String!, $date: String!, $account: String!, $amount: Int!) {
@@ -121,15 +121,18 @@ class CreateBill extends Component {
             placeholder="Amount"
           />
         </Form.Group>
-        <Mutation
-          mutation={CREATEBILL_MUTATION}
-          variables={{ vendor, date, account, amount }}
-        >
-          {createBillMutation => <Button variant="secondary" onClick={createBillMutation}>Add</Button>}
-        </Mutation>
-        <Button variant="danger" onClick={this.props.history.goBack}>
-          Cancel
-        </Button >
+        <ButtonGroup>
+          <Mutation
+            mutation={CREATEBILL_MUTATION}
+            variables={{ vendor, date, account, amount }}
+          >
+            {createBillMutation => <Button variant="secondary" onClick={createBillMutation}>Post</Button>}
+          </Mutation>
+          <Button variant="danger" onClick={this.props.history.goBack}>
+            Cancel
+         </Button >
+        </ButtonGroup>
+
       </div>
     )
   }
