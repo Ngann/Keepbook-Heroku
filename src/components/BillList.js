@@ -1,9 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Query, Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-import Table from 'react-bootstrap/Table'
-import Button from 'react-bootstrap/Button'
-import Modal from 'react-bootstrap/Modal'
+import{ Modal, Button, Table, ButtonGroup} from 'react-bootstrap'
 
 const BILLS_QUERY = gql`
 {
@@ -79,7 +77,7 @@ render() {
 
       return (
         <div className="container" style={containerStyle}>
-          <Table striped bordered hover size="sm" >
+          <Table striped hover size="sm" >
           <thead >
             <tr>
               <th>Date</th>
@@ -98,14 +96,18 @@ render() {
                   <td>{bill.account}</td>
                   <td>{bill.amount}</td>
                   <td>
-                  <Button variant="secondary" onClick={this.handleShow}>
+                   <ButtonGroup size="sm">
+                   <Button variant="outline-secondary" onClick={this.handleShow}>
                   Edit
-                  </Button>| <Mutation
+                  </Button><Mutation
                   mutation={DELETEBILL_MUTATION}
                   variables={{ id: bill.id }}
                   >
-                  {deleteBillMutation => <Button variant="danger" onClick={deleteBillMutation}>Delete</Button>}
-                  </Mutation></td>
+                  {deleteBillMutation => <Button variant="outline-secondary" onClick={deleteBillMutation}>Delete</Button>}
+                  </Mutation>
+
+                   </ButtonGroup>
+                  </td>
                 </tr>
               </tbody>
               <Modal show={this.state.show} onHide={this.handleClose} >
