@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-import { Form, Button, Col, Row } from 'react-bootstrap'
+import { Form, Button, Col, Row, ButtonGroup } from 'react-bootstrap'
 
 const ADDVENDOR_MUTATION = gql`
   mutation AddVendortMutation($name: String!, $contact: String!, $address: String!, $addressTwo: String!, $city: String!, $state: String!, $country: String!) {
@@ -126,20 +126,20 @@ class CreateVendor extends Component {
         <Form.Group id="formGridCheckbox">
           <Form.Check type="checkbox" label="active" />
         </Form.Group>
-        <Row>
+        <Row >
+          <ButtonGroup >
           <Mutation
             mutation={ADDVENDOR_MUTATION}
             variables={{ name, contact, address, addressTwo, city, state, country }}
             onCompleted={() => this.props.history.push('/vendor')}
           // onCompleted={() => this.props.push.history('/')}
           >
-            {addVendorMutation => <Col><Button variant="secondary" onClick={addVendorMutation}>Submit</Button></Col>}
+            {addVendorMutation => <Button variant="secondary" onClick={addVendorMutation}>Submit</Button>}
           </Mutation>
-          <Col>
             <Button variant="danger" onClick={this.props.history.goBack}>
               Cancel
             </Button >
-          </Col>
+           </ButtonGroup>
         </Row>
       </div>
     )
