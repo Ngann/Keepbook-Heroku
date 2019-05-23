@@ -57,7 +57,7 @@ class CreateVendor extends Component {
               className="mb2"
               value={contact}
               onChange={e => this.setState({ contact: e.target.value })}
-              type="number"
+              type="text"
               placeholder=""
             />
           </Col>
