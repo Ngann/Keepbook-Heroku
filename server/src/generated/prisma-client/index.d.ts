@@ -318,6 +318,22 @@ export type VendorOrderByInput =
   | "country_ASC"
   | "country_DESC";
 
+export type BillOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC"
+  | "vendor_ASC"
+  | "vendor_DESC"
+  | "date_ASC"
+  | "date_DESC"
+  | "account_ASC"
+  | "account_DESC"
+  | "amount_ASC"
+  | "amount_DESC";
+
 export type CustomerOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -341,22 +357,6 @@ export type AccountOrderByInput =
   | "name_DESC"
   | "number_ASC"
   | "number_DESC";
-
-export type BillOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC"
-  | "vendor_ASC"
-  | "vendor_DESC"
-  | "date_ASC"
-  | "date_DESC"
-  | "account_ASC"
-  | "account_DESC"
-  | "amount_ASC"
-  | "amount_DESC";
 
 export type InvoiceOrderByInput =
   | "id_ASC"
@@ -524,6 +524,9 @@ export interface VendorWhereInput {
   country_ends_with?: Maybe<String>;
   country_not_ends_with?: Maybe<String>;
   postedBy?: Maybe<UserWhereInput>;
+  bills_every?: Maybe<BillWhereInput>;
+  bills_some?: Maybe<BillWhereInput>;
+  bills_none?: Maybe<BillWhereInput>;
   AND?: Maybe<VendorWhereInput[] | VendorWhereInput>;
   OR?: Maybe<VendorWhereInput[] | VendorWhereInput>;
   NOT?: Maybe<VendorWhereInput[] | VendorWhereInput>;
@@ -746,10 +749,6 @@ export interface AccountWhereInput {
   NOT?: Maybe<AccountWhereInput[] | AccountWhereInput>;
 }
 
-export type BillWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
 export interface BillWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
@@ -832,10 +831,15 @@ export interface BillWhereInput {
   amount_gt?: Maybe<Int>;
   amount_gte?: Maybe<Int>;
   postedBy?: Maybe<UserWhereInput>;
+  vendorId?: Maybe<VendorWhereInput>;
   AND?: Maybe<BillWhereInput[] | BillWhereInput>;
   OR?: Maybe<BillWhereInput[] | BillWhereInput>;
   NOT?: Maybe<BillWhereInput[] | BillWhereInput>;
 }
+
+export type BillWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
 
 export type CustomerWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
@@ -978,6 +982,38 @@ export interface VendorCreateWithoutPostedByInput {
   city: String;
   state: String;
   country: String;
+  bills?: Maybe<BillCreateManyWithoutVendorIdInput>;
+}
+
+export interface BillCreateManyWithoutVendorIdInput {
+  create?: Maybe<
+    BillCreateWithoutVendorIdInput[] | BillCreateWithoutVendorIdInput
+  >;
+  connect?: Maybe<BillWhereUniqueInput[] | BillWhereUniqueInput>;
+}
+
+export interface BillCreateWithoutVendorIdInput {
+  id?: Maybe<ID_Input>;
+  vendor: String;
+  date: String;
+  account: String;
+  amount: Int;
+  postedBy?: Maybe<UserCreateOneInput>;
+}
+
+export interface UserCreateOneInput {
+  create?: Maybe<UserCreateInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  email: String;
+  password: String;
+  vendors?: Maybe<VendorCreateManyWithoutPostedByInput>;
+  customers?: Maybe<CustomerCreateManyWithoutPostedByInput>;
+  accounts?: Maybe<AccountCreateManyWithoutPostedByInput>;
 }
 
 export interface CustomerCreateManyWithoutPostedByInput {
@@ -991,6 +1027,19 @@ export interface CustomerCreateWithoutPostedByInput {
   id?: Maybe<ID_Input>;
   name: String;
   contact: String;
+}
+
+export interface AccountCreateManyWithoutPostedByInput {
+  create?: Maybe<
+    AccountCreateWithoutPostedByInput[] | AccountCreateWithoutPostedByInput
+  >;
+  connect?: Maybe<AccountWhereUniqueInput[] | AccountWhereUniqueInput>;
+}
+
+export interface AccountCreateWithoutPostedByInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  number: String;
 }
 
 export interface AccountUpdateInput {
@@ -1052,6 +1101,395 @@ export interface VendorUpdateWithoutPostedByDataInput {
   city?: Maybe<String>;
   state?: Maybe<String>;
   country?: Maybe<String>;
+  bills?: Maybe<BillUpdateManyWithoutVendorIdInput>;
+}
+
+export interface BillUpdateManyWithoutVendorIdInput {
+  create?: Maybe<
+    BillCreateWithoutVendorIdInput[] | BillCreateWithoutVendorIdInput
+  >;
+  delete?: Maybe<BillWhereUniqueInput[] | BillWhereUniqueInput>;
+  connect?: Maybe<BillWhereUniqueInput[] | BillWhereUniqueInput>;
+  set?: Maybe<BillWhereUniqueInput[] | BillWhereUniqueInput>;
+  disconnect?: Maybe<BillWhereUniqueInput[] | BillWhereUniqueInput>;
+  update?: Maybe<
+    | BillUpdateWithWhereUniqueWithoutVendorIdInput[]
+    | BillUpdateWithWhereUniqueWithoutVendorIdInput
+  >;
+  upsert?: Maybe<
+    | BillUpsertWithWhereUniqueWithoutVendorIdInput[]
+    | BillUpsertWithWhereUniqueWithoutVendorIdInput
+  >;
+  deleteMany?: Maybe<BillScalarWhereInput[] | BillScalarWhereInput>;
+  updateMany?: Maybe<
+    BillUpdateManyWithWhereNestedInput[] | BillUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface BillUpdateWithWhereUniqueWithoutVendorIdInput {
+  where: BillWhereUniqueInput;
+  data: BillUpdateWithoutVendorIdDataInput;
+}
+
+export interface BillUpdateWithoutVendorIdDataInput {
+  vendor?: Maybe<String>;
+  date?: Maybe<String>;
+  account?: Maybe<String>;
+  amount?: Maybe<Int>;
+  postedBy?: Maybe<UserUpdateOneInput>;
+}
+
+export interface UserUpdateOneInput {
+  create?: Maybe<UserCreateInput>;
+  update?: Maybe<UserUpdateDataInput>;
+  upsert?: Maybe<UserUpsertNestedInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserUpdateDataInput {
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+  vendors?: Maybe<VendorUpdateManyWithoutPostedByInput>;
+  customers?: Maybe<CustomerUpdateManyWithoutPostedByInput>;
+  accounts?: Maybe<AccountUpdateManyWithoutPostedByInput>;
+}
+
+export interface CustomerUpdateManyWithoutPostedByInput {
+  create?: Maybe<
+    CustomerCreateWithoutPostedByInput[] | CustomerCreateWithoutPostedByInput
+  >;
+  delete?: Maybe<CustomerWhereUniqueInput[] | CustomerWhereUniqueInput>;
+  connect?: Maybe<CustomerWhereUniqueInput[] | CustomerWhereUniqueInput>;
+  set?: Maybe<CustomerWhereUniqueInput[] | CustomerWhereUniqueInput>;
+  disconnect?: Maybe<CustomerWhereUniqueInput[] | CustomerWhereUniqueInput>;
+  update?: Maybe<
+    | CustomerUpdateWithWhereUniqueWithoutPostedByInput[]
+    | CustomerUpdateWithWhereUniqueWithoutPostedByInput
+  >;
+  upsert?: Maybe<
+    | CustomerUpsertWithWhereUniqueWithoutPostedByInput[]
+    | CustomerUpsertWithWhereUniqueWithoutPostedByInput
+  >;
+  deleteMany?: Maybe<CustomerScalarWhereInput[] | CustomerScalarWhereInput>;
+  updateMany?: Maybe<
+    | CustomerUpdateManyWithWhereNestedInput[]
+    | CustomerUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface CustomerUpdateWithWhereUniqueWithoutPostedByInput {
+  where: CustomerWhereUniqueInput;
+  data: CustomerUpdateWithoutPostedByDataInput;
+}
+
+export interface CustomerUpdateWithoutPostedByDataInput {
+  name?: Maybe<String>;
+  contact?: Maybe<String>;
+}
+
+export interface CustomerUpsertWithWhereUniqueWithoutPostedByInput {
+  where: CustomerWhereUniqueInput;
+  update: CustomerUpdateWithoutPostedByDataInput;
+  create: CustomerCreateWithoutPostedByInput;
+}
+
+export interface CustomerScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  contact?: Maybe<String>;
+  contact_not?: Maybe<String>;
+  contact_in?: Maybe<String[] | String>;
+  contact_not_in?: Maybe<String[] | String>;
+  contact_lt?: Maybe<String>;
+  contact_lte?: Maybe<String>;
+  contact_gt?: Maybe<String>;
+  contact_gte?: Maybe<String>;
+  contact_contains?: Maybe<String>;
+  contact_not_contains?: Maybe<String>;
+  contact_starts_with?: Maybe<String>;
+  contact_not_starts_with?: Maybe<String>;
+  contact_ends_with?: Maybe<String>;
+  contact_not_ends_with?: Maybe<String>;
+  AND?: Maybe<CustomerScalarWhereInput[] | CustomerScalarWhereInput>;
+  OR?: Maybe<CustomerScalarWhereInput[] | CustomerScalarWhereInput>;
+  NOT?: Maybe<CustomerScalarWhereInput[] | CustomerScalarWhereInput>;
+}
+
+export interface CustomerUpdateManyWithWhereNestedInput {
+  where: CustomerScalarWhereInput;
+  data: CustomerUpdateManyDataInput;
+}
+
+export interface CustomerUpdateManyDataInput {
+  name?: Maybe<String>;
+  contact?: Maybe<String>;
+}
+
+export interface AccountUpdateManyWithoutPostedByInput {
+  create?: Maybe<
+    AccountCreateWithoutPostedByInput[] | AccountCreateWithoutPostedByInput
+  >;
+  delete?: Maybe<AccountWhereUniqueInput[] | AccountWhereUniqueInput>;
+  connect?: Maybe<AccountWhereUniqueInput[] | AccountWhereUniqueInput>;
+  set?: Maybe<AccountWhereUniqueInput[] | AccountWhereUniqueInput>;
+  disconnect?: Maybe<AccountWhereUniqueInput[] | AccountWhereUniqueInput>;
+  update?: Maybe<
+    | AccountUpdateWithWhereUniqueWithoutPostedByInput[]
+    | AccountUpdateWithWhereUniqueWithoutPostedByInput
+  >;
+  upsert?: Maybe<
+    | AccountUpsertWithWhereUniqueWithoutPostedByInput[]
+    | AccountUpsertWithWhereUniqueWithoutPostedByInput
+  >;
+  deleteMany?: Maybe<AccountScalarWhereInput[] | AccountScalarWhereInput>;
+  updateMany?: Maybe<
+    | AccountUpdateManyWithWhereNestedInput[]
+    | AccountUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface AccountUpdateWithWhereUniqueWithoutPostedByInput {
+  where: AccountWhereUniqueInput;
+  data: AccountUpdateWithoutPostedByDataInput;
+}
+
+export interface AccountUpdateWithoutPostedByDataInput {
+  name?: Maybe<String>;
+  number?: Maybe<String>;
+}
+
+export interface AccountUpsertWithWhereUniqueWithoutPostedByInput {
+  where: AccountWhereUniqueInput;
+  update: AccountUpdateWithoutPostedByDataInput;
+  create: AccountCreateWithoutPostedByInput;
+}
+
+export interface AccountScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  number?: Maybe<String>;
+  number_not?: Maybe<String>;
+  number_in?: Maybe<String[] | String>;
+  number_not_in?: Maybe<String[] | String>;
+  number_lt?: Maybe<String>;
+  number_lte?: Maybe<String>;
+  number_gt?: Maybe<String>;
+  number_gte?: Maybe<String>;
+  number_contains?: Maybe<String>;
+  number_not_contains?: Maybe<String>;
+  number_starts_with?: Maybe<String>;
+  number_not_starts_with?: Maybe<String>;
+  number_ends_with?: Maybe<String>;
+  number_not_ends_with?: Maybe<String>;
+  AND?: Maybe<AccountScalarWhereInput[] | AccountScalarWhereInput>;
+  OR?: Maybe<AccountScalarWhereInput[] | AccountScalarWhereInput>;
+  NOT?: Maybe<AccountScalarWhereInput[] | AccountScalarWhereInput>;
+}
+
+export interface AccountUpdateManyWithWhereNestedInput {
+  where: AccountScalarWhereInput;
+  data: AccountUpdateManyDataInput;
+}
+
+export interface AccountUpdateManyDataInput {
+  name?: Maybe<String>;
+  number?: Maybe<String>;
+}
+
+export interface UserUpsertNestedInput {
+  update: UserUpdateDataInput;
+  create: UserCreateInput;
+}
+
+export interface BillUpsertWithWhereUniqueWithoutVendorIdInput {
+  where: BillWhereUniqueInput;
+  update: BillUpdateWithoutVendorIdDataInput;
+  create: BillCreateWithoutVendorIdInput;
+}
+
+export interface BillScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  vendor?: Maybe<String>;
+  vendor_not?: Maybe<String>;
+  vendor_in?: Maybe<String[] | String>;
+  vendor_not_in?: Maybe<String[] | String>;
+  vendor_lt?: Maybe<String>;
+  vendor_lte?: Maybe<String>;
+  vendor_gt?: Maybe<String>;
+  vendor_gte?: Maybe<String>;
+  vendor_contains?: Maybe<String>;
+  vendor_not_contains?: Maybe<String>;
+  vendor_starts_with?: Maybe<String>;
+  vendor_not_starts_with?: Maybe<String>;
+  vendor_ends_with?: Maybe<String>;
+  vendor_not_ends_with?: Maybe<String>;
+  date?: Maybe<String>;
+  date_not?: Maybe<String>;
+  date_in?: Maybe<String[] | String>;
+  date_not_in?: Maybe<String[] | String>;
+  date_lt?: Maybe<String>;
+  date_lte?: Maybe<String>;
+  date_gt?: Maybe<String>;
+  date_gte?: Maybe<String>;
+  date_contains?: Maybe<String>;
+  date_not_contains?: Maybe<String>;
+  date_starts_with?: Maybe<String>;
+  date_not_starts_with?: Maybe<String>;
+  date_ends_with?: Maybe<String>;
+  date_not_ends_with?: Maybe<String>;
+  account?: Maybe<String>;
+  account_not?: Maybe<String>;
+  account_in?: Maybe<String[] | String>;
+  account_not_in?: Maybe<String[] | String>;
+  account_lt?: Maybe<String>;
+  account_lte?: Maybe<String>;
+  account_gt?: Maybe<String>;
+  account_gte?: Maybe<String>;
+  account_contains?: Maybe<String>;
+  account_not_contains?: Maybe<String>;
+  account_starts_with?: Maybe<String>;
+  account_not_starts_with?: Maybe<String>;
+  account_ends_with?: Maybe<String>;
+  account_not_ends_with?: Maybe<String>;
+  amount?: Maybe<Int>;
+  amount_not?: Maybe<Int>;
+  amount_in?: Maybe<Int[] | Int>;
+  amount_not_in?: Maybe<Int[] | Int>;
+  amount_lt?: Maybe<Int>;
+  amount_lte?: Maybe<Int>;
+  amount_gt?: Maybe<Int>;
+  amount_gte?: Maybe<Int>;
+  AND?: Maybe<BillScalarWhereInput[] | BillScalarWhereInput>;
+  OR?: Maybe<BillScalarWhereInput[] | BillScalarWhereInput>;
+  NOT?: Maybe<BillScalarWhereInput[] | BillScalarWhereInput>;
+}
+
+export interface BillUpdateManyWithWhereNestedInput {
+  where: BillScalarWhereInput;
+  data: BillUpdateManyDataInput;
+}
+
+export interface BillUpdateManyDataInput {
+  vendor?: Maybe<String>;
+  date?: Maybe<String>;
+  account?: Maybe<String>;
+  amount?: Maybe<Int>;
 }
 
 export interface VendorUpsertWithWhereUniqueWithoutPostedByInput {
@@ -1209,119 +1647,6 @@ export interface VendorUpdateManyDataInput {
   country?: Maybe<String>;
 }
 
-export interface CustomerUpdateManyWithoutPostedByInput {
-  create?: Maybe<
-    CustomerCreateWithoutPostedByInput[] | CustomerCreateWithoutPostedByInput
-  >;
-  delete?: Maybe<CustomerWhereUniqueInput[] | CustomerWhereUniqueInput>;
-  connect?: Maybe<CustomerWhereUniqueInput[] | CustomerWhereUniqueInput>;
-  set?: Maybe<CustomerWhereUniqueInput[] | CustomerWhereUniqueInput>;
-  disconnect?: Maybe<CustomerWhereUniqueInput[] | CustomerWhereUniqueInput>;
-  update?: Maybe<
-    | CustomerUpdateWithWhereUniqueWithoutPostedByInput[]
-    | CustomerUpdateWithWhereUniqueWithoutPostedByInput
-  >;
-  upsert?: Maybe<
-    | CustomerUpsertWithWhereUniqueWithoutPostedByInput[]
-    | CustomerUpsertWithWhereUniqueWithoutPostedByInput
-  >;
-  deleteMany?: Maybe<CustomerScalarWhereInput[] | CustomerScalarWhereInput>;
-  updateMany?: Maybe<
-    | CustomerUpdateManyWithWhereNestedInput[]
-    | CustomerUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface CustomerUpdateWithWhereUniqueWithoutPostedByInput {
-  where: CustomerWhereUniqueInput;
-  data: CustomerUpdateWithoutPostedByDataInput;
-}
-
-export interface CustomerUpdateWithoutPostedByDataInput {
-  name?: Maybe<String>;
-  contact?: Maybe<String>;
-}
-
-export interface CustomerUpsertWithWhereUniqueWithoutPostedByInput {
-  where: CustomerWhereUniqueInput;
-  update: CustomerUpdateWithoutPostedByDataInput;
-  create: CustomerCreateWithoutPostedByInput;
-}
-
-export interface CustomerScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  contact?: Maybe<String>;
-  contact_not?: Maybe<String>;
-  contact_in?: Maybe<String[] | String>;
-  contact_not_in?: Maybe<String[] | String>;
-  contact_lt?: Maybe<String>;
-  contact_lte?: Maybe<String>;
-  contact_gt?: Maybe<String>;
-  contact_gte?: Maybe<String>;
-  contact_contains?: Maybe<String>;
-  contact_not_contains?: Maybe<String>;
-  contact_starts_with?: Maybe<String>;
-  contact_not_starts_with?: Maybe<String>;
-  contact_ends_with?: Maybe<String>;
-  contact_not_ends_with?: Maybe<String>;
-  AND?: Maybe<CustomerScalarWhereInput[] | CustomerScalarWhereInput>;
-  OR?: Maybe<CustomerScalarWhereInput[] | CustomerScalarWhereInput>;
-  NOT?: Maybe<CustomerScalarWhereInput[] | CustomerScalarWhereInput>;
-}
-
-export interface CustomerUpdateManyWithWhereNestedInput {
-  where: CustomerScalarWhereInput;
-  data: CustomerUpdateManyDataInput;
-}
-
-export interface CustomerUpdateManyDataInput {
-  name?: Maybe<String>;
-  contact?: Maybe<String>;
-}
-
 export interface UserUpsertWithoutAccountsInput {
   update: UserUpdateWithoutAccountsDataInput;
   create: UserCreateWithoutAccountsInput;
@@ -1339,34 +1664,38 @@ export interface BillCreateInput {
   account: String;
   amount: Int;
   postedBy?: Maybe<UserCreateOneInput>;
+  vendorId?: Maybe<VendorCreateOneWithoutBillsInput>;
 }
 
-export interface UserCreateOneInput {
-  create?: Maybe<UserCreateInput>;
+export interface VendorCreateOneWithoutBillsInput {
+  create?: Maybe<VendorCreateWithoutBillsInput>;
+  connect?: Maybe<VendorWhereUniqueInput>;
+}
+
+export interface VendorCreateWithoutBillsInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  contact: String;
+  address: String;
+  addressTwo: String;
+  city: String;
+  state: String;
+  country: String;
+  postedBy?: Maybe<UserCreateOneWithoutVendorsInput>;
+}
+
+export interface UserCreateOneWithoutVendorsInput {
+  create?: Maybe<UserCreateWithoutVendorsInput>;
   connect?: Maybe<UserWhereUniqueInput>;
 }
 
-export interface UserCreateInput {
+export interface UserCreateWithoutVendorsInput {
   id?: Maybe<ID_Input>;
   name: String;
   email: String;
   password: String;
-  vendors?: Maybe<VendorCreateManyWithoutPostedByInput>;
   customers?: Maybe<CustomerCreateManyWithoutPostedByInput>;
   accounts?: Maybe<AccountCreateManyWithoutPostedByInput>;
-}
-
-export interface AccountCreateManyWithoutPostedByInput {
-  create?: Maybe<
-    AccountCreateWithoutPostedByInput[] | AccountCreateWithoutPostedByInput
-  >;
-  connect?: Maybe<AccountWhereUniqueInput[] | AccountWhereUniqueInput>;
-}
-
-export interface AccountCreateWithoutPostedByInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  number: String;
 }
 
 export interface BillUpdateInput {
@@ -1375,142 +1704,54 @@ export interface BillUpdateInput {
   account?: Maybe<String>;
   amount?: Maybe<Int>;
   postedBy?: Maybe<UserUpdateOneInput>;
+  vendorId?: Maybe<VendorUpdateOneWithoutBillsInput>;
 }
 
-export interface UserUpdateOneInput {
-  create?: Maybe<UserCreateInput>;
-  update?: Maybe<UserUpdateDataInput>;
-  upsert?: Maybe<UserUpsertNestedInput>;
+export interface VendorUpdateOneWithoutBillsInput {
+  create?: Maybe<VendorCreateWithoutBillsInput>;
+  update?: Maybe<VendorUpdateWithoutBillsDataInput>;
+  upsert?: Maybe<VendorUpsertWithoutBillsInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<VendorWhereUniqueInput>;
+}
+
+export interface VendorUpdateWithoutBillsDataInput {
+  name?: Maybe<String>;
+  contact?: Maybe<String>;
+  address?: Maybe<String>;
+  addressTwo?: Maybe<String>;
+  city?: Maybe<String>;
+  state?: Maybe<String>;
+  country?: Maybe<String>;
+  postedBy?: Maybe<UserUpdateOneWithoutVendorsInput>;
+}
+
+export interface UserUpdateOneWithoutVendorsInput {
+  create?: Maybe<UserCreateWithoutVendorsInput>;
+  update?: Maybe<UserUpdateWithoutVendorsDataInput>;
+  upsert?: Maybe<UserUpsertWithoutVendorsInput>;
   delete?: Maybe<Boolean>;
   disconnect?: Maybe<Boolean>;
   connect?: Maybe<UserWhereUniqueInput>;
 }
 
-export interface UserUpdateDataInput {
+export interface UserUpdateWithoutVendorsDataInput {
   name?: Maybe<String>;
   email?: Maybe<String>;
   password?: Maybe<String>;
-  vendors?: Maybe<VendorUpdateManyWithoutPostedByInput>;
   customers?: Maybe<CustomerUpdateManyWithoutPostedByInput>;
   accounts?: Maybe<AccountUpdateManyWithoutPostedByInput>;
 }
 
-export interface AccountUpdateManyWithoutPostedByInput {
-  create?: Maybe<
-    AccountCreateWithoutPostedByInput[] | AccountCreateWithoutPostedByInput
-  >;
-  delete?: Maybe<AccountWhereUniqueInput[] | AccountWhereUniqueInput>;
-  connect?: Maybe<AccountWhereUniqueInput[] | AccountWhereUniqueInput>;
-  set?: Maybe<AccountWhereUniqueInput[] | AccountWhereUniqueInput>;
-  disconnect?: Maybe<AccountWhereUniqueInput[] | AccountWhereUniqueInput>;
-  update?: Maybe<
-    | AccountUpdateWithWhereUniqueWithoutPostedByInput[]
-    | AccountUpdateWithWhereUniqueWithoutPostedByInput
-  >;
-  upsert?: Maybe<
-    | AccountUpsertWithWhereUniqueWithoutPostedByInput[]
-    | AccountUpsertWithWhereUniqueWithoutPostedByInput
-  >;
-  deleteMany?: Maybe<AccountScalarWhereInput[] | AccountScalarWhereInput>;
-  updateMany?: Maybe<
-    | AccountUpdateManyWithWhereNestedInput[]
-    | AccountUpdateManyWithWhereNestedInput
-  >;
+export interface UserUpsertWithoutVendorsInput {
+  update: UserUpdateWithoutVendorsDataInput;
+  create: UserCreateWithoutVendorsInput;
 }
 
-export interface AccountUpdateWithWhereUniqueWithoutPostedByInput {
-  where: AccountWhereUniqueInput;
-  data: AccountUpdateWithoutPostedByDataInput;
-}
-
-export interface AccountUpdateWithoutPostedByDataInput {
-  name?: Maybe<String>;
-  number?: Maybe<String>;
-}
-
-export interface AccountUpsertWithWhereUniqueWithoutPostedByInput {
-  where: AccountWhereUniqueInput;
-  update: AccountUpdateWithoutPostedByDataInput;
-  create: AccountCreateWithoutPostedByInput;
-}
-
-export interface AccountScalarWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  number?: Maybe<String>;
-  number_not?: Maybe<String>;
-  number_in?: Maybe<String[] | String>;
-  number_not_in?: Maybe<String[] | String>;
-  number_lt?: Maybe<String>;
-  number_lte?: Maybe<String>;
-  number_gt?: Maybe<String>;
-  number_gte?: Maybe<String>;
-  number_contains?: Maybe<String>;
-  number_not_contains?: Maybe<String>;
-  number_starts_with?: Maybe<String>;
-  number_not_starts_with?: Maybe<String>;
-  number_ends_with?: Maybe<String>;
-  number_not_ends_with?: Maybe<String>;
-  AND?: Maybe<AccountScalarWhereInput[] | AccountScalarWhereInput>;
-  OR?: Maybe<AccountScalarWhereInput[] | AccountScalarWhereInput>;
-  NOT?: Maybe<AccountScalarWhereInput[] | AccountScalarWhereInput>;
-}
-
-export interface AccountUpdateManyWithWhereNestedInput {
-  where: AccountScalarWhereInput;
-  data: AccountUpdateManyDataInput;
-}
-
-export interface AccountUpdateManyDataInput {
-  name?: Maybe<String>;
-  number?: Maybe<String>;
-}
-
-export interface UserUpsertNestedInput {
-  update: UserUpdateDataInput;
-  create: UserCreateInput;
+export interface VendorUpsertWithoutBillsInput {
+  update: VendorUpdateWithoutBillsDataInput;
+  create: VendorCreateWithoutBillsInput;
 }
 
 export interface BillUpdateManyMutationInput {
@@ -1623,20 +1864,7 @@ export interface VendorCreateInput {
   state: String;
   country: String;
   postedBy?: Maybe<UserCreateOneWithoutVendorsInput>;
-}
-
-export interface UserCreateOneWithoutVendorsInput {
-  create?: Maybe<UserCreateWithoutVendorsInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface UserCreateWithoutVendorsInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  email: String;
-  password: String;
-  customers?: Maybe<CustomerCreateManyWithoutPostedByInput>;
-  accounts?: Maybe<AccountCreateManyWithoutPostedByInput>;
+  bills?: Maybe<BillCreateManyWithoutVendorIdInput>;
 }
 
 export interface VendorUpdateInput {
@@ -1648,28 +1876,7 @@ export interface VendorUpdateInput {
   state?: Maybe<String>;
   country?: Maybe<String>;
   postedBy?: Maybe<UserUpdateOneWithoutVendorsInput>;
-}
-
-export interface UserUpdateOneWithoutVendorsInput {
-  create?: Maybe<UserCreateWithoutVendorsInput>;
-  update?: Maybe<UserUpdateWithoutVendorsDataInput>;
-  upsert?: Maybe<UserUpsertWithoutVendorsInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface UserUpdateWithoutVendorsDataInput {
-  name?: Maybe<String>;
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-  customers?: Maybe<CustomerUpdateManyWithoutPostedByInput>;
-  accounts?: Maybe<AccountUpdateManyWithoutPostedByInput>;
-}
-
-export interface UserUpsertWithoutVendorsInput {
-  update: UserUpdateWithoutVendorsDataInput;
-  create: UserCreateWithoutVendorsInput;
+  bills?: Maybe<BillUpdateManyWithoutVendorIdInput>;
 }
 
 export interface VendorUpdateManyMutationInput {
@@ -1941,6 +2148,15 @@ export interface VendorPromise extends Promise<Vendor>, Fragmentable {
   state: () => Promise<String>;
   country: () => Promise<String>;
   postedBy: <T = UserPromise>() => T;
+  bills: <T = FragmentableArray<Bill>>(args?: {
+    where?: BillWhereInput;
+    orderBy?: BillOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface VendorSubscription
@@ -1957,6 +2173,15 @@ export interface VendorSubscription
   state: () => Promise<AsyncIterator<String>>;
   country: () => Promise<AsyncIterator<String>>;
   postedBy: <T = UserSubscription>() => T;
+  bills: <T = Promise<AsyncIterator<BillSubscription>>>(args?: {
+    where?: BillWhereInput;
+    orderBy?: BillOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface VendorNullablePromise
@@ -1973,6 +2198,65 @@ export interface VendorNullablePromise
   state: () => Promise<String>;
   country: () => Promise<String>;
   postedBy: <T = UserPromise>() => T;
+  bills: <T = FragmentableArray<Bill>>(args?: {
+    where?: BillWhereInput;
+    orderBy?: BillOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface Bill {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  vendor: String;
+  date: String;
+  account: String;
+  amount: Int;
+}
+
+export interface BillPromise extends Promise<Bill>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  vendor: () => Promise<String>;
+  date: () => Promise<String>;
+  account: () => Promise<String>;
+  amount: () => Promise<Int>;
+  postedBy: <T = UserPromise>() => T;
+  vendorId: <T = VendorPromise>() => T;
+}
+
+export interface BillSubscription
+  extends Promise<AsyncIterator<Bill>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  vendor: () => Promise<AsyncIterator<String>>;
+  date: () => Promise<AsyncIterator<String>>;
+  account: () => Promise<AsyncIterator<String>>;
+  amount: () => Promise<AsyncIterator<Int>>;
+  postedBy: <T = UserSubscription>() => T;
+  vendorId: <T = VendorSubscription>() => T;
+}
+
+export interface BillNullablePromise
+  extends Promise<Bill | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  vendor: () => Promise<String>;
+  date: () => Promise<String>;
+  account: () => Promise<String>;
+  amount: () => Promise<Int>;
+  postedBy: <T = UserPromise>() => T;
+  vendorId: <T = VendorPromise>() => T;
 }
 
 export interface Customer {
@@ -2089,53 +2373,6 @@ export interface AggregateAccountSubscription
   extends Promise<AsyncIterator<AggregateAccount>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface Bill {
-  id: ID_Output;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-  vendor: String;
-  date: String;
-  account: String;
-  amount: Int;
-}
-
-export interface BillPromise extends Promise<Bill>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  vendor: () => Promise<String>;
-  date: () => Promise<String>;
-  account: () => Promise<String>;
-  amount: () => Promise<Int>;
-  postedBy: <T = UserPromise>() => T;
-}
-
-export interface BillSubscription
-  extends Promise<AsyncIterator<Bill>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  vendor: () => Promise<AsyncIterator<String>>;
-  date: () => Promise<AsyncIterator<String>>;
-  account: () => Promise<AsyncIterator<String>>;
-  amount: () => Promise<AsyncIterator<Int>>;
-  postedBy: <T = UserSubscription>() => T;
-}
-
-export interface BillNullablePromise
-  extends Promise<Bill | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  vendor: () => Promise<String>;
-  date: () => Promise<String>;
-  account: () => Promise<String>;
-  amount: () => Promise<Int>;
-  postedBy: <T = UserPromise>() => T;
 }
 
 export interface BillConnection {

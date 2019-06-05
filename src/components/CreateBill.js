@@ -68,7 +68,7 @@ class CreateBill extends Component {
                 >
                   <option>Select Vendor</option>
                   {vendorList.map(vendor => (
-                    <option key={vendor.id} value={vendor.name}>
+                    <option key={vendor.id} value={vendor.id}>
                       {vendor.id}-{vendor.name}
                     </option>
                   ))}

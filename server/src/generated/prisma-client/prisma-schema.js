@@ -299,6 +299,7 @@ type Bill {
   account: String!
   amount: Int!
   postedBy: User
+  vendorId: Vendor
 }
 
 type BillConnection {
@@ -308,6 +309,21 @@ type BillConnection {
 }
 
 input BillCreateInput {
+  id: ID
+  vendor: String!
+  date: String!
+  account: String!
+  amount: Int!
+  postedBy: UserCreateOneInput
+  vendorId: VendorCreateOneWithoutBillsInput
+}
+
+input BillCreateManyWithoutVendorIdInput {
+  create: [BillCreateWithoutVendorIdInput!]
+  connect: [BillWhereUniqueInput!]
+}
+
+input BillCreateWithoutVendorIdInput {
   id: ID
   vendor: String!
   date: String!
@@ -348,6 +364,92 @@ type BillPreviousValues {
   amount: Int!
 }
 
+input BillScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  vendor: String
+  vendor_not: String
+  vendor_in: [String!]
+  vendor_not_in: [String!]
+  vendor_lt: String
+  vendor_lte: String
+  vendor_gt: String
+  vendor_gte: String
+  vendor_contains: String
+  vendor_not_contains: String
+  vendor_starts_with: String
+  vendor_not_starts_with: String
+  vendor_ends_with: String
+  vendor_not_ends_with: String
+  date: String
+  date_not: String
+  date_in: [String!]
+  date_not_in: [String!]
+  date_lt: String
+  date_lte: String
+  date_gt: String
+  date_gte: String
+  date_contains: String
+  date_not_contains: String
+  date_starts_with: String
+  date_not_starts_with: String
+  date_ends_with: String
+  date_not_ends_with: String
+  account: String
+  account_not: String
+  account_in: [String!]
+  account_not_in: [String!]
+  account_lt: String
+  account_lte: String
+  account_gt: String
+  account_gte: String
+  account_contains: String
+  account_not_contains: String
+  account_starts_with: String
+  account_not_starts_with: String
+  account_ends_with: String
+  account_not_ends_with: String
+  amount: Int
+  amount_not: Int
+  amount_in: [Int!]
+  amount_not_in: [Int!]
+  amount_lt: Int
+  amount_lte: Int
+  amount_gt: Int
+  amount_gte: Int
+  AND: [BillScalarWhereInput!]
+  OR: [BillScalarWhereInput!]
+  NOT: [BillScalarWhereInput!]
+}
+
 type BillSubscriptionPayload {
   mutation: MutationType!
   node: Bill
@@ -372,6 +474,14 @@ input BillUpdateInput {
   account: String
   amount: Int
   postedBy: UserUpdateOneInput
+  vendorId: VendorUpdateOneWithoutBillsInput
+}
+
+input BillUpdateManyDataInput {
+  vendor: String
+  date: String
+  account: String
+  amount: Int
 }
 
 input BillUpdateManyMutationInput {
@@ -379,6 +489,42 @@ input BillUpdateManyMutationInput {
   date: String
   account: String
   amount: Int
+}
+
+input BillUpdateManyWithoutVendorIdInput {
+  create: [BillCreateWithoutVendorIdInput!]
+  delete: [BillWhereUniqueInput!]
+  connect: [BillWhereUniqueInput!]
+  set: [BillWhereUniqueInput!]
+  disconnect: [BillWhereUniqueInput!]
+  update: [BillUpdateWithWhereUniqueWithoutVendorIdInput!]
+  upsert: [BillUpsertWithWhereUniqueWithoutVendorIdInput!]
+  deleteMany: [BillScalarWhereInput!]
+  updateMany: [BillUpdateManyWithWhereNestedInput!]
+}
+
+input BillUpdateManyWithWhereNestedInput {
+  where: BillScalarWhereInput!
+  data: BillUpdateManyDataInput!
+}
+
+input BillUpdateWithoutVendorIdDataInput {
+  vendor: String
+  date: String
+  account: String
+  amount: Int
+  postedBy: UserUpdateOneInput
+}
+
+input BillUpdateWithWhereUniqueWithoutVendorIdInput {
+  where: BillWhereUniqueInput!
+  data: BillUpdateWithoutVendorIdDataInput!
+}
+
+input BillUpsertWithWhereUniqueWithoutVendorIdInput {
+  where: BillWhereUniqueInput!
+  update: BillUpdateWithoutVendorIdDataInput!
+  create: BillCreateWithoutVendorIdInput!
 }
 
 input BillWhereInput {
@@ -463,6 +609,7 @@ input BillWhereInput {
   amount_gt: Int
   amount_gte: Int
   postedBy: UserWhereInput
+  vendorId: VendorWhereInput
   AND: [BillWhereInput!]
   OR: [BillWhereInput!]
   NOT: [BillWhereInput!]
@@ -1334,6 +1481,7 @@ type Vendor {
   state: String!
   country: String!
   postedBy: User
+  bills(where: BillWhereInput, orderBy: BillOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Bill!]
 }
 
 type VendorConnection {
@@ -1352,11 +1500,29 @@ input VendorCreateInput {
   state: String!
   country: String!
   postedBy: UserCreateOneWithoutVendorsInput
+  bills: BillCreateManyWithoutVendorIdInput
 }
 
 input VendorCreateManyWithoutPostedByInput {
   create: [VendorCreateWithoutPostedByInput!]
   connect: [VendorWhereUniqueInput!]
+}
+
+input VendorCreateOneWithoutBillsInput {
+  create: VendorCreateWithoutBillsInput
+  connect: VendorWhereUniqueInput
+}
+
+input VendorCreateWithoutBillsInput {
+  id: ID
+  name: String!
+  contact: String!
+  address: String!
+  addressTwo: String!
+  city: String!
+  state: String!
+  country: String!
+  postedBy: UserCreateOneWithoutVendorsInput
 }
 
 input VendorCreateWithoutPostedByInput {
@@ -1368,6 +1534,7 @@ input VendorCreateWithoutPostedByInput {
   city: String!
   state: String!
   country: String!
+  bills: BillCreateManyWithoutVendorIdInput
 }
 
 type VendorEdge {
@@ -1572,6 +1739,7 @@ input VendorUpdateInput {
   state: String
   country: String
   postedBy: UserUpdateOneWithoutVendorsInput
+  bills: BillUpdateManyWithoutVendorIdInput
 }
 
 input VendorUpdateManyDataInput {
@@ -1611,6 +1779,26 @@ input VendorUpdateManyWithWhereNestedInput {
   data: VendorUpdateManyDataInput!
 }
 
+input VendorUpdateOneWithoutBillsInput {
+  create: VendorCreateWithoutBillsInput
+  update: VendorUpdateWithoutBillsDataInput
+  upsert: VendorUpsertWithoutBillsInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: VendorWhereUniqueInput
+}
+
+input VendorUpdateWithoutBillsDataInput {
+  name: String
+  contact: String
+  address: String
+  addressTwo: String
+  city: String
+  state: String
+  country: String
+  postedBy: UserUpdateOneWithoutVendorsInput
+}
+
 input VendorUpdateWithoutPostedByDataInput {
   name: String
   contact: String
@@ -1619,11 +1807,17 @@ input VendorUpdateWithoutPostedByDataInput {
   city: String
   state: String
   country: String
+  bills: BillUpdateManyWithoutVendorIdInput
 }
 
 input VendorUpdateWithWhereUniqueWithoutPostedByInput {
   where: VendorWhereUniqueInput!
   data: VendorUpdateWithoutPostedByDataInput!
+}
+
+input VendorUpsertWithoutBillsInput {
+  update: VendorUpdateWithoutBillsDataInput!
+  create: VendorCreateWithoutBillsInput!
 }
 
 input VendorUpsertWithWhereUniqueWithoutPostedByInput {
@@ -1762,6 +1956,9 @@ input VendorWhereInput {
   country_ends_with: String
   country_not_ends_with: String
   postedBy: UserWhereInput
+  bills_every: BillWhereInput
+  bills_some: BillWhereInput
+  bills_none: BillWhereInput
   AND: [VendorWhereInput!]
   OR: [VendorWhereInput!]
   NOT: [VendorWhereInput!]
