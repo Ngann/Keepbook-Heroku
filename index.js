@@ -9,7 +9,6 @@ const Customer = require('./src/resolvers/Customer')
 const Bill = require('./src/resolvers/Bill')
 const Invoice = require('./src/resolvers/Invoice')
 const Account = require('./src/resolvers/Account')
-const path = require('path')
 
 const resolvers = {
   Query,
