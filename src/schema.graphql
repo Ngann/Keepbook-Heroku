@@ -1,0 +1,130 @@
+scalar DateTime
+
+type Query {
+  searchBills(filter: String, skip: Int, first: Int, orderBy: LinkOrderByInput): SearchBills!
+  searchInvoices(filter: String, skip: Int, first: Int, orderBy: LinkOrderByInput): SearchInvoices!
+  vendors: [Vendor!]!
+  bills: [Bill!]!
+  invoices: [Invoice!]!
+  accounts: [Account!]!
+  customers: [Customer!]!
+  getCustomer(id: ID!): Customer
+  getVendor(id: ID!): Vendor
+}
+
+enum LinkOrderByInput {
+  description_ASC
+  description_DESC
+  url_ASC
+  url_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type SearchBills {
+  bills: [Bill!]!
+  count: Int!
+}
+
+type SearchInvoices {
+  invoices: [Invoice!]!
+  count: Int!
+}
+
+type Mutation {
+  addVendor(name: String!, contact: String!, address: String!, addressTwo: String!, city: String!, state: String!, country:String!): Vendor!
+  updateVendor(id: ID!, name:String! , contact: String!):Vendor
+  deleteVendor(id: ID!): Vendor
+
+  signup(email: String!, password: String!, name: String!): AuthPayload
+  login(email: String!, password: String!): AuthPayload
+
+  createCustomer(name: String!, contact: String!): Customer
+  updateCustomer(id: ID!, name: String!, contact: String!): Customer
+  deleteCustomer(id: ID!): Customer
+
+  createBill(vendor: String!, date: String!, account: String!, amount: Int!): Bill
+  updateBill(id:ID!, vendor: String!, date: String!, account: String!, amount: Int!): Bill
+  deleteBill(id: ID!): Bill
+
+  createInvoice(customer: String!, date: String!, account: String!, amount: Int!): Invoice
+  updateInvoice(id:ID!, customer: String!, date: String!, account: String!, amount: Int!): Invoice
+  deleteInvoice(id: ID!): Invoice
+
+  createAccount(name: String!, number: String!): Account
+  updateAccount(id: ID!, name: String!, number: String!): Account
+  deleteAccount(id: ID!): Account
+}
+
+type Subscription {
+  customerAdded: Customer
+  customerEdited: Customer
+  customerDeleted: Customer
+  vendorDeleted: Vendor
+}
+
+type AuthPayload {
+  token: String
+  user: User
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  vendors: [Vendor]
+  customers: [Customer]
+  bills:[Bill]
+  accounts:[Account]
+}
+
+type Vendor {
+  id: ID!
+  createdAt: DateTime!
+  name: String!
+  contact: String!
+  address: String!
+  addressTwo: String!
+  city: String!
+  state: String!
+  country: String!
+  postedBy: User
+  bills: [Bill]
+}
+
+type Customer {
+  id: ID!
+  createdAt: DateTime!
+  name: String!
+  contact: String!
+  postedBy: User
+}
+
+type Bill {
+  id: ID!
+  vendor: String!
+  date: String!
+  account: String!
+  amount: Int!
+  postedBy: User
+  vendorId: Vendor
+  accountId: Account
+}
+
+type Invoice {
+  id: ID!
+  customer: String!
+  date: String!
+  account: String!
+  amount: Int!
+  postedBy: User
+}
+
+type Account {
+  id: ID! 
+  name: String!
+  number: String!
+  postedBy: User
+  bills: [Bill]
+  vendors: [Vendor]
+}

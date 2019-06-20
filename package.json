@@ -5,7 +5,9 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
-    "password-generator": "^2.2.0"
+    "graphql-yoga": "^1.18.0",
+    "password-generator": "^2.2.0",
+    "prisma-client": "^0.0.0"
   },
   "scripts": {
     "start": "node index.js",
