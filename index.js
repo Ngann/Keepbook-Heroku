@@ -1,3 +1,5 @@
+const express = require('express');
+const path = require('path');
 const { GraphQLServer } = require('graphql-yoga')
 const { prisma } = require('./src/generated/prisma-client')
 const Query = require('./src/resolvers/Query')
@@ -30,6 +32,8 @@ const server = new GraphQLServer({
     prisma,
   }),
 })
+
+server.use(express.static(path.join(__dirname, 'client/build')));
 
 const port = process.env.PORT || 4000;
 server.start(() => console.log(`Server is running on http://localhost:${port}`))
