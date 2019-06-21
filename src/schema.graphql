@@ -52,7 +52,7 @@ type Mutation {
   updateInvoice(id:ID!, customer: String!, date: String!, account: String!, amount: Int!): Invoice
   deleteInvoice(id: ID!): Invoice
 
-  createAccount(name: String!, number: String!): Account
+  createAccount(name: String!, number: String!, accountType: AccountType, accountCategory: AccountCategory!): Account
   updateAccount(id: ID!, name: String!, number: String!): Account
   deleteAccount(id: ID!): Account
 }
@@ -110,6 +110,9 @@ type Bill {
   postedBy: User
   vendorId: Vendor
   accountId: Account
+  paymentStatus: Balance
+  paymentType: Payment
+  status: Status
 }
 
 type Invoice {
@@ -128,4 +131,51 @@ type Account {
   postedBy: User
   bills: [Bill]
   vendors: [Vendor]
+  accountCategory: AccountCategory
+  accountType: AccountType
+  generalJournal: GeneralJournal
+}
+
+type GeneralJournal {
+  id: ID! 
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  date: DateTime!
+  debitAmount: Float!
+  creditAmount: Float!
+  postedBy: User
+  bills: [Bill]
+  vendors: [Vendor] 
+  accounts: [Account]
+}
+
+
+enum Status{
+  Active
+  Inactive
+}
+
+enum Balance{
+  Paid
+  Open
+}
+
+enum Payment{
+  Credit Card
+  Bank
+  Cash
+  EFT
+  Checks
+}
+
+enum AccountType{
+  Debit
+  Credit
+}
+
+enum AccountCategory{
+  Assets
+  Liablity
+  Revenue
+  Expense
 }

@@ -27,6 +27,30 @@ var models = [
   {
     name: "Account",
     embedded: false
+  },
+  {
+    name: "GeneralJournal",
+    embedded: false
+  },
+  {
+    name: "Status",
+    embedded: false
+  },
+  {
+    name: "Balance",
+    embedded: false
+  },
+  {
+    name: "Payment",
+    embedded: false
+  },
+  {
+    name: "AccountType",
+    embedded: false
+  },
+  {
+    name: "AccountCategory",
+    embedded: false
   }
 ];
 exports.Prisma = prisma_lib_1.makePrismaClientClass({

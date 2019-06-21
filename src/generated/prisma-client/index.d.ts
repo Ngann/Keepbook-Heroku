@@ -19,6 +19,7 @@ export interface Exists {
   account: (where?: AccountWhereInput) => Promise<boolean>;
   bill: (where?: BillWhereInput) => Promise<boolean>;
   customer: (where?: CustomerWhereInput) => Promise<boolean>;
+  generalJournal: (where?: GeneralJournalWhereInput) => Promise<boolean>;
   invoice: (where?: InvoiceWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
   vendor: (where?: VendorWhereInput) => Promise<boolean>;
@@ -100,6 +101,27 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => CustomerConnectionPromise;
+  generalJournal: (
+    where: GeneralJournalWhereUniqueInput
+  ) => GeneralJournalNullablePromise;
+  generalJournals: (args?: {
+    where?: GeneralJournalWhereInput;
+    orderBy?: GeneralJournalOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<GeneralJournal>;
+  generalJournalsConnection: (args?: {
+    where?: GeneralJournalWhereInput;
+    orderBy?: GeneralJournalOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => GeneralJournalConnectionPromise;
   invoice: (where: InvoiceWhereUniqueInput) => InvoiceNullablePromise;
   invoices: (args?: {
     where?: InvoiceWhereInput;
@@ -211,6 +233,28 @@ export interface Prisma {
   }) => CustomerPromise;
   deleteCustomer: (where: CustomerWhereUniqueInput) => CustomerPromise;
   deleteManyCustomers: (where?: CustomerWhereInput) => BatchPayloadPromise;
+  createGeneralJournal: (
+    data: GeneralJournalCreateInput
+  ) => GeneralJournalPromise;
+  updateGeneralJournal: (args: {
+    data: GeneralJournalUpdateInput;
+    where: GeneralJournalWhereUniqueInput;
+  }) => GeneralJournalPromise;
+  updateManyGeneralJournals: (args: {
+    data: GeneralJournalUpdateManyMutationInput;
+    where?: GeneralJournalWhereInput;
+  }) => BatchPayloadPromise;
+  upsertGeneralJournal: (args: {
+    where: GeneralJournalWhereUniqueInput;
+    create: GeneralJournalCreateInput;
+    update: GeneralJournalUpdateInput;
+  }) => GeneralJournalPromise;
+  deleteGeneralJournal: (
+    where: GeneralJournalWhereUniqueInput
+  ) => GeneralJournalPromise;
+  deleteManyGeneralJournals: (
+    where?: GeneralJournalWhereInput
+  ) => BatchPayloadPromise;
   createInvoice: (data: InvoiceCreateInput) => InvoicePromise;
   updateInvoice: (args: {
     data: InvoiceUpdateInput;
@@ -277,6 +321,9 @@ export interface Subscription {
   customer: (
     where?: CustomerSubscriptionWhereInput
   ) => CustomerSubscriptionPayloadSubscription;
+  generalJournal: (
+    where?: GeneralJournalSubscriptionWhereInput
+  ) => GeneralJournalSubscriptionPayloadSubscription;
   invoice: (
     where?: InvoiceSubscriptionWhereInput
   ) => InvoiceSubscriptionPayloadSubscription;
@@ -295,6 +342,16 @@ export interface ClientConstructor<T> {
 /**
  * Types
  */
+
+export type Balance = "Paid" | "Open";
+
+export type Payment = "Credit" | "Card" | "Bank" | "Cash" | "EFT" | "Checks";
+
+export type Status = "Active" | "Inactive";
+
+export type AccountCategory = "Assets" | "Liablity" | "Revenue" | "Expense";
+
+export type AccountType = "Debit" | "Credit";
 
 export type VendorOrderByInput =
   | "id_ASC"
@@ -328,7 +385,11 @@ export type AccountOrderByInput =
   | "name_ASC"
   | "name_DESC"
   | "number_ASC"
-  | "number_DESC";
+  | "number_DESC"
+  | "accountCategory_ASC"
+  | "accountCategory_DESC"
+  | "accountType_ASC"
+  | "accountType_DESC";
 
 export type BillOrderByInput =
   | "id_ASC"
@@ -344,7 +405,13 @@ export type BillOrderByInput =
   | "account_ASC"
   | "account_DESC"
   | "amount_ASC"
-  | "amount_DESC";
+  | "amount_DESC"
+  | "paymentStatus_ASC"
+  | "paymentStatus_DESC"
+  | "paymentType_ASC"
+  | "paymentType_DESC"
+  | "status_ASC"
+  | "status_DESC";
 
 export type CustomerOrderByInput =
   | "id_ASC"
@@ -357,6 +424,20 @@ export type CustomerOrderByInput =
   | "name_DESC"
   | "contact_ASC"
   | "contact_DESC";
+
+export type GeneralJournalOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC"
+  | "date_ASC"
+  | "date_DESC"
+  | "debitAmount_ASC"
+  | "debitAmount_DESC"
+  | "creditAmount_ASC"
+  | "creditAmount_DESC";
 
 export type InvoiceOrderByInput =
   | "id_ASC"
@@ -757,6 +838,15 @@ export interface AccountWhereInput {
   vendors_every?: Maybe<VendorWhereInput>;
   vendors_some?: Maybe<VendorWhereInput>;
   vendors_none?: Maybe<VendorWhereInput>;
+  accountCategory?: Maybe<AccountCategory>;
+  accountCategory_not?: Maybe<AccountCategory>;
+  accountCategory_in?: Maybe<AccountCategory[] | AccountCategory>;
+  accountCategory_not_in?: Maybe<AccountCategory[] | AccountCategory>;
+  accountType?: Maybe<AccountType>;
+  accountType_not?: Maybe<AccountType>;
+  accountType_in?: Maybe<AccountType[] | AccountType>;
+  accountType_not_in?: Maybe<AccountType[] | AccountType>;
+  generalJournal?: Maybe<GeneralJournalWhereInput>;
   AND?: Maybe<AccountWhereInput[] | AccountWhereInput>;
   OR?: Maybe<AccountWhereInput[] | AccountWhereInput>;
   NOT?: Maybe<AccountWhereInput[] | AccountWhereInput>;
@@ -846,9 +936,91 @@ export interface BillWhereInput {
   postedBy?: Maybe<UserWhereInput>;
   vendorId?: Maybe<VendorWhereInput>;
   accountId?: Maybe<AccountWhereInput>;
+  paymentStatus?: Maybe<Balance>;
+  paymentStatus_not?: Maybe<Balance>;
+  paymentStatus_in?: Maybe<Balance[] | Balance>;
+  paymentStatus_not_in?: Maybe<Balance[] | Balance>;
+  paymentType?: Maybe<Payment>;
+  paymentType_not?: Maybe<Payment>;
+  paymentType_in?: Maybe<Payment[] | Payment>;
+  paymentType_not_in?: Maybe<Payment[] | Payment>;
+  status?: Maybe<Status>;
+  status_not?: Maybe<Status>;
+  status_in?: Maybe<Status[] | Status>;
+  status_not_in?: Maybe<Status[] | Status>;
   AND?: Maybe<BillWhereInput[] | BillWhereInput>;
   OR?: Maybe<BillWhereInput[] | BillWhereInput>;
   NOT?: Maybe<BillWhereInput[] | BillWhereInput>;
+}
+
+export interface GeneralJournalWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  date?: Maybe<DateTimeInput>;
+  date_not?: Maybe<DateTimeInput>;
+  date_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  date_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  date_lt?: Maybe<DateTimeInput>;
+  date_lte?: Maybe<DateTimeInput>;
+  date_gt?: Maybe<DateTimeInput>;
+  date_gte?: Maybe<DateTimeInput>;
+  debitAmount?: Maybe<Float>;
+  debitAmount_not?: Maybe<Float>;
+  debitAmount_in?: Maybe<Float[] | Float>;
+  debitAmount_not_in?: Maybe<Float[] | Float>;
+  debitAmount_lt?: Maybe<Float>;
+  debitAmount_lte?: Maybe<Float>;
+  debitAmount_gt?: Maybe<Float>;
+  debitAmount_gte?: Maybe<Float>;
+  creditAmount?: Maybe<Float>;
+  creditAmount_not?: Maybe<Float>;
+  creditAmount_in?: Maybe<Float[] | Float>;
+  creditAmount_not_in?: Maybe<Float[] | Float>;
+  creditAmount_lt?: Maybe<Float>;
+  creditAmount_lte?: Maybe<Float>;
+  creditAmount_gt?: Maybe<Float>;
+  creditAmount_gte?: Maybe<Float>;
+  postedBy?: Maybe<UserWhereInput>;
+  bills_every?: Maybe<BillWhereInput>;
+  bills_some?: Maybe<BillWhereInput>;
+  bills_none?: Maybe<BillWhereInput>;
+  vendors_every?: Maybe<VendorWhereInput>;
+  vendors_some?: Maybe<VendorWhereInput>;
+  vendors_none?: Maybe<VendorWhereInput>;
+  accounts_every?: Maybe<AccountWhereInput>;
+  accounts_some?: Maybe<AccountWhereInput>;
+  accounts_none?: Maybe<AccountWhereInput>;
+  AND?: Maybe<GeneralJournalWhereInput[] | GeneralJournalWhereInput>;
+  OR?: Maybe<GeneralJournalWhereInput[] | GeneralJournalWhereInput>;
+  NOT?: Maybe<GeneralJournalWhereInput[] | GeneralJournalWhereInput>;
 }
 
 export type BillWhereUniqueInput = AtLeastOne<{
@@ -856,6 +1028,10 @@ export type BillWhereUniqueInput = AtLeastOne<{
 }>;
 
 export type CustomerWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export type GeneralJournalWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
@@ -966,6 +1142,9 @@ export interface AccountCreateInput {
   postedBy?: Maybe<UserCreateOneWithoutAccountsInput>;
   bills?: Maybe<BillCreateManyWithoutAccountIdInput>;
   vendors?: Maybe<VendorCreateManyWithoutAccountsInput>;
+  accountCategory?: Maybe<AccountCategory>;
+  accountType?: Maybe<AccountType>;
+  generalJournal?: Maybe<GeneralJournalCreateOneWithoutAccountsInput>;
 }
 
 export interface UserCreateOneWithoutAccountsInput {
@@ -1016,6 +1195,9 @@ export interface AccountCreateWithoutVendorsInput {
   number: String;
   postedBy?: Maybe<UserCreateOneWithoutAccountsInput>;
   bills?: Maybe<BillCreateManyWithoutAccountIdInput>;
+  accountCategory?: Maybe<AccountCategory>;
+  accountType?: Maybe<AccountType>;
+  generalJournal?: Maybe<GeneralJournalCreateOneWithoutAccountsInput>;
 }
 
 export interface BillCreateManyWithoutAccountIdInput {
@@ -1033,6 +1215,9 @@ export interface BillCreateWithoutAccountIdInput {
   amount: Int;
   postedBy?: Maybe<UserCreateOneWithoutBillsInput>;
   vendorId?: Maybe<VendorCreateOneWithoutBillsInput>;
+  paymentStatus?: Maybe<Balance>;
+  paymentType?: Maybe<Payment>;
+  status?: Maybe<Status>;
 }
 
 export interface UserCreateOneWithoutBillsInput {
@@ -1111,6 +1296,9 @@ export interface AccountCreateWithoutPostedByInput {
   number: String;
   bills?: Maybe<BillCreateManyWithoutAccountIdInput>;
   vendors?: Maybe<VendorCreateManyWithoutAccountsInput>;
+  accountCategory?: Maybe<AccountCategory>;
+  accountType?: Maybe<AccountType>;
+  generalJournal?: Maybe<GeneralJournalCreateOneWithoutAccountsInput>;
 }
 
 export interface VendorCreateManyWithoutAccountsInput {
@@ -1148,6 +1336,9 @@ export interface BillCreateWithoutVendorIdInput {
   amount: Int;
   postedBy?: Maybe<UserCreateOneWithoutBillsInput>;
   accountId?: Maybe<AccountCreateOneWithoutBillsInput>;
+  paymentStatus?: Maybe<Balance>;
+  paymentType?: Maybe<Payment>;
+  status?: Maybe<Status>;
 }
 
 export interface AccountCreateOneWithoutBillsInput {
@@ -1161,6 +1352,40 @@ export interface AccountCreateWithoutBillsInput {
   number: String;
   postedBy?: Maybe<UserCreateOneWithoutAccountsInput>;
   vendors?: Maybe<VendorCreateManyWithoutAccountsInput>;
+  accountCategory?: Maybe<AccountCategory>;
+  accountType?: Maybe<AccountType>;
+  generalJournal?: Maybe<GeneralJournalCreateOneWithoutAccountsInput>;
+}
+
+export interface GeneralJournalCreateOneWithoutAccountsInput {
+  create?: Maybe<GeneralJournalCreateWithoutAccountsInput>;
+  connect?: Maybe<GeneralJournalWhereUniqueInput>;
+}
+
+export interface GeneralJournalCreateWithoutAccountsInput {
+  id?: Maybe<ID_Input>;
+  date: DateTimeInput;
+  debitAmount: Float;
+  creditAmount: Float;
+  postedBy?: Maybe<UserCreateOneInput>;
+  bills?: Maybe<BillCreateManyInput>;
+  vendors?: Maybe<VendorCreateManyInput>;
+}
+
+export interface UserCreateOneInput {
+  create?: Maybe<UserCreateInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  email: String;
+  password: String;
+  vendors?: Maybe<VendorCreateManyWithoutPostedByInput>;
+  customers?: Maybe<CustomerCreateManyWithoutPostedByInput>;
+  accounts?: Maybe<AccountCreateManyWithoutPostedByInput>;
+  bills?: Maybe<BillCreateManyWithoutPostedByInput>;
 }
 
 export interface BillCreateManyWithoutPostedByInput {
@@ -1178,6 +1403,9 @@ export interface BillCreateWithoutPostedByInput {
   amount: Int;
   vendorId?: Maybe<VendorCreateOneWithoutBillsInput>;
   accountId?: Maybe<AccountCreateOneWithoutBillsInput>;
+  paymentStatus?: Maybe<Balance>;
+  paymentType?: Maybe<Payment>;
+  status?: Maybe<Status>;
 }
 
 export interface VendorCreateOneWithoutBillsInput {
@@ -1198,12 +1426,39 @@ export interface VendorCreateWithoutBillsInput {
   accounts?: Maybe<AccountCreateManyWithoutVendorsInput>;
 }
 
+export interface BillCreateManyInput {
+  create?: Maybe<BillCreateInput[] | BillCreateInput>;
+  connect?: Maybe<BillWhereUniqueInput[] | BillWhereUniqueInput>;
+}
+
+export interface BillCreateInput {
+  id?: Maybe<ID_Input>;
+  vendor: String;
+  date: String;
+  account: String;
+  amount: Int;
+  postedBy?: Maybe<UserCreateOneWithoutBillsInput>;
+  vendorId?: Maybe<VendorCreateOneWithoutBillsInput>;
+  accountId?: Maybe<AccountCreateOneWithoutBillsInput>;
+  paymentStatus?: Maybe<Balance>;
+  paymentType?: Maybe<Payment>;
+  status?: Maybe<Status>;
+}
+
+export interface VendorCreateManyInput {
+  create?: Maybe<VendorCreateInput[] | VendorCreateInput>;
+  connect?: Maybe<VendorWhereUniqueInput[] | VendorWhereUniqueInput>;
+}
+
 export interface AccountUpdateInput {
   name?: Maybe<String>;
   number?: Maybe<String>;
   postedBy?: Maybe<UserUpdateOneWithoutAccountsInput>;
   bills?: Maybe<BillUpdateManyWithoutAccountIdInput>;
   vendors?: Maybe<VendorUpdateManyWithoutAccountsInput>;
+  accountCategory?: Maybe<AccountCategory>;
+  accountType?: Maybe<AccountType>;
+  generalJournal?: Maybe<GeneralJournalUpdateOneWithoutAccountsInput>;
 }
 
 export interface UserUpdateOneWithoutAccountsInput {
@@ -1297,6 +1552,9 @@ export interface AccountUpdateWithoutVendorsDataInput {
   number?: Maybe<String>;
   postedBy?: Maybe<UserUpdateOneWithoutAccountsInput>;
   bills?: Maybe<BillUpdateManyWithoutAccountIdInput>;
+  accountCategory?: Maybe<AccountCategory>;
+  accountType?: Maybe<AccountType>;
+  generalJournal?: Maybe<GeneralJournalUpdateOneWithoutAccountsInput>;
 }
 
 export interface BillUpdateManyWithoutAccountIdInput {
@@ -1333,6 +1591,9 @@ export interface BillUpdateWithoutAccountIdDataInput {
   amount?: Maybe<Int>;
   postedBy?: Maybe<UserUpdateOneWithoutBillsInput>;
   vendorId?: Maybe<VendorUpdateOneWithoutBillsInput>;
+  paymentStatus?: Maybe<Balance>;
+  paymentType?: Maybe<Payment>;
+  status?: Maybe<Status>;
 }
 
 export interface UserUpdateOneWithoutBillsInput {
@@ -1460,6 +1721,9 @@ export interface AccountUpdateWithoutPostedByDataInput {
   number?: Maybe<String>;
   bills?: Maybe<BillUpdateManyWithoutAccountIdInput>;
   vendors?: Maybe<VendorUpdateManyWithoutAccountsInput>;
+  accountCategory?: Maybe<AccountCategory>;
+  accountType?: Maybe<AccountType>;
+  generalJournal?: Maybe<GeneralJournalUpdateOneWithoutAccountsInput>;
 }
 
 export interface VendorUpdateManyWithoutAccountsInput {
@@ -1536,6 +1800,9 @@ export interface BillUpdateWithoutVendorIdDataInput {
   amount?: Maybe<Int>;
   postedBy?: Maybe<UserUpdateOneWithoutBillsInput>;
   accountId?: Maybe<AccountUpdateOneWithoutBillsInput>;
+  paymentStatus?: Maybe<Balance>;
+  paymentType?: Maybe<Payment>;
+  status?: Maybe<Status>;
 }
 
 export interface AccountUpdateOneWithoutBillsInput {
@@ -1552,17 +1819,117 @@ export interface AccountUpdateWithoutBillsDataInput {
   number?: Maybe<String>;
   postedBy?: Maybe<UserUpdateOneWithoutAccountsInput>;
   vendors?: Maybe<VendorUpdateManyWithoutAccountsInput>;
+  accountCategory?: Maybe<AccountCategory>;
+  accountType?: Maybe<AccountType>;
+  generalJournal?: Maybe<GeneralJournalUpdateOneWithoutAccountsInput>;
 }
 
-export interface AccountUpsertWithoutBillsInput {
-  update: AccountUpdateWithoutBillsDataInput;
-  create: AccountCreateWithoutBillsInput;
+export interface GeneralJournalUpdateOneWithoutAccountsInput {
+  create?: Maybe<GeneralJournalCreateWithoutAccountsInput>;
+  update?: Maybe<GeneralJournalUpdateWithoutAccountsDataInput>;
+  upsert?: Maybe<GeneralJournalUpsertWithoutAccountsInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<GeneralJournalWhereUniqueInput>;
 }
 
-export interface BillUpsertWithWhereUniqueWithoutVendorIdInput {
+export interface GeneralJournalUpdateWithoutAccountsDataInput {
+  date?: Maybe<DateTimeInput>;
+  debitAmount?: Maybe<Float>;
+  creditAmount?: Maybe<Float>;
+  postedBy?: Maybe<UserUpdateOneInput>;
+  bills?: Maybe<BillUpdateManyInput>;
+  vendors?: Maybe<VendorUpdateManyInput>;
+}
+
+export interface UserUpdateOneInput {
+  create?: Maybe<UserCreateInput>;
+  update?: Maybe<UserUpdateDataInput>;
+  upsert?: Maybe<UserUpsertNestedInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserUpdateDataInput {
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+  vendors?: Maybe<VendorUpdateManyWithoutPostedByInput>;
+  customers?: Maybe<CustomerUpdateManyWithoutPostedByInput>;
+  accounts?: Maybe<AccountUpdateManyWithoutPostedByInput>;
+  bills?: Maybe<BillUpdateManyWithoutPostedByInput>;
+}
+
+export interface BillUpdateManyWithoutPostedByInput {
+  create?: Maybe<
+    BillCreateWithoutPostedByInput[] | BillCreateWithoutPostedByInput
+  >;
+  delete?: Maybe<BillWhereUniqueInput[] | BillWhereUniqueInput>;
+  connect?: Maybe<BillWhereUniqueInput[] | BillWhereUniqueInput>;
+  set?: Maybe<BillWhereUniqueInput[] | BillWhereUniqueInput>;
+  disconnect?: Maybe<BillWhereUniqueInput[] | BillWhereUniqueInput>;
+  update?: Maybe<
+    | BillUpdateWithWhereUniqueWithoutPostedByInput[]
+    | BillUpdateWithWhereUniqueWithoutPostedByInput
+  >;
+  upsert?: Maybe<
+    | BillUpsertWithWhereUniqueWithoutPostedByInput[]
+    | BillUpsertWithWhereUniqueWithoutPostedByInput
+  >;
+  deleteMany?: Maybe<BillScalarWhereInput[] | BillScalarWhereInput>;
+  updateMany?: Maybe<
+    BillUpdateManyWithWhereNestedInput[] | BillUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface BillUpdateWithWhereUniqueWithoutPostedByInput {
   where: BillWhereUniqueInput;
-  update: BillUpdateWithoutVendorIdDataInput;
-  create: BillCreateWithoutVendorIdInput;
+  data: BillUpdateWithoutPostedByDataInput;
+}
+
+export interface BillUpdateWithoutPostedByDataInput {
+  vendor?: Maybe<String>;
+  date?: Maybe<String>;
+  account?: Maybe<String>;
+  amount?: Maybe<Int>;
+  vendorId?: Maybe<VendorUpdateOneWithoutBillsInput>;
+  accountId?: Maybe<AccountUpdateOneWithoutBillsInput>;
+  paymentStatus?: Maybe<Balance>;
+  paymentType?: Maybe<Payment>;
+  status?: Maybe<Status>;
+}
+
+export interface VendorUpdateOneWithoutBillsInput {
+  create?: Maybe<VendorCreateWithoutBillsInput>;
+  update?: Maybe<VendorUpdateWithoutBillsDataInput>;
+  upsert?: Maybe<VendorUpsertWithoutBillsInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<VendorWhereUniqueInput>;
+}
+
+export interface VendorUpdateWithoutBillsDataInput {
+  name?: Maybe<String>;
+  contact?: Maybe<String>;
+  address?: Maybe<String>;
+  addressTwo?: Maybe<String>;
+  city?: Maybe<String>;
+  state?: Maybe<String>;
+  country?: Maybe<String>;
+  postedBy?: Maybe<UserUpdateOneWithoutVendorsInput>;
+  accounts?: Maybe<AccountUpdateManyWithoutVendorsInput>;
+}
+
+export interface VendorUpsertWithoutBillsInput {
+  update: VendorUpdateWithoutBillsDataInput;
+  create: VendorCreateWithoutBillsInput;
+}
+
+export interface BillUpsertWithWhereUniqueWithoutPostedByInput {
+  where: BillWhereUniqueInput;
+  update: BillUpdateWithoutPostedByDataInput;
+  create: BillCreateWithoutPostedByInput;
 }
 
 export interface BillScalarWhereInput {
@@ -1646,6 +2013,18 @@ export interface BillScalarWhereInput {
   amount_lte?: Maybe<Int>;
   amount_gt?: Maybe<Int>;
   amount_gte?: Maybe<Int>;
+  paymentStatus?: Maybe<Balance>;
+  paymentStatus_not?: Maybe<Balance>;
+  paymentStatus_in?: Maybe<Balance[] | Balance>;
+  paymentStatus_not_in?: Maybe<Balance[] | Balance>;
+  paymentType?: Maybe<Payment>;
+  paymentType_not?: Maybe<Payment>;
+  paymentType_in?: Maybe<Payment[] | Payment>;
+  paymentType_not_in?: Maybe<Payment[] | Payment>;
+  status?: Maybe<Status>;
+  status_not?: Maybe<Status>;
+  status_in?: Maybe<Status[] | Status>;
+  status_not_in?: Maybe<Status[] | Status>;
   AND?: Maybe<BillScalarWhereInput[] | BillScalarWhereInput>;
   OR?: Maybe<BillScalarWhereInput[] | BillScalarWhereInput>;
   NOT?: Maybe<BillScalarWhereInput[] | BillScalarWhereInput>;
@@ -1661,12 +2040,90 @@ export interface BillUpdateManyDataInput {
   date?: Maybe<String>;
   account?: Maybe<String>;
   amount?: Maybe<Int>;
+  paymentStatus?: Maybe<Balance>;
+  paymentType?: Maybe<Payment>;
+  status?: Maybe<Status>;
 }
 
-export interface VendorUpsertWithWhereUniqueWithoutAccountsInput {
+export interface UserUpsertNestedInput {
+  update: UserUpdateDataInput;
+  create: UserCreateInput;
+}
+
+export interface BillUpdateManyInput {
+  create?: Maybe<BillCreateInput[] | BillCreateInput>;
+  update?: Maybe<
+    | BillUpdateWithWhereUniqueNestedInput[]
+    | BillUpdateWithWhereUniqueNestedInput
+  >;
+  upsert?: Maybe<
+    | BillUpsertWithWhereUniqueNestedInput[]
+    | BillUpsertWithWhereUniqueNestedInput
+  >;
+  delete?: Maybe<BillWhereUniqueInput[] | BillWhereUniqueInput>;
+  connect?: Maybe<BillWhereUniqueInput[] | BillWhereUniqueInput>;
+  set?: Maybe<BillWhereUniqueInput[] | BillWhereUniqueInput>;
+  disconnect?: Maybe<BillWhereUniqueInput[] | BillWhereUniqueInput>;
+  deleteMany?: Maybe<BillScalarWhereInput[] | BillScalarWhereInput>;
+  updateMany?: Maybe<
+    BillUpdateManyWithWhereNestedInput[] | BillUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface BillUpdateWithWhereUniqueNestedInput {
+  where: BillWhereUniqueInput;
+  data: BillUpdateDataInput;
+}
+
+export interface BillUpdateDataInput {
+  vendor?: Maybe<String>;
+  date?: Maybe<String>;
+  account?: Maybe<String>;
+  amount?: Maybe<Int>;
+  postedBy?: Maybe<UserUpdateOneWithoutBillsInput>;
+  vendorId?: Maybe<VendorUpdateOneWithoutBillsInput>;
+  accountId?: Maybe<AccountUpdateOneWithoutBillsInput>;
+  paymentStatus?: Maybe<Balance>;
+  paymentType?: Maybe<Payment>;
+  status?: Maybe<Status>;
+}
+
+export interface BillUpsertWithWhereUniqueNestedInput {
+  where: BillWhereUniqueInput;
+  update: BillUpdateDataInput;
+  create: BillCreateInput;
+}
+
+export interface VendorUpdateManyInput {
+  create?: Maybe<VendorCreateInput[] | VendorCreateInput>;
+  update?: Maybe<
+    | VendorUpdateWithWhereUniqueNestedInput[]
+    | VendorUpdateWithWhereUniqueNestedInput
+  >;
+  upsert?: Maybe<
+    | VendorUpsertWithWhereUniqueNestedInput[]
+    | VendorUpsertWithWhereUniqueNestedInput
+  >;
+  delete?: Maybe<VendorWhereUniqueInput[] | VendorWhereUniqueInput>;
+  connect?: Maybe<VendorWhereUniqueInput[] | VendorWhereUniqueInput>;
+  set?: Maybe<VendorWhereUniqueInput[] | VendorWhereUniqueInput>;
+  disconnect?: Maybe<VendorWhereUniqueInput[] | VendorWhereUniqueInput>;
+  deleteMany?: Maybe<VendorScalarWhereInput[] | VendorScalarWhereInput>;
+  updateMany?: Maybe<
+    | VendorUpdateManyWithWhereNestedInput[]
+    | VendorUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface VendorUpdateWithWhereUniqueNestedInput {
   where: VendorWhereUniqueInput;
-  update: VendorUpdateWithoutAccountsDataInput;
-  create: VendorCreateWithoutAccountsInput;
+  data: VendorUpdateDataInput;
+}
+
+export interface VendorUpsertWithWhereUniqueNestedInput {
+  where: VendorWhereUniqueInput;
+  update: VendorUpdateDataInput;
+  create: VendorCreateInput;
 }
 
 export interface VendorScalarWhereInput {
@@ -1818,6 +2275,28 @@ export interface VendorUpdateManyDataInput {
   country?: Maybe<String>;
 }
 
+export interface GeneralJournalUpsertWithoutAccountsInput {
+  update: GeneralJournalUpdateWithoutAccountsDataInput;
+  create: GeneralJournalCreateWithoutAccountsInput;
+}
+
+export interface AccountUpsertWithoutBillsInput {
+  update: AccountUpdateWithoutBillsDataInput;
+  create: AccountCreateWithoutBillsInput;
+}
+
+export interface BillUpsertWithWhereUniqueWithoutVendorIdInput {
+  where: BillWhereUniqueInput;
+  update: BillUpdateWithoutVendorIdDataInput;
+  create: BillCreateWithoutVendorIdInput;
+}
+
+export interface VendorUpsertWithWhereUniqueWithoutAccountsInput {
+  where: VendorWhereUniqueInput;
+  update: VendorUpdateWithoutAccountsDataInput;
+  create: VendorCreateWithoutAccountsInput;
+}
+
 export interface AccountUpsertWithWhereUniqueWithoutPostedByInput {
   where: AccountWhereUniqueInput;
   update: AccountUpdateWithoutPostedByDataInput;
@@ -1883,6 +2362,14 @@ export interface AccountScalarWhereInput {
   number_not_starts_with?: Maybe<String>;
   number_ends_with?: Maybe<String>;
   number_not_ends_with?: Maybe<String>;
+  accountCategory?: Maybe<AccountCategory>;
+  accountCategory_not?: Maybe<AccountCategory>;
+  accountCategory_in?: Maybe<AccountCategory[] | AccountCategory>;
+  accountCategory_not_in?: Maybe<AccountCategory[] | AccountCategory>;
+  accountType?: Maybe<AccountType>;
+  accountType_not?: Maybe<AccountType>;
+  accountType_in?: Maybe<AccountType[] | AccountType>;
+  accountType_not_in?: Maybe<AccountType[] | AccountType>;
   AND?: Maybe<AccountScalarWhereInput[] | AccountScalarWhereInput>;
   OR?: Maybe<AccountScalarWhereInput[] | AccountScalarWhereInput>;
   NOT?: Maybe<AccountScalarWhereInput[] | AccountScalarWhereInput>;
@@ -1896,74 +2383,8 @@ export interface AccountUpdateManyWithWhereNestedInput {
 export interface AccountUpdateManyDataInput {
   name?: Maybe<String>;
   number?: Maybe<String>;
-}
-
-export interface BillUpdateManyWithoutPostedByInput {
-  create?: Maybe<
-    BillCreateWithoutPostedByInput[] | BillCreateWithoutPostedByInput
-  >;
-  delete?: Maybe<BillWhereUniqueInput[] | BillWhereUniqueInput>;
-  connect?: Maybe<BillWhereUniqueInput[] | BillWhereUniqueInput>;
-  set?: Maybe<BillWhereUniqueInput[] | BillWhereUniqueInput>;
-  disconnect?: Maybe<BillWhereUniqueInput[] | BillWhereUniqueInput>;
-  update?: Maybe<
-    | BillUpdateWithWhereUniqueWithoutPostedByInput[]
-    | BillUpdateWithWhereUniqueWithoutPostedByInput
-  >;
-  upsert?: Maybe<
-    | BillUpsertWithWhereUniqueWithoutPostedByInput[]
-    | BillUpsertWithWhereUniqueWithoutPostedByInput
-  >;
-  deleteMany?: Maybe<BillScalarWhereInput[] | BillScalarWhereInput>;
-  updateMany?: Maybe<
-    BillUpdateManyWithWhereNestedInput[] | BillUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface BillUpdateWithWhereUniqueWithoutPostedByInput {
-  where: BillWhereUniqueInput;
-  data: BillUpdateWithoutPostedByDataInput;
-}
-
-export interface BillUpdateWithoutPostedByDataInput {
-  vendor?: Maybe<String>;
-  date?: Maybe<String>;
-  account?: Maybe<String>;
-  amount?: Maybe<Int>;
-  vendorId?: Maybe<VendorUpdateOneWithoutBillsInput>;
-  accountId?: Maybe<AccountUpdateOneWithoutBillsInput>;
-}
-
-export interface VendorUpdateOneWithoutBillsInput {
-  create?: Maybe<VendorCreateWithoutBillsInput>;
-  update?: Maybe<VendorUpdateWithoutBillsDataInput>;
-  upsert?: Maybe<VendorUpsertWithoutBillsInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<VendorWhereUniqueInput>;
-}
-
-export interface VendorUpdateWithoutBillsDataInput {
-  name?: Maybe<String>;
-  contact?: Maybe<String>;
-  address?: Maybe<String>;
-  addressTwo?: Maybe<String>;
-  city?: Maybe<String>;
-  state?: Maybe<String>;
-  country?: Maybe<String>;
-  postedBy?: Maybe<UserUpdateOneWithoutVendorsInput>;
-  accounts?: Maybe<AccountUpdateManyWithoutVendorsInput>;
-}
-
-export interface VendorUpsertWithoutBillsInput {
-  update: VendorUpdateWithoutBillsDataInput;
-  create: VendorCreateWithoutBillsInput;
-}
-
-export interface BillUpsertWithWhereUniqueWithoutPostedByInput {
-  where: BillWhereUniqueInput;
-  update: BillUpdateWithoutPostedByDataInput;
-  create: BillCreateWithoutPostedByInput;
+  accountCategory?: Maybe<AccountCategory>;
+  accountType?: Maybe<AccountType>;
 }
 
 export interface UserUpsertWithoutVendorsInput {
@@ -2087,17 +2508,8 @@ export interface UserUpsertWithoutAccountsInput {
 export interface AccountUpdateManyMutationInput {
   name?: Maybe<String>;
   number?: Maybe<String>;
-}
-
-export interface BillCreateInput {
-  id?: Maybe<ID_Input>;
-  vendor: String;
-  date: String;
-  account: String;
-  amount: Int;
-  postedBy?: Maybe<UserCreateOneWithoutBillsInput>;
-  vendorId?: Maybe<VendorCreateOneWithoutBillsInput>;
-  accountId?: Maybe<AccountCreateOneWithoutBillsInput>;
+  accountCategory?: Maybe<AccountCategory>;
+  accountType?: Maybe<AccountType>;
 }
 
 export interface BillUpdateInput {
@@ -2108,6 +2520,9 @@ export interface BillUpdateInput {
   postedBy?: Maybe<UserUpdateOneWithoutBillsInput>;
   vendorId?: Maybe<VendorUpdateOneWithoutBillsInput>;
   accountId?: Maybe<AccountUpdateOneWithoutBillsInput>;
+  paymentStatus?: Maybe<Balance>;
+  paymentType?: Maybe<Payment>;
+  status?: Maybe<Status>;
 }
 
 export interface BillUpdateManyMutationInput {
@@ -2115,6 +2530,9 @@ export interface BillUpdateManyMutationInput {
   date?: Maybe<String>;
   account?: Maybe<String>;
   amount?: Maybe<Int>;
+  paymentStatus?: Maybe<Balance>;
+  paymentType?: Maybe<Payment>;
+  status?: Maybe<Status>;
 }
 
 export interface CustomerCreateInput {
@@ -2175,6 +2593,97 @@ export interface CustomerUpdateManyMutationInput {
   contact?: Maybe<String>;
 }
 
+export interface GeneralJournalCreateInput {
+  id?: Maybe<ID_Input>;
+  date: DateTimeInput;
+  debitAmount: Float;
+  creditAmount: Float;
+  postedBy?: Maybe<UserCreateOneInput>;
+  bills?: Maybe<BillCreateManyInput>;
+  vendors?: Maybe<VendorCreateManyInput>;
+  accounts?: Maybe<AccountCreateManyWithoutGeneralJournalInput>;
+}
+
+export interface AccountCreateManyWithoutGeneralJournalInput {
+  create?: Maybe<
+    | AccountCreateWithoutGeneralJournalInput[]
+    | AccountCreateWithoutGeneralJournalInput
+  >;
+  connect?: Maybe<AccountWhereUniqueInput[] | AccountWhereUniqueInput>;
+}
+
+export interface AccountCreateWithoutGeneralJournalInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  number: String;
+  postedBy?: Maybe<UserCreateOneWithoutAccountsInput>;
+  bills?: Maybe<BillCreateManyWithoutAccountIdInput>;
+  vendors?: Maybe<VendorCreateManyWithoutAccountsInput>;
+  accountCategory?: Maybe<AccountCategory>;
+  accountType?: Maybe<AccountType>;
+}
+
+export interface GeneralJournalUpdateInput {
+  date?: Maybe<DateTimeInput>;
+  debitAmount?: Maybe<Float>;
+  creditAmount?: Maybe<Float>;
+  postedBy?: Maybe<UserUpdateOneInput>;
+  bills?: Maybe<BillUpdateManyInput>;
+  vendors?: Maybe<VendorUpdateManyInput>;
+  accounts?: Maybe<AccountUpdateManyWithoutGeneralJournalInput>;
+}
+
+export interface AccountUpdateManyWithoutGeneralJournalInput {
+  create?: Maybe<
+    | AccountCreateWithoutGeneralJournalInput[]
+    | AccountCreateWithoutGeneralJournalInput
+  >;
+  delete?: Maybe<AccountWhereUniqueInput[] | AccountWhereUniqueInput>;
+  connect?: Maybe<AccountWhereUniqueInput[] | AccountWhereUniqueInput>;
+  set?: Maybe<AccountWhereUniqueInput[] | AccountWhereUniqueInput>;
+  disconnect?: Maybe<AccountWhereUniqueInput[] | AccountWhereUniqueInput>;
+  update?: Maybe<
+    | AccountUpdateWithWhereUniqueWithoutGeneralJournalInput[]
+    | AccountUpdateWithWhereUniqueWithoutGeneralJournalInput
+  >;
+  upsert?: Maybe<
+    | AccountUpsertWithWhereUniqueWithoutGeneralJournalInput[]
+    | AccountUpsertWithWhereUniqueWithoutGeneralJournalInput
+  >;
+  deleteMany?: Maybe<AccountScalarWhereInput[] | AccountScalarWhereInput>;
+  updateMany?: Maybe<
+    | AccountUpdateManyWithWhereNestedInput[]
+    | AccountUpdateManyWithWhereNestedInput
+  >;
+}
+
+export interface AccountUpdateWithWhereUniqueWithoutGeneralJournalInput {
+  where: AccountWhereUniqueInput;
+  data: AccountUpdateWithoutGeneralJournalDataInput;
+}
+
+export interface AccountUpdateWithoutGeneralJournalDataInput {
+  name?: Maybe<String>;
+  number?: Maybe<String>;
+  postedBy?: Maybe<UserUpdateOneWithoutAccountsInput>;
+  bills?: Maybe<BillUpdateManyWithoutAccountIdInput>;
+  vendors?: Maybe<VendorUpdateManyWithoutAccountsInput>;
+  accountCategory?: Maybe<AccountCategory>;
+  accountType?: Maybe<AccountType>;
+}
+
+export interface AccountUpsertWithWhereUniqueWithoutGeneralJournalInput {
+  where: AccountWhereUniqueInput;
+  update: AccountUpdateWithoutGeneralJournalDataInput;
+  create: AccountCreateWithoutGeneralJournalInput;
+}
+
+export interface GeneralJournalUpdateManyMutationInput {
+  date?: Maybe<DateTimeInput>;
+  debitAmount?: Maybe<Float>;
+  creditAmount?: Maybe<Float>;
+}
+
 export interface InvoiceCreateInput {
   id?: Maybe<ID_Input>;
   customer: String;
@@ -2184,52 +2693,12 @@ export interface InvoiceCreateInput {
   postedBy?: Maybe<UserCreateOneInput>;
 }
 
-export interface UserCreateOneInput {
-  create?: Maybe<UserCreateInput>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface UserCreateInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  email: String;
-  password: String;
-  vendors?: Maybe<VendorCreateManyWithoutPostedByInput>;
-  customers?: Maybe<CustomerCreateManyWithoutPostedByInput>;
-  accounts?: Maybe<AccountCreateManyWithoutPostedByInput>;
-  bills?: Maybe<BillCreateManyWithoutPostedByInput>;
-}
-
 export interface InvoiceUpdateInput {
   customer?: Maybe<String>;
   date?: Maybe<String>;
   account?: Maybe<String>;
   amount?: Maybe<Int>;
   postedBy?: Maybe<UserUpdateOneInput>;
-}
-
-export interface UserUpdateOneInput {
-  create?: Maybe<UserCreateInput>;
-  update?: Maybe<UserUpdateDataInput>;
-  upsert?: Maybe<UserUpsertNestedInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface UserUpdateDataInput {
-  name?: Maybe<String>;
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-  vendors?: Maybe<VendorUpdateManyWithoutPostedByInput>;
-  customers?: Maybe<CustomerUpdateManyWithoutPostedByInput>;
-  accounts?: Maybe<AccountUpdateManyWithoutPostedByInput>;
-  bills?: Maybe<BillUpdateManyWithoutPostedByInput>;
-}
-
-export interface UserUpsertNestedInput {
-  update: UserUpdateDataInput;
-  create: UserCreateInput;
 }
 
 export interface InvoiceUpdateManyMutationInput {
@@ -2315,6 +2784,26 @@ export interface CustomerSubscriptionWhereInput {
   >;
 }
 
+export interface GeneralJournalSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<GeneralJournalWhereInput>;
+  AND?: Maybe<
+    | GeneralJournalSubscriptionWhereInput[]
+    | GeneralJournalSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    | GeneralJournalSubscriptionWhereInput[]
+    | GeneralJournalSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    | GeneralJournalSubscriptionWhereInput[]
+    | GeneralJournalSubscriptionWhereInput
+  >;
+}
+
 export interface InvoiceSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
@@ -2358,6 +2847,8 @@ export interface Account {
   updatedAt: DateTimeOutput;
   name: String;
   number: String;
+  accountCategory?: AccountCategory;
+  accountType?: AccountType;
 }
 
 export interface AccountPromise extends Promise<Account>, Fragmentable {
@@ -2385,6 +2876,9 @@ export interface AccountPromise extends Promise<Account>, Fragmentable {
     first?: Int;
     last?: Int;
   }) => T;
+  accountCategory: () => Promise<AccountCategory>;
+  accountType: () => Promise<AccountType>;
+  generalJournal: <T = GeneralJournalPromise>() => T;
 }
 
 export interface AccountSubscription
@@ -2414,6 +2908,9 @@ export interface AccountSubscription
     first?: Int;
     last?: Int;
   }) => T;
+  accountCategory: () => Promise<AsyncIterator<AccountCategory>>;
+  accountType: () => Promise<AsyncIterator<AccountType>>;
+  generalJournal: <T = GeneralJournalSubscription>() => T;
 }
 
 export interface AccountNullablePromise
@@ -2443,6 +2940,9 @@ export interface AccountNullablePromise
     first?: Int;
     last?: Int;
   }) => T;
+  accountCategory: () => Promise<AccountCategory>;
+  accountType: () => Promise<AccountType>;
+  generalJournal: <T = GeneralJournalPromise>() => T;
 }
 
 export interface User {
@@ -2714,6 +3214,9 @@ export interface Bill {
   date: String;
   account: String;
   amount: Int;
+  paymentStatus?: Balance;
+  paymentType?: Payment;
+  status?: Status;
 }
 
 export interface BillPromise extends Promise<Bill>, Fragmentable {
@@ -2727,6 +3230,9 @@ export interface BillPromise extends Promise<Bill>, Fragmentable {
   postedBy: <T = UserPromise>() => T;
   vendorId: <T = VendorPromise>() => T;
   accountId: <T = AccountPromise>() => T;
+  paymentStatus: () => Promise<Balance>;
+  paymentType: () => Promise<Payment>;
+  status: () => Promise<Status>;
 }
 
 export interface BillSubscription
@@ -2742,6 +3248,9 @@ export interface BillSubscription
   postedBy: <T = UserSubscription>() => T;
   vendorId: <T = VendorSubscription>() => T;
   accountId: <T = AccountSubscription>() => T;
+  paymentStatus: () => Promise<AsyncIterator<Balance>>;
+  paymentType: () => Promise<AsyncIterator<Payment>>;
+  status: () => Promise<AsyncIterator<Status>>;
 }
 
 export interface BillNullablePromise
@@ -2757,6 +3266,9 @@ export interface BillNullablePromise
   postedBy: <T = UserPromise>() => T;
   vendorId: <T = VendorPromise>() => T;
   accountId: <T = AccountPromise>() => T;
+  paymentStatus: () => Promise<Balance>;
+  paymentType: () => Promise<Payment>;
+  status: () => Promise<Status>;
 }
 
 export interface Customer {
@@ -2799,6 +3311,132 @@ export interface CustomerNullablePromise
   contact: () => Promise<String>;
   postedBy: <T = UserPromise>() => T;
   vendorId: <T = VendorPromise>() => T;
+}
+
+export interface GeneralJournal {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  date: DateTimeOutput;
+  debitAmount: Float;
+  creditAmount: Float;
+}
+
+export interface GeneralJournalPromise
+  extends Promise<GeneralJournal>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  date: () => Promise<DateTimeOutput>;
+  debitAmount: () => Promise<Float>;
+  creditAmount: () => Promise<Float>;
+  postedBy: <T = UserPromise>() => T;
+  bills: <T = FragmentableArray<Bill>>(args?: {
+    where?: BillWhereInput;
+    orderBy?: BillOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  vendors: <T = FragmentableArray<Vendor>>(args?: {
+    where?: VendorWhereInput;
+    orderBy?: VendorOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  accounts: <T = FragmentableArray<Account>>(args?: {
+    where?: AccountWhereInput;
+    orderBy?: AccountOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface GeneralJournalSubscription
+  extends Promise<AsyncIterator<GeneralJournal>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  date: () => Promise<AsyncIterator<DateTimeOutput>>;
+  debitAmount: () => Promise<AsyncIterator<Float>>;
+  creditAmount: () => Promise<AsyncIterator<Float>>;
+  postedBy: <T = UserSubscription>() => T;
+  bills: <T = Promise<AsyncIterator<BillSubscription>>>(args?: {
+    where?: BillWhereInput;
+    orderBy?: BillOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  vendors: <T = Promise<AsyncIterator<VendorSubscription>>>(args?: {
+    where?: VendorWhereInput;
+    orderBy?: VendorOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  accounts: <T = Promise<AsyncIterator<AccountSubscription>>>(args?: {
+    where?: AccountWhereInput;
+    orderBy?: AccountOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface GeneralJournalNullablePromise
+  extends Promise<GeneralJournal | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  date: () => Promise<DateTimeOutput>;
+  debitAmount: () => Promise<Float>;
+  creditAmount: () => Promise<Float>;
+  postedBy: <T = UserPromise>() => T;
+  bills: <T = FragmentableArray<Bill>>(args?: {
+    where?: BillWhereInput;
+    orderBy?: BillOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  vendors: <T = FragmentableArray<Vendor>>(args?: {
+    where?: VendorWhereInput;
+    orderBy?: VendorOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  accounts: <T = FragmentableArray<Account>>(args?: {
+    where?: AccountWhereInput;
+    orderBy?: AccountOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 export interface AccountConnection {
@@ -2984,6 +3622,62 @@ export interface AggregateCustomerPromise
 
 export interface AggregateCustomerSubscription
   extends Promise<AsyncIterator<AggregateCustomer>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface GeneralJournalConnection {
+  pageInfo: PageInfo;
+  edges: GeneralJournalEdge[];
+}
+
+export interface GeneralJournalConnectionPromise
+  extends Promise<GeneralJournalConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<GeneralJournalEdge>>() => T;
+  aggregate: <T = AggregateGeneralJournalPromise>() => T;
+}
+
+export interface GeneralJournalConnectionSubscription
+  extends Promise<AsyncIterator<GeneralJournalConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<GeneralJournalEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateGeneralJournalSubscription>() => T;
+}
+
+export interface GeneralJournalEdge {
+  node: GeneralJournal;
+  cursor: String;
+}
+
+export interface GeneralJournalEdgePromise
+  extends Promise<GeneralJournalEdge>,
+    Fragmentable {
+  node: <T = GeneralJournalPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface GeneralJournalEdgeSubscription
+  extends Promise<AsyncIterator<GeneralJournalEdge>>,
+    Fragmentable {
+  node: <T = GeneralJournalSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateGeneralJournal {
+  count: Int;
+}
+
+export interface AggregateGeneralJournalPromise
+  extends Promise<AggregateGeneralJournal>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateGeneralJournalSubscription
+  extends Promise<AsyncIterator<AggregateGeneralJournal>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
@@ -3244,6 +3938,8 @@ export interface AccountPreviousValues {
   updatedAt: DateTimeOutput;
   name: String;
   number: String;
+  accountCategory?: AccountCategory;
+  accountType?: AccountType;
 }
 
 export interface AccountPreviousValuesPromise
@@ -3254,6 +3950,8 @@ export interface AccountPreviousValuesPromise
   updatedAt: () => Promise<DateTimeOutput>;
   name: () => Promise<String>;
   number: () => Promise<String>;
+  accountCategory: () => Promise<AccountCategory>;
+  accountType: () => Promise<AccountType>;
 }
 
 export interface AccountPreviousValuesSubscription
@@ -3264,6 +3962,8 @@ export interface AccountPreviousValuesSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   name: () => Promise<AsyncIterator<String>>;
   number: () => Promise<AsyncIterator<String>>;
+  accountCategory: () => Promise<AsyncIterator<AccountCategory>>;
+  accountType: () => Promise<AsyncIterator<AccountType>>;
 }
 
 export interface BillSubscriptionPayload {
@@ -3299,6 +3999,9 @@ export interface BillPreviousValues {
   date: String;
   account: String;
   amount: Int;
+  paymentStatus?: Balance;
+  paymentType?: Payment;
+  status?: Status;
 }
 
 export interface BillPreviousValuesPromise
@@ -3311,6 +4014,9 @@ export interface BillPreviousValuesPromise
   date: () => Promise<String>;
   account: () => Promise<String>;
   amount: () => Promise<Int>;
+  paymentStatus: () => Promise<Balance>;
+  paymentType: () => Promise<Payment>;
+  status: () => Promise<Status>;
 }
 
 export interface BillPreviousValuesSubscription
@@ -3323,6 +4029,9 @@ export interface BillPreviousValuesSubscription
   date: () => Promise<AsyncIterator<String>>;
   account: () => Promise<AsyncIterator<String>>;
   amount: () => Promise<AsyncIterator<Int>>;
+  paymentStatus: () => Promise<AsyncIterator<Balance>>;
+  paymentType: () => Promise<AsyncIterator<Payment>>;
+  status: () => Promise<AsyncIterator<Status>>;
 }
 
 export interface CustomerSubscriptionPayload {
@@ -3376,6 +4085,62 @@ export interface CustomerPreviousValuesSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   name: () => Promise<AsyncIterator<String>>;
   contact: () => Promise<AsyncIterator<String>>;
+}
+
+export interface GeneralJournalSubscriptionPayload {
+  mutation: MutationType;
+  node: GeneralJournal;
+  updatedFields: String[];
+  previousValues: GeneralJournalPreviousValues;
+}
+
+export interface GeneralJournalSubscriptionPayloadPromise
+  extends Promise<GeneralJournalSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = GeneralJournalPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = GeneralJournalPreviousValuesPromise>() => T;
+}
+
+export interface GeneralJournalSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<GeneralJournalSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = GeneralJournalSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = GeneralJournalPreviousValuesSubscription>() => T;
+}
+
+export interface GeneralJournalPreviousValues {
+  id: ID_Output;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  date: DateTimeOutput;
+  debitAmount: Float;
+  creditAmount: Float;
+}
+
+export interface GeneralJournalPreviousValuesPromise
+  extends Promise<GeneralJournalPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  date: () => Promise<DateTimeOutput>;
+  debitAmount: () => Promise<Float>;
+  creditAmount: () => Promise<Float>;
+}
+
+export interface GeneralJournalPreviousValuesSubscription
+  extends Promise<AsyncIterator<GeneralJournalPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  date: () => Promise<AsyncIterator<DateTimeOutput>>;
+  debitAmount: () => Promise<AsyncIterator<Float>>;
+  creditAmount: () => Promise<AsyncIterator<Float>>;
 }
 
 export interface InvoiceSubscriptionPayload {
@@ -3588,6 +4353,11 @@ The `Int` scalar type represents non-fractional signed whole numeric values. Int
 export type Int = number;
 
 /*
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point). 
+*/
+export type Float = number;
+
+/*
 The `Boolean` scalar type represents `true` or `false`.
 */
 export type Boolean = boolean;
@@ -3621,6 +4391,30 @@ export const models: Model[] = [
   },
   {
     name: "Account",
+    embedded: false
+  },
+  {
+    name: "GeneralJournal",
+    embedded: false
+  },
+  {
+    name: "Status",
+    embedded: false
+  },
+  {
+    name: "Balance",
+    embedded: false
+  },
+  {
+    name: "Payment",
+    embedded: false
+  },
+  {
+    name: "AccountType",
+    embedded: false
+  },
+  {
+    name: "AccountCategory",
     embedded: false
   }
 ];

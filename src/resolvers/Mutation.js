@@ -114,7 +114,9 @@ function createAccount(parent, args, context) {
     name: args.name,
     number: args.number,
     postedBy: { connect: { id: userId } },
-  })
+    accountType: args.accountType,
+    accountCategory: args.accountCategory,
+    })
 }
 
 function updateAccount(parent, args, context) {

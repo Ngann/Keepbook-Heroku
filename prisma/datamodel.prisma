@@ -48,6 +48,9 @@ type Bill {
   postedBy: User
   vendorId: Vendor
   accountId: Account
+  paymentStatus: Balance
+  paymentType: Payment
+  status: Status
 }
 
 type Invoice {
@@ -70,4 +73,50 @@ type Account {
   postedBy: User
   bills: [Bill]
   vendors: [Vendor]
+  accountCategory: AccountCategory
+  accountType: AccountType
+  generalJournal: GeneralJournal
+}
+
+type GeneralJournal {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  date: DateTime!
+  debitAmount: Float!
+  creditAmount: Float!
+  postedBy: User
+  bills: [Bill]
+  vendors: [Vendor] 
+  accounts: [Account]
+}
+
+enum Status{
+  Active
+  Inactive
+}
+
+enum Balance{
+  Paid
+  Open
+}
+
+enum Payment{
+  Credit Card
+  Bank
+  Cash
+  EFT
+  Checks
+}
+
+enum AccountType{
+  Debit
+  Credit
+}
+
+enum AccountCategory{
+  Assets
+  Liablity
+  Revenue
+  Expense
 }

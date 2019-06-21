@@ -12,6 +12,16 @@ module.exports = {
   postedBy: User
   bills(where: BillWhereInput, orderBy: BillOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Bill!]
   vendors(where: VendorWhereInput, orderBy: VendorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Vendor!]
+  accountCategory: AccountCategory
+  accountType: AccountType
+  generalJournal: GeneralJournal
+}
+
+enum AccountCategory {
+  Assets
+  Liablity
+  Revenue
+  Expense
 }
 
 type AccountConnection {
@@ -27,6 +37,14 @@ input AccountCreateInput {
   postedBy: UserCreateOneWithoutAccountsInput
   bills: BillCreateManyWithoutAccountIdInput
   vendors: VendorCreateManyWithoutAccountsInput
+  accountCategory: AccountCategory
+  accountType: AccountType
+  generalJournal: GeneralJournalCreateOneWithoutAccountsInput
+}
+
+input AccountCreateManyWithoutGeneralJournalInput {
+  create: [AccountCreateWithoutGeneralJournalInput!]
+  connect: [AccountWhereUniqueInput!]
 }
 
 input AccountCreateManyWithoutPostedByInput {
@@ -50,6 +68,20 @@ input AccountCreateWithoutBillsInput {
   number: String!
   postedBy: UserCreateOneWithoutAccountsInput
   vendors: VendorCreateManyWithoutAccountsInput
+  accountCategory: AccountCategory
+  accountType: AccountType
+  generalJournal: GeneralJournalCreateOneWithoutAccountsInput
+}
+
+input AccountCreateWithoutGeneralJournalInput {
+  id: ID
+  name: String!
+  number: String!
+  postedBy: UserCreateOneWithoutAccountsInput
+  bills: BillCreateManyWithoutAccountIdInput
+  vendors: VendorCreateManyWithoutAccountsInput
+  accountCategory: AccountCategory
+  accountType: AccountType
 }
 
 input AccountCreateWithoutPostedByInput {
@@ -58,6 +90,9 @@ input AccountCreateWithoutPostedByInput {
   number: String!
   bills: BillCreateManyWithoutAccountIdInput
   vendors: VendorCreateManyWithoutAccountsInput
+  accountCategory: AccountCategory
+  accountType: AccountType
+  generalJournal: GeneralJournalCreateOneWithoutAccountsInput
 }
 
 input AccountCreateWithoutVendorsInput {
@@ -66,6 +101,9 @@ input AccountCreateWithoutVendorsInput {
   number: String!
   postedBy: UserCreateOneWithoutAccountsInput
   bills: BillCreateManyWithoutAccountIdInput
+  accountCategory: AccountCategory
+  accountType: AccountType
+  generalJournal: GeneralJournalCreateOneWithoutAccountsInput
 }
 
 type AccountEdge {
@@ -84,6 +122,10 @@ enum AccountOrderByInput {
   name_DESC
   number_ASC
   number_DESC
+  accountCategory_ASC
+  accountCategory_DESC
+  accountType_ASC
+  accountType_DESC
 }
 
 type AccountPreviousValues {
@@ -92,6 +134,8 @@ type AccountPreviousValues {
   updatedAt: DateTime!
   name: String!
   number: String!
+  accountCategory: AccountCategory
+  accountType: AccountType
 }
 
 input AccountScalarWhereInput {
@@ -153,6 +197,14 @@ input AccountScalarWhereInput {
   number_not_starts_with: String
   number_ends_with: String
   number_not_ends_with: String
+  accountCategory: AccountCategory
+  accountCategory_not: AccountCategory
+  accountCategory_in: [AccountCategory!]
+  accountCategory_not_in: [AccountCategory!]
+  accountType: AccountType
+  accountType_not: AccountType
+  accountType_in: [AccountType!]
+  accountType_not_in: [AccountType!]
   AND: [AccountScalarWhereInput!]
   OR: [AccountScalarWhereInput!]
   NOT: [AccountScalarWhereInput!]
@@ -176,22 +228,46 @@ input AccountSubscriptionWhereInput {
   NOT: [AccountSubscriptionWhereInput!]
 }
 
+enum AccountType {
+  Debit
+  Credit
+}
+
 input AccountUpdateInput {
   name: String
   number: String
   postedBy: UserUpdateOneWithoutAccountsInput
   bills: BillUpdateManyWithoutAccountIdInput
   vendors: VendorUpdateManyWithoutAccountsInput
+  accountCategory: AccountCategory
+  accountType: AccountType
+  generalJournal: GeneralJournalUpdateOneWithoutAccountsInput
 }
 
 input AccountUpdateManyDataInput {
   name: String
   number: String
+  accountCategory: AccountCategory
+  accountType: AccountType
 }
 
 input AccountUpdateManyMutationInput {
   name: String
   number: String
+  accountCategory: AccountCategory
+  accountType: AccountType
+}
+
+input AccountUpdateManyWithoutGeneralJournalInput {
+  create: [AccountCreateWithoutGeneralJournalInput!]
+  delete: [AccountWhereUniqueInput!]
+  connect: [AccountWhereUniqueInput!]
+  set: [AccountWhereUniqueInput!]
+  disconnect: [AccountWhereUniqueInput!]
+  update: [AccountUpdateWithWhereUniqueWithoutGeneralJournalInput!]
+  upsert: [AccountUpsertWithWhereUniqueWithoutGeneralJournalInput!]
+  deleteMany: [AccountScalarWhereInput!]
+  updateMany: [AccountUpdateManyWithWhereNestedInput!]
 }
 
 input AccountUpdateManyWithoutPostedByInput {
@@ -237,6 +313,19 @@ input AccountUpdateWithoutBillsDataInput {
   number: String
   postedBy: UserUpdateOneWithoutAccountsInput
   vendors: VendorUpdateManyWithoutAccountsInput
+  accountCategory: AccountCategory
+  accountType: AccountType
+  generalJournal: GeneralJournalUpdateOneWithoutAccountsInput
+}
+
+input AccountUpdateWithoutGeneralJournalDataInput {
+  name: String
+  number: String
+  postedBy: UserUpdateOneWithoutAccountsInput
+  bills: BillUpdateManyWithoutAccountIdInput
+  vendors: VendorUpdateManyWithoutAccountsInput
+  accountCategory: AccountCategory
+  accountType: AccountType
 }
 
 input AccountUpdateWithoutPostedByDataInput {
@@ -244,6 +333,9 @@ input AccountUpdateWithoutPostedByDataInput {
   number: String
   bills: BillUpdateManyWithoutAccountIdInput
   vendors: VendorUpdateManyWithoutAccountsInput
+  accountCategory: AccountCategory
+  accountType: AccountType
+  generalJournal: GeneralJournalUpdateOneWithoutAccountsInput
 }
 
 input AccountUpdateWithoutVendorsDataInput {
@@ -251,6 +343,14 @@ input AccountUpdateWithoutVendorsDataInput {
   number: String
   postedBy: UserUpdateOneWithoutAccountsInput
   bills: BillUpdateManyWithoutAccountIdInput
+  accountCategory: AccountCategory
+  accountType: AccountType
+  generalJournal: GeneralJournalUpdateOneWithoutAccountsInput
+}
+
+input AccountUpdateWithWhereUniqueWithoutGeneralJournalInput {
+  where: AccountWhereUniqueInput!
+  data: AccountUpdateWithoutGeneralJournalDataInput!
 }
 
 input AccountUpdateWithWhereUniqueWithoutPostedByInput {
@@ -266,6 +366,12 @@ input AccountUpdateWithWhereUniqueWithoutVendorsInput {
 input AccountUpsertWithoutBillsInput {
   update: AccountUpdateWithoutBillsDataInput!
   create: AccountCreateWithoutBillsInput!
+}
+
+input AccountUpsertWithWhereUniqueWithoutGeneralJournalInput {
+  where: AccountWhereUniqueInput!
+  update: AccountUpdateWithoutGeneralJournalDataInput!
+  create: AccountCreateWithoutGeneralJournalInput!
 }
 
 input AccountUpsertWithWhereUniqueWithoutPostedByInput {
@@ -346,6 +452,15 @@ input AccountWhereInput {
   vendors_every: VendorWhereInput
   vendors_some: VendorWhereInput
   vendors_none: VendorWhereInput
+  accountCategory: AccountCategory
+  accountCategory_not: AccountCategory
+  accountCategory_in: [AccountCategory!]
+  accountCategory_not_in: [AccountCategory!]
+  accountType: AccountType
+  accountType_not: AccountType
+  accountType_in: [AccountType!]
+  accountType_not_in: [AccountType!]
+  generalJournal: GeneralJournalWhereInput
   AND: [AccountWhereInput!]
   OR: [AccountWhereInput!]
   NOT: [AccountWhereInput!]
@@ -367,6 +482,10 @@ type AggregateCustomer {
   count: Int!
 }
 
+type AggregateGeneralJournal {
+  count: Int!
+}
+
 type AggregateInvoice {
   count: Int!
 }
@@ -377,6 +496,11 @@ type AggregateUser {
 
 type AggregateVendor {
   count: Int!
+}
+
+enum Balance {
+  Paid
+  Open
 }
 
 type BatchPayload {
@@ -394,6 +518,9 @@ type Bill {
   postedBy: User
   vendorId: Vendor
   accountId: Account
+  paymentStatus: Balance
+  paymentType: Payment
+  status: Status
 }
 
 type BillConnection {
@@ -411,6 +538,14 @@ input BillCreateInput {
   postedBy: UserCreateOneWithoutBillsInput
   vendorId: VendorCreateOneWithoutBillsInput
   accountId: AccountCreateOneWithoutBillsInput
+  paymentStatus: Balance
+  paymentType: Payment
+  status: Status
+}
+
+input BillCreateManyInput {
+  create: [BillCreateInput!]
+  connect: [BillWhereUniqueInput!]
 }
 
 input BillCreateManyWithoutAccountIdInput {
@@ -436,6 +571,9 @@ input BillCreateWithoutAccountIdInput {
   amount: Int!
   postedBy: UserCreateOneWithoutBillsInput
   vendorId: VendorCreateOneWithoutBillsInput
+  paymentStatus: Balance
+  paymentType: Payment
+  status: Status
 }
 
 input BillCreateWithoutPostedByInput {
@@ -446,6 +584,9 @@ input BillCreateWithoutPostedByInput {
   amount: Int!
   vendorId: VendorCreateOneWithoutBillsInput
   accountId: AccountCreateOneWithoutBillsInput
+  paymentStatus: Balance
+  paymentType: Payment
+  status: Status
 }
 
 input BillCreateWithoutVendorIdInput {
@@ -456,6 +597,9 @@ input BillCreateWithoutVendorIdInput {
   amount: Int!
   postedBy: UserCreateOneWithoutBillsInput
   accountId: AccountCreateOneWithoutBillsInput
+  paymentStatus: Balance
+  paymentType: Payment
+  status: Status
 }
 
 type BillEdge {
@@ -478,6 +622,12 @@ enum BillOrderByInput {
   account_DESC
   amount_ASC
   amount_DESC
+  paymentStatus_ASC
+  paymentStatus_DESC
+  paymentType_ASC
+  paymentType_DESC
+  status_ASC
+  status_DESC
 }
 
 type BillPreviousValues {
@@ -488,6 +638,9 @@ type BillPreviousValues {
   date: String!
   account: String!
   amount: Int!
+  paymentStatus: Balance
+  paymentType: Payment
+  status: Status
 }
 
 input BillScalarWhereInput {
@@ -571,6 +724,18 @@ input BillScalarWhereInput {
   amount_lte: Int
   amount_gt: Int
   amount_gte: Int
+  paymentStatus: Balance
+  paymentStatus_not: Balance
+  paymentStatus_in: [Balance!]
+  paymentStatus_not_in: [Balance!]
+  paymentType: Payment
+  paymentType_not: Payment
+  paymentType_in: [Payment!]
+  paymentType_not_in: [Payment!]
+  status: Status
+  status_not: Status
+  status_in: [Status!]
+  status_not_in: [Status!]
   AND: [BillScalarWhereInput!]
   OR: [BillScalarWhereInput!]
   NOT: [BillScalarWhereInput!]
@@ -594,6 +759,19 @@ input BillSubscriptionWhereInput {
   NOT: [BillSubscriptionWhereInput!]
 }
 
+input BillUpdateDataInput {
+  vendor: String
+  date: String
+  account: String
+  amount: Int
+  postedBy: UserUpdateOneWithoutBillsInput
+  vendorId: VendorUpdateOneWithoutBillsInput
+  accountId: AccountUpdateOneWithoutBillsInput
+  paymentStatus: Balance
+  paymentType: Payment
+  status: Status
+}
+
 input BillUpdateInput {
   vendor: String
   date: String
@@ -602,6 +780,9 @@ input BillUpdateInput {
   postedBy: UserUpdateOneWithoutBillsInput
   vendorId: VendorUpdateOneWithoutBillsInput
   accountId: AccountUpdateOneWithoutBillsInput
+  paymentStatus: Balance
+  paymentType: Payment
+  status: Status
 }
 
 input BillUpdateManyDataInput {
@@ -609,6 +790,21 @@ input BillUpdateManyDataInput {
   date: String
   account: String
   amount: Int
+  paymentStatus: Balance
+  paymentType: Payment
+  status: Status
+}
+
+input BillUpdateManyInput {
+  create: [BillCreateInput!]
+  update: [BillUpdateWithWhereUniqueNestedInput!]
+  upsert: [BillUpsertWithWhereUniqueNestedInput!]
+  delete: [BillWhereUniqueInput!]
+  connect: [BillWhereUniqueInput!]
+  set: [BillWhereUniqueInput!]
+  disconnect: [BillWhereUniqueInput!]
+  deleteMany: [BillScalarWhereInput!]
+  updateMany: [BillUpdateManyWithWhereNestedInput!]
 }
 
 input BillUpdateManyMutationInput {
@@ -616,6 +812,9 @@ input BillUpdateManyMutationInput {
   date: String
   account: String
   amount: Int
+  paymentStatus: Balance
+  paymentType: Payment
+  status: Status
 }
 
 input BillUpdateManyWithoutAccountIdInput {
@@ -666,6 +865,9 @@ input BillUpdateWithoutAccountIdDataInput {
   amount: Int
   postedBy: UserUpdateOneWithoutBillsInput
   vendorId: VendorUpdateOneWithoutBillsInput
+  paymentStatus: Balance
+  paymentType: Payment
+  status: Status
 }
 
 input BillUpdateWithoutPostedByDataInput {
@@ -675,6 +877,9 @@ input BillUpdateWithoutPostedByDataInput {
   amount: Int
   vendorId: VendorUpdateOneWithoutBillsInput
   accountId: AccountUpdateOneWithoutBillsInput
+  paymentStatus: Balance
+  paymentType: Payment
+  status: Status
 }
 
 input BillUpdateWithoutVendorIdDataInput {
@@ -684,6 +889,14 @@ input BillUpdateWithoutVendorIdDataInput {
   amount: Int
   postedBy: UserUpdateOneWithoutBillsInput
   accountId: AccountUpdateOneWithoutBillsInput
+  paymentStatus: Balance
+  paymentType: Payment
+  status: Status
+}
+
+input BillUpdateWithWhereUniqueNestedInput {
+  where: BillWhereUniqueInput!
+  data: BillUpdateDataInput!
 }
 
 input BillUpdateWithWhereUniqueWithoutAccountIdInput {
@@ -699,6 +912,12 @@ input BillUpdateWithWhereUniqueWithoutPostedByInput {
 input BillUpdateWithWhereUniqueWithoutVendorIdInput {
   where: BillWhereUniqueInput!
   data: BillUpdateWithoutVendorIdDataInput!
+}
+
+input BillUpsertWithWhereUniqueNestedInput {
+  where: BillWhereUniqueInput!
+  update: BillUpdateDataInput!
+  create: BillCreateInput!
 }
 
 input BillUpsertWithWhereUniqueWithoutAccountIdInput {
@@ -803,6 +1022,18 @@ input BillWhereInput {
   postedBy: UserWhereInput
   vendorId: VendorWhereInput
   accountId: AccountWhereInput
+  paymentStatus: Balance
+  paymentStatus_not: Balance
+  paymentStatus_in: [Balance!]
+  paymentStatus_not_in: [Balance!]
+  paymentType: Payment
+  paymentType_not: Payment
+  paymentType_in: [Payment!]
+  paymentType_not_in: [Payment!]
+  status: Status
+  status_not: Status
+  status_in: [Status!]
+  status_not_in: [Status!]
   AND: [BillWhereInput!]
   OR: [BillWhereInput!]
   NOT: [BillWhereInput!]
@@ -1079,6 +1310,211 @@ input CustomerWhereUniqueInput {
 
 scalar DateTime
 
+type GeneralJournal {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  date: DateTime!
+  debitAmount: Float!
+  creditAmount: Float!
+  postedBy: User
+  bills(where: BillWhereInput, orderBy: BillOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Bill!]
+  vendors(where: VendorWhereInput, orderBy: VendorOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Vendor!]
+  accounts(where: AccountWhereInput, orderBy: AccountOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Account!]
+}
+
+type GeneralJournalConnection {
+  pageInfo: PageInfo!
+  edges: [GeneralJournalEdge]!
+  aggregate: AggregateGeneralJournal!
+}
+
+input GeneralJournalCreateInput {
+  id: ID
+  date: DateTime!
+  debitAmount: Float!
+  creditAmount: Float!
+  postedBy: UserCreateOneInput
+  bills: BillCreateManyInput
+  vendors: VendorCreateManyInput
+  accounts: AccountCreateManyWithoutGeneralJournalInput
+}
+
+input GeneralJournalCreateOneWithoutAccountsInput {
+  create: GeneralJournalCreateWithoutAccountsInput
+  connect: GeneralJournalWhereUniqueInput
+}
+
+input GeneralJournalCreateWithoutAccountsInput {
+  id: ID
+  date: DateTime!
+  debitAmount: Float!
+  creditAmount: Float!
+  postedBy: UserCreateOneInput
+  bills: BillCreateManyInput
+  vendors: VendorCreateManyInput
+}
+
+type GeneralJournalEdge {
+  node: GeneralJournal!
+  cursor: String!
+}
+
+enum GeneralJournalOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  date_ASC
+  date_DESC
+  debitAmount_ASC
+  debitAmount_DESC
+  creditAmount_ASC
+  creditAmount_DESC
+}
+
+type GeneralJournalPreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  date: DateTime!
+  debitAmount: Float!
+  creditAmount: Float!
+}
+
+type GeneralJournalSubscriptionPayload {
+  mutation: MutationType!
+  node: GeneralJournal
+  updatedFields: [String!]
+  previousValues: GeneralJournalPreviousValues
+}
+
+input GeneralJournalSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: GeneralJournalWhereInput
+  AND: [GeneralJournalSubscriptionWhereInput!]
+  OR: [GeneralJournalSubscriptionWhereInput!]
+  NOT: [GeneralJournalSubscriptionWhereInput!]
+}
+
+input GeneralJournalUpdateInput {
+  date: DateTime
+  debitAmount: Float
+  creditAmount: Float
+  postedBy: UserUpdateOneInput
+  bills: BillUpdateManyInput
+  vendors: VendorUpdateManyInput
+  accounts: AccountUpdateManyWithoutGeneralJournalInput
+}
+
+input GeneralJournalUpdateManyMutationInput {
+  date: DateTime
+  debitAmount: Float
+  creditAmount: Float
+}
+
+input GeneralJournalUpdateOneWithoutAccountsInput {
+  create: GeneralJournalCreateWithoutAccountsInput
+  update: GeneralJournalUpdateWithoutAccountsDataInput
+  upsert: GeneralJournalUpsertWithoutAccountsInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: GeneralJournalWhereUniqueInput
+}
+
+input GeneralJournalUpdateWithoutAccountsDataInput {
+  date: DateTime
+  debitAmount: Float
+  creditAmount: Float
+  postedBy: UserUpdateOneInput
+  bills: BillUpdateManyInput
+  vendors: VendorUpdateManyInput
+}
+
+input GeneralJournalUpsertWithoutAccountsInput {
+  update: GeneralJournalUpdateWithoutAccountsDataInput!
+  create: GeneralJournalCreateWithoutAccountsInput!
+}
+
+input GeneralJournalWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  date: DateTime
+  date_not: DateTime
+  date_in: [DateTime!]
+  date_not_in: [DateTime!]
+  date_lt: DateTime
+  date_lte: DateTime
+  date_gt: DateTime
+  date_gte: DateTime
+  debitAmount: Float
+  debitAmount_not: Float
+  debitAmount_in: [Float!]
+  debitAmount_not_in: [Float!]
+  debitAmount_lt: Float
+  debitAmount_lte: Float
+  debitAmount_gt: Float
+  debitAmount_gte: Float
+  creditAmount: Float
+  creditAmount_not: Float
+  creditAmount_in: [Float!]
+  creditAmount_not_in: [Float!]
+  creditAmount_lt: Float
+  creditAmount_lte: Float
+  creditAmount_gt: Float
+  creditAmount_gte: Float
+  postedBy: UserWhereInput
+  bills_every: BillWhereInput
+  bills_some: BillWhereInput
+  bills_none: BillWhereInput
+  vendors_every: VendorWhereInput
+  vendors_some: VendorWhereInput
+  vendors_none: VendorWhereInput
+  accounts_every: AccountWhereInput
+  accounts_some: AccountWhereInput
+  accounts_none: AccountWhereInput
+  AND: [GeneralJournalWhereInput!]
+  OR: [GeneralJournalWhereInput!]
+  NOT: [GeneralJournalWhereInput!]
+}
+
+input GeneralJournalWhereUniqueInput {
+  id: ID
+}
+
 type Invoice {
   id: ID!
   createdAt: DateTime!
@@ -1282,6 +1718,12 @@ type Mutation {
   upsertCustomer(where: CustomerWhereUniqueInput!, create: CustomerCreateInput!, update: CustomerUpdateInput!): Customer!
   deleteCustomer(where: CustomerWhereUniqueInput!): Customer
   deleteManyCustomers(where: CustomerWhereInput): BatchPayload!
+  createGeneralJournal(data: GeneralJournalCreateInput!): GeneralJournal!
+  updateGeneralJournal(data: GeneralJournalUpdateInput!, where: GeneralJournalWhereUniqueInput!): GeneralJournal
+  updateManyGeneralJournals(data: GeneralJournalUpdateManyMutationInput!, where: GeneralJournalWhereInput): BatchPayload!
+  upsertGeneralJournal(where: GeneralJournalWhereUniqueInput!, create: GeneralJournalCreateInput!, update: GeneralJournalUpdateInput!): GeneralJournal!
+  deleteGeneralJournal(where: GeneralJournalWhereUniqueInput!): GeneralJournal
+  deleteManyGeneralJournals(where: GeneralJournalWhereInput): BatchPayload!
   createInvoice(data: InvoiceCreateInput!): Invoice!
   updateInvoice(data: InvoiceUpdateInput!, where: InvoiceWhereUniqueInput!): Invoice
   updateManyInvoices(data: InvoiceUpdateManyMutationInput!, where: InvoiceWhereInput): BatchPayload!
@@ -1319,6 +1761,15 @@ type PageInfo {
   endCursor: String
 }
 
+enum Payment {
+  Credit
+  Card
+  Bank
+  Cash
+  EFT
+  Checks
+}
+
 type Query {
   account(where: AccountWhereUniqueInput!): Account
   accounts(where: AccountWhereInput, orderBy: AccountOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Account]!
@@ -1329,6 +1780,9 @@ type Query {
   customer(where: CustomerWhereUniqueInput!): Customer
   customers(where: CustomerWhereInput, orderBy: CustomerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Customer]!
   customersConnection(where: CustomerWhereInput, orderBy: CustomerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CustomerConnection!
+  generalJournal(where: GeneralJournalWhereUniqueInput!): GeneralJournal
+  generalJournals(where: GeneralJournalWhereInput, orderBy: GeneralJournalOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [GeneralJournal]!
+  generalJournalsConnection(where: GeneralJournalWhereInput, orderBy: GeneralJournalOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GeneralJournalConnection!
   invoice(where: InvoiceWhereUniqueInput!): Invoice
   invoices(where: InvoiceWhereInput, orderBy: InvoiceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Invoice]!
   invoicesConnection(where: InvoiceWhereInput, orderBy: InvoiceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): InvoiceConnection!
@@ -1341,10 +1795,16 @@ type Query {
   node(id: ID!): Node
 }
 
+enum Status {
+  Active
+  Inactive
+}
+
 type Subscription {
   account(where: AccountSubscriptionWhereInput): AccountSubscriptionPayload
   bill(where: BillSubscriptionWhereInput): BillSubscriptionPayload
   customer(where: CustomerSubscriptionWhereInput): CustomerSubscriptionPayload
+  generalJournal(where: GeneralJournalSubscriptionWhereInput): GeneralJournalSubscriptionPayload
   invoice(where: InvoiceSubscriptionWhereInput): InvoiceSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   vendor(where: VendorSubscriptionWhereInput): VendorSubscriptionPayload
@@ -1755,6 +2215,11 @@ input VendorCreateInput {
   bills: BillCreateManyWithoutVendorIdInput
 }
 
+input VendorCreateManyInput {
+  create: [VendorCreateInput!]
+  connect: [VendorWhereUniqueInput!]
+}
+
 input VendorCreateManyWithoutAccountsInput {
   create: [VendorCreateWithoutAccountsInput!]
   connect: [VendorWhereUniqueInput!]
@@ -2043,6 +2508,18 @@ input VendorUpdateManyDataInput {
   country: String
 }
 
+input VendorUpdateManyInput {
+  create: [VendorCreateInput!]
+  update: [VendorUpdateWithWhereUniqueNestedInput!]
+  upsert: [VendorUpsertWithWhereUniqueNestedInput!]
+  delete: [VendorWhereUniqueInput!]
+  connect: [VendorWhereUniqueInput!]
+  set: [VendorWhereUniqueInput!]
+  disconnect: [VendorWhereUniqueInput!]
+  deleteMany: [VendorScalarWhereInput!]
+  updateMany: [VendorUpdateManyWithWhereNestedInput!]
+}
+
 input VendorUpdateManyMutationInput {
   name: String
   contact: String
@@ -2136,6 +2613,11 @@ input VendorUpdateWithoutPostedByDataInput {
   bills: BillUpdateManyWithoutVendorIdInput
 }
 
+input VendorUpdateWithWhereUniqueNestedInput {
+  where: VendorWhereUniqueInput!
+  data: VendorUpdateDataInput!
+}
+
 input VendorUpdateWithWhereUniqueWithoutAccountsInput {
   where: VendorWhereUniqueInput!
   data: VendorUpdateWithoutAccountsDataInput!
@@ -2154,6 +2636,12 @@ input VendorUpsertNestedInput {
 input VendorUpsertWithoutBillsInput {
   update: VendorUpdateWithoutBillsDataInput!
   create: VendorCreateWithoutBillsInput!
+}
+
+input VendorUpsertWithWhereUniqueNestedInput {
+  where: VendorWhereUniqueInput!
+  update: VendorUpdateDataInput!
+  create: VendorCreateInput!
 }
 
 input VendorUpsertWithWhereUniqueWithoutAccountsInput {
