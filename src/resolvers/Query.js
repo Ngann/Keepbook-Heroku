@@ -18,6 +18,10 @@ function accounts(parent, args, context, info) {
   return context.prisma.accounts()
 }
 
+function users(parent, args, context, info) {
+  return context.prisma.users()
+}
+
 async function searchBills(parent, args, context) {
   const count = await context.prisma
     .billsConnection({

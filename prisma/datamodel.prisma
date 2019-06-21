@@ -8,6 +8,7 @@ type User {
   vendors: [Vendor!]!
   customers: [Customer!]!
   accounts: [Account!]!
+  bills: [Bill]
 }
 
 type Vendor {
@@ -22,6 +23,7 @@ type Vendor {
   state: String!
   country: String!
   postedBy: User
+  accounts: [Account!]!
   bills: [Bill]
 }
 
@@ -32,6 +34,7 @@ type Customer {
   name: String!
   contact: String!
   postedBy: User
+  vendorId: Vendor
 }
 
 type Bill {
@@ -66,4 +69,5 @@ type Account {
   number: String!
   postedBy: User
   bills: [Bill]
+  vendors: [Vendor]
 }

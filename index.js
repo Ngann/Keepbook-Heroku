@@ -41,9 +41,10 @@ if (process.env.NODE_ENV === 'production') {
 	server.use(express.static('client/build'));
 }
 
-server.get('*', (request, response) => {
-	response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-});
+// enable for production only
+// server.get('*', (request, response) => {
+// 	response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+// });
 
 server.start(() => console.log(`Server is running on http://localhost:${port}`))
 

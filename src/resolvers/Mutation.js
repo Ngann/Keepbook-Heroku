@@ -57,6 +57,7 @@ function deleteCustomer(parent, {id}, context) {
 }
 
 function createBill(parent, args, context) {
+  const userId = getUserId(context)
   return context.prisma.createBill({
     vendor: args.vendor,
     date: args.date,
@@ -64,6 +65,7 @@ function createBill(parent, args, context) {
     amount: args.amount,
     vendorId: {connect: {id: args.vendor}},
     accountId: {connect: {id: args.account}},
+    postedBy: { connect: { id: userId } },
   })
 }
 

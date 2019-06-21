@@ -10,6 +10,7 @@ type Query {
   customers: [Customer!]!
   getCustomer(id: ID!): Customer
   getVendor(id: ID!): Vendor
+  users: [User]
 }
 
 enum LinkOrderByInput {
