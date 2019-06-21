@@ -343,11 +343,11 @@ export interface ClientConstructor<T> {
  * Types
  */
 
-export type Balance = "Paid" | "Open";
+export type Balance = "Paid" | "Open" | "PartialPayment";
 
-export type Payment = "Credit" | "Card" | "Bank" | "Cash" | "EFT" | "Checks";
+export type Payment = "CreditCard" | "Bank" | "Cash" | "EFT" | "Checks";
 
-export type Status = "Active" | "Inactive";
+export type Status = "Active" | "Inactive" | "Open" | "Close";
 
 export type AccountCategory = "Assets" | "Liablity" | "Revenue" | "Expense";
 

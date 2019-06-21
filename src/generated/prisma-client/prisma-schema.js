@@ -501,6 +501,7 @@ type AggregateVendor {
 enum Balance {
   Paid
   Open
+  PartialPayment
 }
 
 type BatchPayload {
@@ -1762,8 +1763,7 @@ type PageInfo {
 }
 
 enum Payment {
-  Credit
-  Card
+  CreditCard
   Bank
   Cash
   EFT
@@ -1798,6 +1798,8 @@ type Query {
 enum Status {
   Active
   Inactive
+  Open
+  Close
 }
 
 type Subscription {

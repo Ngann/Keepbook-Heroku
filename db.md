@@ -107,26 +107,31 @@ query {
   }
 }
 
-Accounts:
 mutation {
 createAccount(
-  name: "Payable"
-  number: "1000"
+  name: "SOMETHING"
+  number: "3000"
+  accountType: Debit
+  accountCategory: Assets
 ) {
+  id
   name
   number
+  accountType
+  accountCategory
   postedBy {
     name
   }
 }
 }
-
 {
   "data": {
     "createAccount": {
-      "id": "cjx5hroa1l2yh0b12ml2yawwi",
-      "name": "Receivable",
-      "number": "2000",
+      "id": "cjx5lyaz1lfn90b12h3qs8d1a",
+      "name": "SOMETHING",
+      "number": "3000",
+      "accountType": "Debit",
+      "accountCategory": "Assets",
       "postedBy": {
         "name": "Alice"
       }

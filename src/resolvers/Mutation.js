@@ -71,6 +71,7 @@ function createBill(parent, args, context) {
 }
 
 function updateBill(parent, args, context) {
+  const userId = getUserId(context)
   return context.prisma.updateBill({
     where: { id: args.id},
     data: {
@@ -78,6 +79,10 @@ function updateBill(parent, args, context) {
       date: args.date,
       account: args.account,
       amount: args.amount,
+      postedBy: { connect: { id: userId } },
+      paymentStatus: args.paymentStatus,
+      paymentType: args.paymentType,
+      status: args.status,
     }
   })
 }

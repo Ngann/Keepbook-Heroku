@@ -45,7 +45,7 @@ type Mutation {
   deleteCustomer(id: ID!): Customer
 
   createBill(vendor: String!, date: String!, account: String!, amount: Int!, paymentStatus: Balance): Bill
-  updateBill(id:ID!, vendor: String!, date: String!, account: String!, amount: Int!): Bill
+  updateBill(id:ID!, vendor: String, date: String, account: String, amount: Int, paymentStatus: Balance, paymentType: Payment, status: Status): Bill
   deleteBill(id: ID!): Bill
 
   createInvoice(customer: String!, date: String!, account: String!, amount: Int!): Invoice
@@ -160,11 +160,11 @@ enum Status{
 enum Balance{
   Paid
   Open
-  Partial Payment
+  PartialPayment
 }
 
 enum Payment{
-  Credit Card
+  CreditCard
   Bank
   Cash
   EFT

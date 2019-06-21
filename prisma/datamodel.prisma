@@ -94,15 +94,18 @@ type GeneralJournal {
 enum Status{
   Active
   Inactive
+  Open
+  Close
 }
 
 enum Balance{
   Paid
   Open
+  PartialPayment
 }
 
 enum Payment{
-  Credit Card
+  CreditCard
   Bank
   Cash
   EFT
