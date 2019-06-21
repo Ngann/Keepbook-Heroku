@@ -20,7 +20,7 @@ import { SubscriptionClient } from "subscriptions-transport-ws";
 // const port = process.env.PORT || 4000
 const httpLink = createHttpLink({
   // uri: `http://localhost:${port}`,
-  uri: `https://thawing-waters-21862.herokuapp.com`,
+  uri: `https://keepbook-123.herokuapp.com`,
 })
 
 const authLink = setContext((_, { headers }) => {
@@ -34,7 +34,7 @@ const authLink = setContext((_, { headers }) => {
 })
 
 // const GRAPHQL_ENDPOINT = `ws://localhost:${port}`;
-const GRAPHQL_ENDPOINT = `wss://thawing-waters-21862.herokuapp.com`;
+const GRAPHQL_ENDPOINT = `wss://keepbook-123.herokuapp.com`;
 
 const wsClient = new SubscriptionClient(GRAPHQL_ENDPOINT, {
   reconnect: true,
