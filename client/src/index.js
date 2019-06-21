@@ -33,7 +33,7 @@ const authLink = setContext((_, { headers }) => {
 })
 
 // const GRAPHQL_ENDPOINT = `ws://localhost:${port}`;
-const GRAPHQL_ENDPOINT = `thawing-waters-21862.herokuapp.com`;
+const GRAPHQL_ENDPOINT = `wss://thawing-waters-21862.herokuapp.com`;
 
 const wsClient = new SubscriptionClient(GRAPHQL_ENDPOINT, {
   reconnect: true,
