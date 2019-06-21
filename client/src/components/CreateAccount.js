@@ -4,11 +4,13 @@ import gql from 'graphql-tag'
 import { Form, Button, ButtonGroup } from 'react-bootstrap'
 
 const CREATEACCCOUNT_MUTATION = gql`
-  mutation CreateAccountMutation($name: String!, $number: String!) {
-    createAccount(name: $name, number: $number) {
+  mutation CreateAccountMutation($name: String!, $number: String!, $accountType: String!, $accountCategory: String!) {
+    createAccount(name: $name, number: $number, accountType: $accountType, accountCategory: $accountCategory) {
       id
       name
       number
+      accountType
+      accountCategory
     }
   }
 `
@@ -24,10 +26,12 @@ class CreateAccount extends Component {
     state = {
         name: '',
         number: '',
+        accountType: '',
+        accountCategory: '',
     }
 
     render() {
-        const { name, number } = this.state
+        const { name, number, accountType, accountCategory } = this.state
         return (
             <div className="container" style={containerStyle}>
                 <Form.Group controlId="formBasicAccount">
@@ -50,10 +54,30 @@ class CreateAccount extends Component {
                         placeholder="number"
                     />
                 </Form.Group>
+                {/* <Form.Group controlId="formBasicnumber">
+                    <Form.Label>Account Type</Form.Label>
+                    <Form.Control
+                        className="mb2"
+                        value={accountType}
+                        onChange={e => this.setState({ accountType: e.target.value })}
+                        type="text"
+                        placeholder="number"
+                    />
+                </Form.Group>
+                <Form.Group controlId="formBasicnumber">
+                    <Form.Label>Account Category</Form.Label>
+                    <Form.Control
+                        className="mb2"
+                        value={accountCategory}
+                        onChange={e => this.setState({ accountCategory: e.target.value })}
+                        type="text"
+                        placeholder="number"
+                    />
+                </Form.Group> */}
                 <ButtonGroup>
                     <Mutation
                         mutation={CREATEACCCOUNT_MUTATION}
-                        variables={{ name, number }}
+                        variables={{ name, number, accountType, accountCategory }}
                     >
                         {CreateAccountMutation => <Button variant="secondary" onClick={CreateAccountMutation}>Submit</Button>}
                     </Mutation>

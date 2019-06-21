@@ -11,6 +11,8 @@ type Query {
   getCustomer(id: ID!): Customer
   getVendor(id: ID!): Vendor
   users: [User]
+  accountTypes: [AccountType]
+  accountCategories: [AccountCategory]
 }
 
 enum LinkOrderByInput {

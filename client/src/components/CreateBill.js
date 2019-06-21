@@ -69,7 +69,7 @@ class CreateBill extends Component {
                   <option>Select Vendor</option>
                   {vendorList.map(vendor => (
                     <option key={vendor.id} value={vendor.id}>
-                      {vendor.id}-{vendor.name}
+                      {vendor.name}
                     </option>
                   ))}
                 </Form.Control>

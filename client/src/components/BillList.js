@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { Query, Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import{ Modal, Button, Table, ButtonGroup} from 'react-bootstrap'
+import CreateBill from './CreateBill'
 
 const BILLS_QUERY = gql`
 {
@@ -12,6 +13,9 @@ const BILLS_QUERY = gql`
     amount
     account
     vendorId {
+      name
+    }
+    accountId {
       name
     }
   }
@@ -96,8 +100,8 @@ render() {
               <tbody>
                 <tr>
                   <td>{bill.date}</td>
-                  <td>{bill.vendor}</td>
-                  <td>{bill.account}</td>
+                  <td>{bill.vendorId.name}</td>
+                  <td>{bill.accountId.name}</td>
                   <td>{bill.amount}</td>
                   <td>
                    <ButtonGroup size="sm">
