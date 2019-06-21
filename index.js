@@ -36,6 +36,11 @@ const server = new GraphQLServer({
 })
 
 server.use(express.static(path.join(__dirname, 'client/build')));
+
+if (process.env.NODE_ENV === 'production') {
+	server.use(express.static('client/build'));
+}
+
 server.get('*', (request, response) => {
 	response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
