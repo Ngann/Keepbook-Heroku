@@ -7,6 +7,10 @@ _This application allows user to create bills and invoices. It will also have th
 
 Please see wiki for additional information.
 
+## Heroku Deployment
+  http://keepbook-123.herokuapp.com
+  This is a live enviroment and the data can be deleted by users who signs up.
+
 ## Table of Content
 
 - [Component](#component)
