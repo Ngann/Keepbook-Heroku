@@ -66,6 +66,7 @@ function createBill(parent, args, context) {
     vendorId: {connect: {id: args.vendor}},
     accountId: {connect: {id: args.account}},
     postedBy: { connect: { id: userId } },
+    paymentStatus: args.paymentStatus,
   })
 }
 

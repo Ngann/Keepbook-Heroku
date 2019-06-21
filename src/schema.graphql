@@ -44,7 +44,7 @@ type Mutation {
   updateCustomer(id: ID!, name: String!, contact: String!): Customer
   deleteCustomer(id: ID!): Customer
 
-  createBill(vendor: String!, date: String!, account: String!, amount: Int!): Bill
+  createBill(vendor: String!, date: String!, account: String!, amount: Int!, paymentStatus: Balance): Bill
   updateBill(id:ID!, vendor: String!, date: String!, account: String!, amount: Int!): Bill
   deleteBill(id: ID!): Bill
 
@@ -153,11 +153,14 @@ type GeneralJournal {
 enum Status{
   Active
   Inactive
+  Open
+  Close
 }
 
 enum Balance{
   Paid
   Open
+  Partial Payment
 }
 
 enum Payment{
