@@ -87,6 +87,7 @@ type Vendor {
   state: String!
   country: String!
   postedBy: User
+  bills: [Bill]
 }
 
 type Customer {
@@ -104,6 +105,7 @@ type Bill {
   account: String!
   amount: Int!
   postedBy: User
+  vendorId: Vendor
 }
 
 type Invoice {
