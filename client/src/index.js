@@ -15,7 +15,7 @@ import { split } from 'apollo-link'
 import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities'
 import 'bootstrap/dist/css/bootstrap.css';
-
+import { SubscriptionClient } from "subscriptions-transport-ws";
 
 const port = process.env.PORT || 4000
 const httpLink = createHttpLink({
@@ -32,15 +32,26 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 
-const wsLink = new WebSocketLink({
-  uri: `ws://localhost:${port}`,
-  options: {
-    reconnect: true,
-    connectionParams: {
-      authToken: localStorage.getItem(AUTH_TOKEN),
-    },
+const GRAPHQL_ENDPOINT = `ws://localhost:${port}`;
+
+const wsClient = new SubscriptionClient(GRAPHQL_ENDPOINT, {
+  reconnect: true,
+  connectionParams: {
+    authToken: localStorage.getItem(AUTH_TOKEN),
   },
-})
+});
+
+const wsLink = new WebSocketLink(wsClient);
+
+// const wsLink = new WebSocketLink({
+//   uri: `ws://localhost:${port}`,
+//   options: {
+//     reconnect: true,
+//     connectionParams: {
+//       authToken: localStorage.getItem(AUTH_TOKEN),
+//     },
+//   },
+// })
 
 const link = split(
   ({ query }) => {

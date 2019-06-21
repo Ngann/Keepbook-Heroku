@@ -24,6 +24,8 @@ const resolvers = {
   Account,
 }
 
+const port = process.env.PORT || 4000;
+
 const server = new GraphQLServer({
   typeDefs: './src/schema.graphql',
   resolvers,
@@ -34,9 +36,6 @@ const server = new GraphQLServer({
 })
 
 server.use(express.static(path.join(__dirname, 'client/build')));
-server.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'/client/build/index.html'));
-});
 
-const port = process.env.PORT || 4000;
 server.start(() => console.log(`Server is running on http://localhost:${port}`))
+
