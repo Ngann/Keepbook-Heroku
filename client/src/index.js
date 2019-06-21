@@ -17,9 +17,10 @@ import { getMainDefinition } from 'apollo-utilities'
 import 'bootstrap/dist/css/bootstrap.css';
 import { SubscriptionClient } from "subscriptions-transport-ws";
 
-const port = process.env.PORT || 4000
+// const port = process.env.PORT || 4000
 const httpLink = createHttpLink({
-  uri: `http://localhost:${port}`,
+  // uri: `http://localhost:${port}`,
+  uri: `http://thawing-waters-21862.herokuapp.com`,
 })
 
 const authLink = setContext((_, { headers }) => {
