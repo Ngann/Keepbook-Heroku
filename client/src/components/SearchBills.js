@@ -13,6 +13,12 @@ const BILL_SEARCH_QUERY = gql`
         date
         account
         amount
+        vendorId{
+          name
+        }
+        accountId{
+          name
+        }
       }
     }
   }

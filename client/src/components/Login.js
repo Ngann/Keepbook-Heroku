@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import { AUTH_TOKEN } from '../constants'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-import Form from 'react-bootstrap/Form'
-import FormControl from 'react-bootstrap/FormControl'
-import Button from 'react-bootstrap/Button'
 import logo from '../assets/images/logo.png'
 import {
   MDBContainer,
@@ -17,6 +14,10 @@ import {
   MDBCardHeader,
   MDBBtn
 } from "mdbreact"
+
+import {Form, Button} from 'react-bootstrap'
+import MyVerticallyCenteredModal from './Modal';
+import { NONAME } from 'dns';
 
 const SIGNUP_MUTATION = gql`
   mutation SignupMutation($email: String!, $password: String!, $name: String!) {
@@ -39,6 +40,7 @@ const containerStyle = {
 };
 
 const cardStyle = {
+  margin: '0 auto',
   align: 'center',
   verticalAlign: 'middle',
   border: '1px solid #020100',
@@ -47,11 +49,14 @@ const cardStyle = {
 };
 
 const rowStyle = {
+  width: '30rem',
+  float: 'none',
+  margin: '0 auto',
   marginTop:'70px',
-  marginRight:'25%',
-  marginLeft:'25%',
-  paddingTop:'25%',
-  paddingBottom:'25%',
+  // marginRight:'25%',
+  // marginLeft:'25%',
+  // paddingTop:'25%',
+  // paddingBottom:'25%',
   // backgroundColor: '#235789'
 };
 
@@ -71,7 +76,9 @@ class Login extends Component {
   render() {
     const { login, email, password, name } = this.state
     return (
-      <MDBContainer style={containerStyle} >
+      <MDBContainer 
+      style={containerStyle}
+      >
         <MDBRow style={rowStyle}>
           <MDBCol >
             <MDBCard style={cardStyle}>
@@ -150,6 +157,26 @@ class Login extends Component {
           </MDBCol>
         </MDBRow>
       </MDBContainer>
+    //   <Form style={rowStyle} >
+    //   <Form.Group controlId="formBasicEmail">
+    //     <Form.Label>Email address</Form.Label>
+    //     <Form.Control type="email" placeholder="Enter email" />
+    //     <Form.Text className="text-muted">
+    //       We'll never share your email with anyone else.
+    //     </Form.Text>
+    //   </Form.Group>
+
+    //   <Form.Group controlId="formBasicPassword">
+    //     <Form.Label>Password</Form.Label>
+    //     <Form.Control type="password" placeholder="Password" />
+    //   </Form.Group>
+    //   <Form.Group controlId="formBasicChecbox">
+    //     <Form.Check type="checkbox" label="Check me out" />
+    //   </Form.Group>
+    //   <Button variant="primary" type="submit">
+    //     Submit
+    //   </Button>
+    // </Form>
     )
   }
 
