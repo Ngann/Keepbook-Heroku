@@ -1,9 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import { Query, Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-import Table from 'react-bootstrap/Table'
-import Button from 'react-bootstrap/Button'
-import Modal from 'react-bootstrap/Modal'
+import {Table, Button, Modal, ButtonToolbar, Form} from 'react-bootstrap'
+import MyVerticallyCenteredModal from './Modal'
 
 const CUSTOMERS_QUERY = gql`
 {
@@ -45,6 +44,7 @@ class CustomerList extends Component {constructor(props, context) {
 
   this.state = {
     show: false,
+    modalShow: false,
   };
 }
 
@@ -62,10 +62,10 @@ state = {
 }
 
 render() {
+  let modalClose = () => this.setState({ modalShow: false });
 
   const { name, contact } = this.state
   return (
-
     <Query query={CUSTOMERS_QUERY}>
     {({ loading, error, data }) => {
       if (loading)return <div>Fetching</div>
@@ -100,27 +100,50 @@ render() {
                   </Mutation></td>
                 </tr>
               </tbody>
+
+
+              <ButtonToolbar>
+                <Button
+                  variant="primary"
+                  onClick={() => this.setState({ modalShow: true })}
+                >
+                  Launch vertically centered modal
+                </Button>
+
+                <MyVerticallyCenteredModal
+                  show={this.state.modalShow}
+                  onHide={modalClose}
+                />
+              </ButtonToolbar>
+
+
+
+
               <Modal show={this.state.show} onHide={this.handleClose} >
                 <Modal.Header closeButton>
                 <Modal.Title>Customer: {customer.name}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <form className="flex flex-column mt3">
-                    <input
-                    className="mb2"
-                    value={name}
-                    onChange={e => this.setState({ name: e.target.value })}
-                    type="text"
-                    placeholder="A name"
+                  <Form.Group controlId="formBasicCustomer">
+                    <Form.Label>Customer Name</Form.Label>
+                    <Form.Control
+                        className="mb2"
+                        value={name}
+                        onChange={e => this.setState({ name: e.target.value })}
+                        type="text"
+                        placeholder="A name"
                     />
-                    <input
-                    className="mb2"
-                    value={contact}
-                    onChange={e => this.setState({ contact: e.target.value })}
-                    type="text"
-                    placeholder="contact"
+                    </Form.Group>
+                    <Form.Group controlId="formBasicContact">
+                    <Form.Label>Contact</Form.Label>
+                    <Form.Control
+                        className="mb2"
+                        value={contact}
+                        onChange={e => this.setState({ contact: e.target.value })}
+                        type="text"
+                        placeholder="contact"
                     />
-                  </form>
+                    </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
                   <Button variant="secondary" onClick={this.handleClose}>

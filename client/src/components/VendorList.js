@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Query, Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-import { ButtonGroup, Table, Button, Modal } from 'react-bootstrap';
+import { ButtonGroup, Table, Button, Modal, Form } from 'react-bootstrap';
 
 const VENDORS_QUERY = gql`
 {
@@ -126,22 +126,26 @@ class VendorList extends Component {
                         <Modal.Title>Vendor: {vendor.name}</Modal.Title>
                       </Modal.Header>
                       <Modal.Body>
-                        <form className="flex flex-column mt3">
-                          <input
-                            className="mb2"
-                            value={name}
-                            onChange={e => this.setState({ name: e.target.value })}
-                            type="text"
-                            placeholder="A name"
-                          />
-                          <input
-                            className="mb2"
-                            value={contact}
-                            onChange={e => this.setState({ contact: e.target.value })}
-                            type="text"
-                            placeholder="contact"
-                          />
-                        </form>
+                      <Form.Group controlId="formBasicCustomer">
+                      <Form.Label>Vendor Name</Form.Label>
+                      <Form.Control
+                          className="mb2"
+                          value={name}
+                          onChange={e => this.setState({ name: e.target.value })}
+                          type="text"
+                          placeholder="A name"
+                      />
+                      </Form.Group>
+                      <Form.Group controlId="formBasicContact">
+                      <Form.Label>Contact</Form.Label>
+                      <Form.Control
+                          className="mb2"
+                          value={contact}
+                          onChange={e => this.setState({ contact: e.target.value })}
+                          type="text"
+                          placeholder="contact"
+                      />
+                      </Form.Group>
                       </Modal.Body>
                       <Modal.Footer>
                         <Button variant="secondary" onClick={this.handleClose}>

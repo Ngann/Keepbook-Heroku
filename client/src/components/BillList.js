@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Query, Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-import{ Modal, Button, Table, ButtonGroup} from 'react-bootstrap'
-import CreateBill from './CreateBill'
+import{ Modal, Button, Table, ButtonGroup, Form} from 'react-bootstrap'
 
 const BILLS_QUERY = gql`
 {
@@ -123,22 +122,26 @@ render() {
                   <Modal.Title>Bill: {bill.vendor}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <form className="flex flex-column mt3">
-                  <input
-                  className="mb2"
-                  value={vendor}
-                  onChange={e => this.setState({ vendor: e.target.value })}
-                  type="text"
-                  placeholder="A vendor"
-                  />
-                  <input
-                  className="mb2"
-                  value={account}
-                  onChange={e => this.setState({ amount: e.target.value })}
-                  type="text"
-                  placeholder="amount"
-                  />
-                  </form>
+                <Form.Group controlId="formBasicCustomer">
+                    <Form.Label>Vendor Name</Form.Label>
+                    <Form.Control
+                        className="mb2"
+                        value={vendor}
+                        onChange={e => this.setState({ vendor: e.target.value })}
+                        type="text"
+                        placeholder="A vendor"
+                    />
+                    </Form.Group>
+                    <Form.Group controlId="formBasicContact">
+                    <Form.Label>Amount</Form.Label>
+                    <Form.Control
+                        className="mb2"
+                        value={account}
+                        onChange={e => this.setState({ amount: e.target.value })}
+                        type="text"
+                        placeholder="amount"
+                    />
+                    </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
                   <Button variant="secondary" onClick={this.handleClose}>
