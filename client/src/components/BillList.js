@@ -117,7 +117,11 @@ render() {
                   </td>
                 </tr>
               </tbody>
-              <Modal show={this.state.show} onHide={this.handleClose} >
+              <Modal show={this.state.show} onHide={this.handleClose} 
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+              >
                 <Modal.Header closeButton>
                   <Modal.Title>Bill: {bill.vendor}</Modal.Title>
                 </Modal.Header>

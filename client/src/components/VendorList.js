@@ -121,7 +121,11 @@ class VendorList extends Component {
                           </td>
                       </tr>
                     </tbody>
-                    <Modal show={this.state.show} onHide={this.handleClose} >
+                    <Modal show={this.state.show} onHide={this.handleClose} 
+                      size="lg"
+                      aria-labelledby="contained-modal-title-vcenter"
+                      centered
+                    >
                       <Modal.Header closeButton>
                         <Modal.Title>Vendor: {vendor.name}</Modal.Title>
                       </Modal.Header>

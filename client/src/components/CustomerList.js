@@ -101,25 +101,31 @@ render() {
                 </tr>
               </tbody>
 
-
+{/* 
               <ButtonToolbar>
                 <Button
                   variant="primary"
                   onClick={() => this.setState({ modalShow: true })}
                 >
                   Launch vertically centered modal
-                </Button>
+                </Button> */}
 
-                <MyVerticallyCenteredModal
+                {/* <MyVerticallyCenteredModal
                   show={this.state.modalShow}
                   onHide={modalClose}
                 />
-              </ButtonToolbar>
+              </ButtonToolbar> */}
 
 
 
 
-              <Modal show={this.state.show} onHide={this.handleClose} >
+              <Modal 
+              show={this.state.show} 
+              onHide={this.handleClose} 
+              size="lg"
+              aria-labelledby="contained-modal-title-vcenter"
+              centered
+              >
                 <Modal.Header closeButton>
                 <Modal.Title>Customer: {customer.name}</Modal.Title>
                 </Modal.Header>
