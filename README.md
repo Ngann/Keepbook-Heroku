@@ -3,13 +3,16 @@
 
 ## Description
 
-_This application allows user to create bills and invoices. It will also have the option to view the cashflow statement ._
+_This application allows user to create vendors, customers, bills and invoices._
 
-Please see wiki for additional information.
+Additional work for this project has moved to a new respository.
+https://github.com/Ngann/KB-Heroku
+
+However user can still access the applicaton at http://keepbook-123.herokuapp.com
 
 ## Heroku Deployment
   http://keepbook-123.herokuapp.com
-  This is a live enviroment and the data can be deleted by users who signs up.
+  This is a live environment and the data can created by users who signs up.
 
 ## Table of Content
 
