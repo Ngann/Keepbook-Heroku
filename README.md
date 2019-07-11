@@ -5,10 +5,10 @@
 
 _This application allows user to create vendors, customers, bills and invoices._
 
-Additional work for this project has moved to a new respository.
+_Additional work for this project has moved to a new respository.
 https://github.com/Ngann/KB-Heroku
 
-However user can still access the applicaton at http://keepbook-123.herokuapp.com
+_However user can still access the applicaton at http://keepbook-123.herokuapp.com
 
 ## Heroku Deployment
   http://keepbook-123.herokuapp.com
@@ -79,7 +79,7 @@ _DB setup per schema_
 * Bcrypt
 * JWT
 
-##Packages
+## Packages
 * React Charts https://github.com/jerairrest/react-chartjs-2
 * React Bootstrap Component
 
