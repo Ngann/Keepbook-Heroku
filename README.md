@@ -4,11 +4,10 @@
 ## Description
 
 _This application allows user to create vendors, customers, bills and invoices._
-
-_Additional work for this project has moved to a new respository.
+* Additional work for this project has moved to a new respository.
 https://github.com/Ngann/KB-Heroku
 
-_However user can still access the applicaton at http://keepbook-123.herokuapp.com
+* Users can still access the applicaton at http://keepbook-123.herokuapp.com
 
 ## Heroku Deployment
   http://keepbook-123.herokuapp.com
